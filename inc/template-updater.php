@@ -41,7 +41,7 @@ class BeechAgency_Theme_Updater {
 
       $timestamp = date("Y-m-d H:i:s");
       file_put_contents($this->log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
-      error_log( print_r("GitUpdater: [$timestamp] $message"));
+      //error_log( print_r("GitUpdater: [$timestamp] $message"));
   }
 
   public function set_logging( $status = false ) {
