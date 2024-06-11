@@ -71,9 +71,10 @@ class BeechAgency_Theme_Updater {
   private function get_repository_info() {
       if ( is_null( $this->github_response ) ) { // Do we have a response?
         $args = array();
-        $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest?recursive=1', $this->username, $this->repository ); // Build URI
+        $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', $this->username, $this->repository ); // Build URI
           
         $args = array();
+        $this->log("Request URL: ". $request_uri);
 
         if( $this->authorize_token ) { // Is there an access token?
             $args['headers']['Authorization'] = "token {$this->authorize_token}"; // Set the headers
@@ -124,10 +125,9 @@ class BeechAgency_Theme_Updater {
 
       if( property_exists( $transient, 'checked') ) { // Check if transient has a checked property
 
-        //dump_it($transient->checked, 'yellow');
-
           if( $checked = $transient->checked ) { // Did Wordpress check for updates?
-              $this->get_repository_info(); // Get the repo info
+              
+            $this->get_repository_info(); // Get the repo info
               $this->log("Checking repository info: ". $this->theme);
 
               if( gettype($this->github_response) === "boolean" ) { return $transient; }
@@ -147,7 +147,6 @@ class BeechAgency_Theme_Updater {
                   $new_files = $this->github_response->zipball_url; // Get the ZIP
 
                   // Handle Extra Github folder of annoyingness
-                  
                   // END: Handle Extra Github folder of annoyingness
                     
                   $slug = current( explode('/', $this->theme ) ); // Create valid slug
@@ -174,6 +173,7 @@ class BeechAgency_Theme_Updater {
   }
 
   public function download_package( $args, $url ) {
+    // This function is just for adding auth prior to downloading the package.
 
     //dump_it('Download Package', 'red');
     //dump_it($args, 'red');
@@ -185,49 +185,26 @@ class BeechAgency_Theme_Updater {
               $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
           }
       }
-
-      //$this->log("Download Package Args (after modification): " . json_encode($args));
-        // Using wp_remote_get for better WordPress compatibility
-        $response = wp_remote_get($url, $args);
-
-        // Log HTTP response
-        if (is_wp_error($response)) {
-            $this->log("HTTP error: " . $response->get_error_message());
-        } else {
-            $this->log("HTTP response received: " . json_encode($response));
-            
-            $body = wp_remote_retrieve_body($response);
-            $filename = $args['filename'];
-
-            // Attempt to write the file
-            if (!empty($body)) {
-                file_put_contents($filename, $body);
-                if ($this->verify_package($filename)) {
-                    $this->log("Package downloaded and verified successfully: " . $filename);
-                } else {
-                    $this->log("Package download failed verification or is corrupt: " . $filename);
-                }
-            } else {
-                $this->log("Empty body in HTTP response.");
-            }
-        }
-
       
       remove_filter( 'http_request_args', [ $this, 'download_package' ] );
 
       return $args;
   }
 
-    private function verify_package($file) {
-        return file_exists($file) && filesize($file) > 0;
-    }
 
     public function after_install( $response, $hook_extra, $result ) {
 
         global $wp_filesystem; // Get global FS object
 
+
+        $install_directory = get_theme_root(). '/' . $this->theme ; // Our theme directory
+        $wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the theme dir
+        $result['destination'] = $install_directory; // Set the destination for the rest of the stack
+
+
         $this->log("attempt after install: ". $this->theme);
         // Get the parent directory of the destination (the theme directory)
+        /*
         $destination = $result['destination'];
         $theme_root = get_theme_root();
         $theme_directory = $theme_root . '/' . $this->theme;
@@ -260,6 +237,9 @@ class BeechAgency_Theme_Updater {
 
         // Update the result destination
         $result['destination'] = $theme_directory;
+        */
+
+
 
         return $result;
     }
