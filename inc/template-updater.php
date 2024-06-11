@@ -142,6 +142,39 @@ class BeechAgency_Theme_Updater {
               if( $out_of_date ) {
 
                   $new_files = $this->github_response->zipball_url; // Get the ZIP
+
+                  // Handle Extra Github folder of annoyingness
+                  // Download the zip file
+                    $temp_zip = download_url($new_files);
+                      
+                    if (is_wp_error($temp_zip)) {
+                        // Handle error
+                        $this->log("Temp zip error, unable to be created.");
+                        return $transient;
+                    }
+
+                    $this->log("Set temp zip.");
+
+                    // Extract the zip file to a temporary directory
+                    $temp_dir = wp_tempnam($temp_zip);
+                    unzip_file($temp_zip, $temp_dir);
+
+                    $this->log("Set temp directory." . $temp_dir);
+                    // Find the inner folder containing the theme files
+                    $inner_folders = glob($temp_dir . '/*', GLOB_ONLYDIR);
+                    if (!empty($inner_folders)) {
+                        $inner_folder = reset($inner_folders);
+                        $this->log("New files set: ");
+                        // Update the new files path to point to the inner folder
+                        $new_files = trailingslashit($inner_folder);
+                    }
+
+                    // Clean up temporary files
+                    unlink($temp_zip);
+                    $this->rrmdir($temp_dir); // Define this function to recursively remove directories
+
+                    $this->log("Extra folder handled.");
+                    // END: Handle Extra Github folder of annoyingness
                     
                   $slug = current( explode('/', $this->theme ) ); // Create valid slug
 
@@ -204,6 +237,12 @@ class BeechAgency_Theme_Updater {
         if (!empty($subfolders)) {
             $source = reset($subfolders);
             
+            // If there's another level of folder, navigate into it
+            $sub_subfolders = array_filter(glob($source . '/*'), 'is_dir');
+            if (!empty($sub_subfolders)) {
+                $source = reset($sub_subfolders);
+            }
+
             // Move files from extracted folder to the theme directory
             $wp_filesystem->move($source, $theme_directory, true);
         }
