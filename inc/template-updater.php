@@ -34,6 +34,19 @@ class BeechAgency_Theme_Updater {
       return $this;
   }
 
+  // Provides logging
+  private function log($message) {
+      if ( !$this->logging ) return;
+
+      $timestamp = date("Y-m-d H:i:s");
+      file_put_contents($this->log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
+  }
+
+  public function set_logging( $status = false ) {
+        $this->logging =  $status;
+  }
+
+
   public function set_theme_properties() {
       $this->version  = wp_get_theme($this->theme)->get('Version');
       $this->themeObject = wp_get_theme($this->theme);
@@ -87,6 +100,8 @@ class BeechAgency_Theme_Updater {
   }
 
   public function initialize() {
+      $this->log("Initializing GitHub Updater for ". $this->theme);
+
       add_filter( 'pre_set_site_transient_update_themes', array( $this, 'modify_transient' ), 10, 1 );
       //add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3);
       add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
@@ -101,13 +116,14 @@ class BeechAgency_Theme_Updater {
   }
 
   public function modify_transient( $transient ) {
-
+    
       if( property_exists( $transient, 'checked') ) { // Check if transient has a checked property
 
         //dump_it($transient->checked, 'yellow');
 
           if( $checked = $transient->checked ) { // Did Wordpress check for updates?
               $this->get_repository_info(); // Get the repo info
+              $this->log("Checking repository info: ". $this->theme);
 
               if( gettype($this->github_response) === "boolean" ) { return $transient; }
 
@@ -119,6 +135,7 @@ class BeechAgency_Theme_Updater {
                   'gt' 
               ); // Check if we're out of date
 
+              $this->log("Repo version checked and compared: ". $out_of_date,  $github_version, $checked[ $this->theme ]);
 
               if( $out_of_date ) {
 
@@ -162,15 +179,20 @@ class BeechAgency_Theme_Updater {
 
         global $wp_filesystem; // Get global FS object
 
-
+        $this->log("Attempt after install: ". $this->theme);
         // Get the parent directory of the destination (the theme directory)
         $destination = $result['destination'];
         $theme_root = get_theme_root();
         $theme_directory = $theme_root . '/' . $this->theme;
 
+        $this->log("Desination: ".  $destination);
+        $this->log("theme_root: ".  $theme_root);
+
         // Locate the extracted folder (which includes the branch name suffix)
         $extracted_folder = $wp_filesystem->find_folder($destination);
         $subfolders = array_filter(glob($extracted_folder . '/*'), 'is_dir');
+
+        $this->log("extracted_folder: ".  $extracted_folder);
 
         // Assuming there's only one subfolder in the extracted directory
         if (!empty($subfolders)) {
@@ -192,6 +214,7 @@ class BeechAgency_Theme_Updater {
 
 
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
+$updater->set_logging(false);
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'beechagency2023' );
 $updater->set_theme('beechagency2023'); 

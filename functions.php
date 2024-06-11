@@ -236,6 +236,12 @@ require get_template_directory() . '/inc/template-resets.php';
  */
 require get_template_directory() . '/inc/template-editor.php';
 
+/**
+ * Add the theme updater
+ */
+require get_template_directory() . '/inc/template-updater.php';
+
+
 
 // This is in use!
 if ( ! function_exists( 'beechblocks_post_list_ids') ) :
