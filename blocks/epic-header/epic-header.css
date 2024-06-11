@@ -1,0 +1,84 @@
+.wp-block-beech-epic-header {
+    display: block;
+    position: relative;
+    --_header-height : calc(100vh - var(--header-offset));
+    background-color: var(--wp--preset--color--off-black);
+    color: var(--wp--preset--color--white);
+    min-height: 400vh;
+}
+
+.epic-header__inner {
+    position: sticky;
+    top: 0;
+    padding: calc(var(--block-space) * 0) var(--gutter);
+    min-height: var(--_header-height);
+}
+
+.epic-header__inner-top, 
+.epic-header__inner-bottom-left, 
+.epic-header__inner-bottom-right {
+    position: absolute;
+}
+
+.epic-header__inner-top {z-index: 5;top: calc(var(--block-space) * 0);left: var(--gutter);} 
+.epic-header__inner-bottom-right { 
+    z-index: 5; 
+    bottom: calc(var(--block-space) * 1); 
+    right: var(--gutter); 
+    text-align: right;
+}
+.epic-header__inner-bottom-left { 
+    z-index: 1;
+    bottom: calc(var(--block-space) * 1); 
+    left: var(--gutter);
+
+    max-width: 32rem;
+} 
+
+header.wp-block-beech-epic-header h1.splitting {
+    line-height: 0.9;
+    font-size: clamp(5vw, calc( ((100 - var(--scroll-percentage))/ 100) * 10vw  ) ,10vw);
+    letter-spacing: -0.3vw;;
+    will-change: font-size;
+}
+
+header .epic-header__byline {
+    font-size: var(--wp--preset--font-size--x-large);
+    line-height: 1.1;
+}
+.epic-header__video-wrapper {
+    position: absolute;
+    inset: 0 0 0 0;
+    z-index: 2;
+    /* translate: 0 calc(var(--header-offset) * -1); */
+    /*
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    */
+}
+.epic-header__video-inner {
+    margin: 0 auto;
+    position: sticky;
+    z-index: 2;
+    top: 0;
+    left:0;
+    width: 100%;
+    height: 100vh;
+    height: 100svh;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+}
+.epic-header__video-wrapper video {
+    /*min-height: var(--_header-height);*/
+    --min-value: 0.4;
+    --max-value: 1.64;
+    --scroll-range: calc(100 - var(--min-value)); /* Total scroll range */
+    --scroll-factor: calc((var(--scroll-percentage) / var(--scroll-range)) * 100); /* Calculate scroll factor */
+    --clamped-value: clamp(var(--min-value), calc(var(--min-value) + var(--scroll-factor) * 0.016), var(--max-value)); /* Clamp the value between 0.4 and 1.2 */
+    object-fit: cover;
+    width: 100%;
+    scale: var(--clamped-value);
+    will-change: scale;
+}

@@ -1,0 +1,100 @@
+@media screen and (min-width: 1680px) {
+   .archive-page-articles {
+      --card-cols: 3;
+   }
+}
+
+/* LG - 1280px */
+@media screen and (max-width: 1280px) {
+   /* Archive Pages */
+   .archive-page-articles {
+      --card-cols: 4;
+   }
+   .filter-list-inner .title {  padding: calc(0.5rem + 2px) 0rem; }
+   .filter-list {
+      flex-wrap: wrap;
+   }
+   .filter-list .item a { padding: 0.5rem 2rem; }
+
+   /* Posts Pages */
+
+}
+
+/* MD */
+@media screen and (max-width: 1024px) {
+   :root {
+     --gutter : 2rem;
+     --xy-gutter : 2rem;
+    --block-space : 4rem;
+   }
+
+   .archive-page-articles {
+      --card-cols: 6;
+   }
+
+   /* Header Menu */
+   .menu-header-menu-container { display: none;}
+   .nav-mobile-menu-button { display: block;}
+
+   /* Mobile Menu Dude */
+   body.menu-open { position: fixed; width: 100%; }   
+   #masthead.site-header { position: relative; }
+   .darkmode.toggle-wrapper, #menuButton { position: relative; z-index: 101; }
+   #masthead .site-branding { position: relative; z-index: 101; display: flex; align-items: center;}
+
+   .site-header .nav-wrap::after {
+      content: '';
+      position: fixed;
+      inset: 0 0 0 0;
+      z-index: 90;
+      backdrop-filter: blur(0px);
+      translate: 100% 0;
+      transition: all 150ms ease;
+   }
+   .site-header.open .nav-wrap::after { 
+      backdrop-filter: blur(2px);
+      translate: 0% 0;
+   }
+   .site-header.open .nav-wrap { color: var(--wp--preset--color--white);}
+   .menu-header-menu-container {
+      display: flex;
+      align-items: center;
+      position: fixed;
+      z-index: 100;
+      top: 0;
+      right: 0;
+      background-color: var(--wp--preset--color--off-black);
+      
+      height: 100vh;
+      max-width: 34rem;
+      widtH: 100%;
+      translate: 100% 0%;
+      transition: translate 150ms ease;
+   }
+
+   .menu-header-menu-container .menu {
+      padding: 3rem var(--gutter) 6rem;
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+      font-size: var(--wp--preset--font-size--2-xl);
+      line-height: 1.1;
+   }
+
+   .site-header.open .menu-header-menu-container { 
+      translate: 0 0; 
+      box-shadow: 17px 0px 15px 13px var(--wp--preset--color--mid-gray);
+   }
+   .menu-header-menu-container .menu a { display: flex; align-items: center; gap: 1rem;} 
+   .menu-header-menu-container .menu  .current_page_item a::before {
+      content: '';
+      display: inline-block;
+      background-color:  var(--wp--preset--color--rorange);
+      aspect-ratio: 1 / 1;
+      border-radius: 100%;
+      width: 1.5rem;
+      height: 1.5rem;
+      margin-top: 0.25rem;
+   }
+
+}

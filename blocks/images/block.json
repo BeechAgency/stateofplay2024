@@ -1,0 +1,45 @@
+{
+    "name": "beech/images",
+    "title": "Images",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./images.css" ],
+    "category": "theme",
+    "icon": "images-alt2",
+    "keywords": ["images", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "images.php"
+    },
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": ["full","wide","content"],
+        "alignWide" : true,
+        "jsx": true,
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "filter": {
+            "duotone": false
+        },
+        "nested": false,
+        "multiple" : true
+    },
+
+    "styles": [
+        {
+            "name": "default",
+            "label": "Tight",
+            "isDefault": true
+        },
+        {
+            "name": "gappy",
+            "label": "Gappy",
+            "isDefault": false
+        }
+    ],
+    "parent" : [
+        "core/post-content"    
+    ]
+}

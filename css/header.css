@@ -1,0 +1,93 @@
+.site-header {
+    padding-inline: var(--gutter);
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+
+    display: flex;
+    justify-content: space-between;
+    gap: 3rem;
+}
+.site-branding a { color: inherit; }
+.site-branding svg {
+    height: 1.56rem;
+    width: auto;
+    display:block;
+    overflow: visible;
+}
+.site-header .menu {
+    display: flex;
+    gap: 1.5rem;
+}
+
+.site-header .nav-wrap {
+    display: flex;
+    gap: 1.5rem;
+    align-items: center;
+}
+/* Darkmode Toggle */
+.darkmode {
+    margin-left: auto;
+}
+.toggle-wrapper {
+    overflow: hidden;
+    position: relative;
+}
+.toggle {display: flex;align-items: center;--_toggle-base-size: calc(var(--_toggle-base-width) / 2.5);--_toggle-base-height: calc(var(--_toggle-base-size) + 0.25rem + 2px);--_toggle-base-width: calc(var(--wp--preset--font-size--small) * 1.2 * 2.5);}
+.toggle *::before,
+.toggle *::after {
+  content: '';
+  position: absolute;
+}
+.toggle input { display: none;}
+
+.toggle label.toggle-item {
+    background: transparent;
+    border: 1px solid currentColor;
+    height: var(--_toggle-base-height);
+    cursor: pointer;
+}
+
+.toggle label.toggle-item:before {
+    display: block;
+    transition: all .2s ease;
+    border: 1px solid currentColor;
+    width: var(--_toggle-base-size);
+    height: var(--_toggle-base-size);
+    top:  50%;
+    translate: 0% -50%;
+    left: calc(var(--_toggle-base-size) * 0.1);
+    background: currentColor;
+    border-radius: 100%;
+}
+
+.toggle input:checked + label:before {
+    /* transform: translateX( -100% ); */
+    left: calc(100% - (var(--_toggle-base-size) * 0.1) - var(--_toggle-base-size) );
+}
+label.toggle-item {
+    width: var(--_toggle-base-width);
+    height: 3rem;
+    display: inline-block;
+    border-radius: 2rem;
+    margin: 0px;
+    position: relative;
+    transition: all .3s ease;
+    transform-origin: 20% center;
+    cursor: pointer;
+}
+
+.nav-mobile-menu-button {
+    display: none;
+    color: currentColor;
+    border: 0px solid transparent;
+    background-color: transparent;
+    font-size: var(--wp--preset--font-size--small);
+    padding: 0;
+    line-height: 1.5;
+    vertical-align: middle;
+    text-decoration: none;
+}
+#page.site:has(header.wp-block-beech-epic-header) header.site-header {
+    color: var(--wp--preset--color--white);
+    background-color: var(--wp--preset--color--off-black);
+}

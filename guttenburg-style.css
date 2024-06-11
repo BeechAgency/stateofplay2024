@@ -1,0 +1,106 @@
+@import url('css/xylem.v2.css?v=0.1.0');
+@import url('css/base.css?v=0.1');
+
+html, body {
+    font-size: 13px;
+}
+
+.edit-post-visual-editor { background-color: #fff; }
+
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper {
+    margin-top : 0rem !important;
+    margin-bottom : 0rem !important;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    border-bottom: solid 1px #e0e0e0;
+    background-color: white;
+}
+
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper h1 {
+    position: relative;
+    font-size: var(--wp--preset--font-size--1-xl);
+    color: #1e1e1e;
+    text-align: center;
+}
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper h1::before {
+    content: 'Title';
+    display: inline-block;
+    color: #1e1e1e;
+    margin-right: 2rem;
+    font-weight: lighter;
+    opacity: 0.3;
+}
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper h1::after {
+    position: absolute;
+    content: '';
+    bottom: -0.5rem;
+    left: 50%;
+    border-bottom: solid 3px var(--wp-admin-theme-color);
+    width: 0%;
+    transition: all 150ms ease;
+}
+.editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper h1.is-selected::after {
+    width: 60%;
+    left: 20%;
+}
+body .editor-styles-wrapper :where(body .is-layout-flow) > * {
+    margin-block-start: 0px;
+}
+
+.wp-block[data-type="core/widget-area"],
+.blocks-widgets-container .editor-styles-wrapper {
+    max-width: 100% !important;
+    width: 100%;
+}
+
+.block-editor-block-icon > div { 
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.editor-styles-wrapper a:where(:not(.wp-element-button)) {
+    color: inherit;
+}
+
+
+
+/* Make ACF Buttons not look chad */
+body .acf-button-group.-vertical {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    flex-direction: row;
+}
+
+
+body .acf-button-group label {
+    box-shadow: inset 0 0 0 1px #ddd;
+    border: none;
+    outline: 1px solid transparent;
+    color: #1e1e1e;
+    padding: 6px 12px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 13px;
+    font-family: inherit;
+    font-weight: 400 !important;
+}
+
+body .acf-button-group label.selected {
+    background-color: #1e1e1e;
+    box-shadow: none;
+}
+
+body .acf-field .acf-label label {
+    font-weight: bold !important;
+    padding-bottom: 12px;
+    color: #1e1e1e;
+}
+
+.components-resizable-box__container {
+    max-width: 100% !important;
+}

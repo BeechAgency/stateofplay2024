@@ -1,0 +1,10 @@
+.is-style-rounded {
+    padding-inline: var(--gutter, 2rem);
+}
+.is-style-rounded .feature__inner-wrap {
+    border-radius: var(--rounded, 2rem);
+    overflow: hidden;
+
+    box-shadow: 1px -1px 11px -3px color-mix(in srgb, var(--wp--preset--color--off-black) 20%, white);
+}
+

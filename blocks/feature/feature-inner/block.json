@@ -1,0 +1,37 @@
+{
+    "name": "beech/feature-inner",
+    "title": "Feature Inner",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./feature-inner.css" ],
+    "category": "formatting",
+    "icon": "groups",
+    "keywords": ["feature", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "feature-inner.php"
+    },
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": ["full", "wide"],
+        "alignWide": true,
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : false,
+            "margin" : false
+        },
+        "filter": {
+            "duotone": true
+        },
+        "nested": true,
+        "multiple" : true
+    },
+    "attributes": {
+    },
+    "parent" : [
+        "beech/feature-outer"    
+    ]
+}

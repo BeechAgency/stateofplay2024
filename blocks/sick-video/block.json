@@ -1,0 +1,52 @@
+{
+  "name": "beech/sick-video",
+  "title": "Sick Video!",
+  "description": "A custom testimonial block that uses ACF fields.",
+  "style": ["file:./sick-video.css"],
+  "category": "theme",
+  "icon": "<svg width='1600' height='1600' viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'><path d='M888 324v120h72V324a84.015 84.015 0 00-24.602-59.398A84.018 84.018 0 00876 240H756v72h120c3.184 0 6.234 1.266 8.484 3.516S888 320.816 888 324zM960 876V756h-72v120c0 3.184-1.266 6.234-3.516 8.484S879.184 888 876 888H756v72h120a84.015 84.015 0 0059.398-24.602A84.018 84.018 0 00960 876zM324 960h120v-72H324c-6.629 0-12-5.371-12-12V756h-72v120a84.015 84.015 0 0024.602 59.398A84.018 84.018 0 00324 960zM312 324c0-6.629 5.371-12 12-12h120v-72H324a84.015 84.015 0 00-59.398 24.602A84.018 84.018 0 00240 324v120h72zM420 468h360v72H420zM420 660h360v72H420z'/></svg>",
+  "keywords": ["text", "quote"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "sick-video.php"
+  },
+  "align": "full",
+  "supports": {
+    "anchor": true,
+    "color": false,
+    "align": false,
+    "jsx": true,
+    "dimensions": {
+      "minHeight": true
+    },
+    "spacing": {
+      "padding": false,
+      "margin": false
+    },
+    "nested": false,
+    "multiple": true
+  },
+  "styles": [
+    {
+      "name": "default",
+      "label": "SLLLAAAY",
+      "isDefault": true
+    },
+    {
+      "name": "aspect-16-9",
+      "label": "16 / 9",
+      "isDefault": false
+    },
+    {
+      "name": "aspect-9-16",
+      "label": "9 / 16",
+      "isDefault": false
+    },
+    {
+      "name": "aspect-4-3",
+      "label": "4 / 3",
+      "isDefault": false
+    }
+  ],
+  "parent": ["beech/images"]
+}

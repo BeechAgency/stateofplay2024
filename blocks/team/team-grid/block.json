@@ -1,0 +1,38 @@
+{
+    "name": "beech/team-grid",
+    "title": "Team Grid",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./team-grid.css" ],
+    "category": "theme",
+    "icon": "groups",
+    "keywords": ["team-grid", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "team-grid.php"
+    },
+    "align": "full",
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": [ "full" ],
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : false,
+            "margin" : false
+        },
+        "nested": true,
+        "multiple" : false
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "parent" : [
+        "core/team-section"
+    ]
+}

@@ -1,0 +1,47 @@
+{
+    "name": "beech/outcomes-inner",
+    "title": "Outcomes Container",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./outcomes-inner.css" ],
+    "category": "theme",
+    "icon": "<svg width='1600' height='1600' viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'><path d='M600 0C269.14 0 0 269.14 0 600s269.14 600 600 600 600-269.14 600-600S930.86 0 600 0zm0 85.727c284.55 0 514.27 229.73 514.27 514.27 0 284.55-229.73 514.27-514.27 514.27-284.55 0-514.27-229.73-514.27-514.27 0-284.55 229.73-514.27 514.27-514.27zm0 85.688c-236.18 0-428.59 192.38-428.59 428.59s192.38 428.59 428.59 428.59c236.18 0 428.59-192.38 428.59-428.59S836.21 171.415 600 171.415zm0 85.723c189.86 0 342.86 153 342.86 342.86s-153 342.86-342.86 342.86-342.86-153-342.86-342.86 153-342.86 342.86-342.86zm0 85.727c-141.52 0-257.14 115.61-257.14 257.14S458.47 857.145 600 857.145s257.14-115.61 257.14-257.14S741.53 342.865 600 342.865zm0 85.723c95.176 0 171.41 76.238 171.41 171.41S695.172 771.408 600 771.408s-171.41-76.238-171.41-171.41 76.238-171.41 171.41-171.41z'/></svg>",
+    "keywords": ["outcomes-inner", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "outcomes-inner.php"
+    },
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "jsx": true,
+        "align" : false,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "filter": {
+            "duotone": true
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "styles": [
+        {
+            "name": "default",
+            "label": "Default",
+            "isDefault": true
+        }
+    ],
+    "parent" : [
+        "beech/outcomes-outer"  
+    ]
+}

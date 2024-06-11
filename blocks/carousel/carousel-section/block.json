@@ -1,0 +1,38 @@
+{
+    "name": "beech/carousel-section",
+    "title": "Carousel Section",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./carousel-section.css" ],
+    "category": "theme",
+    "icon": "slides",
+    "keywords": ["carousel-section", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "carousel-section.php"
+    },
+    "align": "full",
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": [ "full" ],
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "parent" : [
+        "core/post-content"
+    ]
+}

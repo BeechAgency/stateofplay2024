@@ -1,0 +1,20 @@
+.team-grid__inner {
+    /*padding-inline: var(--gutter, 2rem);*/
+}
+
+.team-grid__grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 4.5rem 2.5rem;
+}
+.wp-block-beech-team-grid {
+    padding-top: 3rem;
+}
+.wp-block-heading + .wp-block-beech-team-grid {
+    padding-top: 6rem;
+}
+
+.is-style-not-grid .team-grid__grid {
+    grid-template-columns: repeat(12, 1fr);
+    gap: 7.5rem var(--xy-col-gap);
+}

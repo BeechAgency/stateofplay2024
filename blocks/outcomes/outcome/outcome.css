@@ -1,0 +1,75 @@
+.is-style-big-n-wide .outcome-item {
+    border-top: solid 1px var(--wp--preset--color--mid-gray);
+    padding-block: 2rem 3rem;
+}
+.is-style-big-n-wide .outcomes-item--text {
+    display: flex;
+    gap: 1rem;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.has-style-big-n-wide .outcome-item:last-child {
+    border-bottom: solid 1px var(--wp--preset--color--mid-gray);
+}
+
+.is-style-big-n-wide .outcome-item h4,
+.is-style-big-n-wide .editor-styles-wrapper .outcome-item h4 {
+    font-size: var(--wp--preset--font-size--4-xl);
+    margin: 0;
+    line-height: 1;
+}
+.is-style-big-n-wide .outcome-item p {
+    color: var(--wp--preset--color--black);
+    width: 24%;
+}
+div:not(.is-style-big-n-wide) > .outcomes-wrapper .outcome-item {
+    border-bottom: solid 1px var(--wp--preset--color--mid-gray);
+    padding-bottom: 1rem;
+    margin-bottom: 2rem;
+}
+div:not(.is-style-big-n-wide) > .outcomes-wrapper .outcome-item h4 {
+    font-size: var(--wp--preset--font-size--2-xl);
+}
+
+
+.outcome-item {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: nowrap;
+    align-items: flex-start;
+    justify-content: flex-start;
+}
+.outcomes-item--arrow {
+    padding-top: 1rem;
+}
+
+div.is-style-smol > .outcomes-wrapper .outcome-item { align-items: flex-start; border-bottom-color: transparent; margin-bottom: 1rem; gap: 1.5rem; }
+div.is-style-smol > .outcomes-wrapper .outcome-item h4 { font-size: var(--wp--preset--font-size--xl); margin-bottom: 0; }
+div.is-style-smol > .outcomes-wrapper .outcome-item h4:has( + p ) { margin-bottom: 0.5rem;} 
+div.is-style-smol > .outcomes-wrapper .outcome-item p { margin-bottom: 0rem;} 
+div.is-style-smol .outcomes-item--arrow { padding-top: 0rem; }
+div.is-style-smol .outcomes-item--arrow svg { width: 1.25rem; }
+
+.wp-block-beech-outcomes-inner:first-child .outcomes__inner-blocks {
+    margin-top: 0;
+}
+
+@media screen and (max-width: 768px) { 
+    .outcome-item { flex-direction: column; align-items: flex-start; text-align: left;}
+    .outcome-item p { max-width: 12rem; width: 100%;}
+
+    div:not(.is-style-big-n-wide) > .outcomes-wrapper { grid-column: 2 / span 8; }
+    div:not(.is-style-big-n-wide) > .outcomes-extras { grid-column: span 8; } 
+
+    div:not(.is-style-big-n-wide) > .outcomes-wrapper .outcome-item {
+        flex-direction: row;
+    }
+}   
+
+@media screen and (max-width: 480px) {
+    div:not(.is-style-big-n-wide) > .outcomes-wrapper {
+        grid-column: span 12;
+    }
+}

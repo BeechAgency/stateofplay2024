@@ -1,0 +1,58 @@
+{
+    "name": "beech/articles",
+    "title": "Articles",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./articles.css" ],
+    "category": "theme",
+    "icon": "<svg width='1600' height='1600' viewBox='0 0 1200 1200' xmlns='http://www.w3.org/2000/svg'><path d='M1148.4 290.4L964.8 106.8c-13.199-13.199-31.199-21.602-50.398-21.602h-309.6c-19.199 0-37.199 7.2-50.398 21.602-13.199 13.199-21.602 31.199-21.602 50.398v7.2l-226.8 60c-18 3.6-33.602 15.601-43.199 32.401-9.602 16.801-12 36-7.2 54l1.2 4.801L66.003 426c-16.801 9.602-28.801 25.199-33.602 43.199-4.8 18-2.398 38.398 7.2 54l320.4 555.6c9.6 16.801 25.198 28.801 43.198 33.602 6 2.398 12 2.398 19.2 2.398 12 0 25.198-3.601 36-9.601l355.2-205.2 114-30h170.4c39.601 0 72-32.398 72-72v-457.2c0-18-7.2-37.2-21.603-50.402zm-187.2-99.598l103.2 103.2h-96c-3.602 0-6-2.398-6-6v-97.199zm-645.6 97.199c1.2-1.2 2.398-3.602 6-4.8l211.2-56.399v571.2c0 39.602 32.398 72 72 72h85.199l-196.8 52.801c-3.602 1.2-6 0-7.2-1.199-1.198-1.2-3.6-2.398-4.8-6l-165.6-620.4c-1.203-3.598 0-6 0-7.2zm111.6 764.4c-4.8 2.398-10.801 1.2-14.398-3.602l-319.2-555.6c-2.398-3.601-1.2-6-1.2-7.199s1.2-4.8 4.802-6l176.4-102 148.8 553.2c4.8 19.2 16.8 33.602 33.602 43.2 10.8 6 22.8 9.6 36 9.6 6 0 12-1.198 19.199-2.398l74.398-20.398zm670.8-243.6H604.8c-6 0-10.801-4.8-10.801-10.801V156c0-3.602 2.398-6 3.602-7.2 1.199-1.198 3.601-3.6 7.199-3.6H900v140.4c0 37.198 30 68.397 68.398 68.397h140.4v442.8c.004 7.203-4.797 12.004-10.797 12.004z'/></svg>",
+    "keywords": ["articles", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "articles.php"
+    },
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": ["full"],
+        "alignWide" : false,
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "filter": {
+            "duotone": true
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "styles": [
+        {
+            "name": "articles",
+            "label": "Articles",
+            "isDefault": true
+        },
+        {
+            "name": "projects",
+            "label": "Projects",
+            "isDefault": false
+        },
+        {
+            "name": "related",
+            "label": "Related",
+            "isDefault": false
+        }
+    ],
+    "parent" : [
+        "core/post-content", "core/widget-area"    
+    ]
+}

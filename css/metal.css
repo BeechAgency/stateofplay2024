@@ -1,0 +1,23 @@
+@font-face {
+    font-family: 'Archaz Negras';
+    src: url('../assets/fonts/ArchazNegrasPersonalUseRegular-7BgrB.woff');
+}
+@font-face {
+    font-family: 'Makunu';
+    src: url('../assets/fonts/MakunuDemoRegular-Ea9Zj.woff');
+}
+@font-face {
+    font-family: 'Gorecobra';
+    src: url('../assets/fonts/Gorecobra-rgPDB.ttf');
+}
+
+body.metal {
+    --wp--preset--font-family--headings : 'Archaz Negras', 'mono' !important;
+    --wp--preset--font-family--body : 'Makunu', 'mono' !important;
+    --wp--preset--font-family--champion : 'Gorecobra', 'mono' !important;
+    --wp--preset--font-size--4-xl : 8rem;
+    --wp--preset--font-size--3-xl : 6rem;
+    text-transform: uppercase !important;
+    font-size: 34px;
+}
+body.metal h1.header__marquee-text { font-size: 16vw; }

@@ -1,0 +1,17 @@
+@import url('css/normalize.css');
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap');
+
+@import url('css/base.css');
+
+:root {
+    --text-scale: 1.15;
+}
+
+html, body {
+    padding: 5px;
+}
+
+[style*="color: white"], [style*="color: #fff"], [style*="color: #ffffff"] {
+    color: black !important;
+    opacity: 0.1;
+}

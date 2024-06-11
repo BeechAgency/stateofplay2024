@@ -1,0 +1,45 @@
+{
+    "name": "beech/scroll-video",
+    "title": "Scroll Video",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./scroll-video.css" ],
+    "category": "theme",
+    "icon": "video-alt2",
+    "keywords": ["scroll-video", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "scroll-video.php"
+    },
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": ["full"],
+        "alignWide" : false,
+        "jsx": true,
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "filter": {
+            "duotone": false
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "styles": [
+        {
+            "name": "default",
+            "label": "Default",
+            "isDefault": true
+        }
+    ],
+    "parent" : [
+        "core/post-content"    
+    ]
+}

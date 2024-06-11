@@ -1,0 +1,5 @@
+.team-section__inner {
+    padding-inline: var(--gutter, 2rem);
+    padding-block: var(--block-space, 6rem);
+    width: 100%;
+}

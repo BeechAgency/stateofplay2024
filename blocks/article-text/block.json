@@ -1,0 +1,54 @@
+{
+    "name": "beech/article-text",
+    "title": "Article Text",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./article-text.css" ],
+    "category": "theme",
+    "icon": "text",
+    "keywords": ["text", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "article-text.php"
+    },
+    "align": "full",
+    "supports": {
+        "anchor": true,
+        "color": false,
+        "align": [ "full" ],
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "styles": [
+        {
+            "name": "default",
+            "label": "Default",
+            "isDefault": true
+        },
+        {
+            "name": "post-meta",
+            "label": "Post Meta",
+            "isDefault": false
+        },
+        {
+            "name": "quote",
+            "label": "Has Quote",
+            "isDefault": false
+        },
+        {
+            "name": "toc",
+            "label": "Has ToC",
+            "isDefault": false
+        }
+    ],
+    "parent" : [
+        "core/post-content"
+    ]
+}

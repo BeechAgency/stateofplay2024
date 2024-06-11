@@ -1,0 +1,39 @@
+.wp-block-beech-outcomes-outer {
+    padding-inline: var(--gutter);
+    padding-top: var(--block-space, 6rem);
+    padding-bottom: var(--block-space, 6rem);
+}
+.wp-block-beech-outcomes-outer > .wp-block-beech-outcomes-outer {
+    padding: 0;
+}
+
+.wp-block-beech-outcomes-outer.block-editor-block-list__block:not(.is-style-big-n-wide) {
+    display: block;
+}
+
+.wp-block-beech-outcomes-outer:not(.is-style-big-n-wide),
+.wp-block-beech-outcomes-outer.block-editor-block-list__block:not(.is-style-big-n-wide) > div {
+    display: grid;
+    grid-template-columns: repeat(var(--xy-grid-cols), 1fr);
+    column-gap: var(--xy-col-gap);
+    row-gap: var(--xy-row-gap);
+}
+
+div:not(.is-style-big-n-wide) > .outcomes-wrapper .outcomes__outer-blocks {
+    grid-column: 7 / 12;
+}
+div:not(.is-style-big-n-wide) > .outcomes-extras {
+    grid-column: 1 / 5;
+
+}
+div:not(.is-style-big-n-wide) > .outcomes-wrapper {
+    grid-column: 7 / 12;
+}
+
+h6.eyebrow {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+

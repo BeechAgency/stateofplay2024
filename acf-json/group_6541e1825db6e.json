@@ -1,0 +1,85 @@
+{
+    "key": "group_6541e1825db6e",
+    "title": "Block - Outcome Item",
+    "fields": [
+        {
+            "key": "field_6541e182c3391",
+            "label": "Big Text",
+            "name": "big_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "82% Increase",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_6541e1ddc3392",
+            "label": "Little Text",
+            "name": "little_text",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "On sales from last year",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_65ef8537471b3",
+            "label": "Display Arrow",
+            "name": "display_arrow",
+            "aria-label": "",
+            "type": "true_false",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "message": "",
+            "default_value": 0,
+            "ui_on_text": "Show Arrow",
+            "ui_off_text": "Hide",
+            "ui": 1
+        }
+    ],
+    "location": [
+        [
+            {
+                "param": "block",
+                "operator": "==",
+                "value": "beech\/outcome"
+            }
+        ]
+    ],
+    "menu_order": 0,
+    "position": "normal",
+    "style": "default",
+    "label_placement": "top",
+    "instruction_placement": "label",
+    "hide_on_screen": "",
+    "active": true,
+    "description": "",
+    "show_in_rest": 0,
+    "modified": 1710196063
+}

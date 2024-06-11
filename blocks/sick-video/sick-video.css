@@ -1,0 +1,57 @@
+
+/** Videos */
+.sick-video-wrapper video,
+.sick-video-wrapper iframe {
+    width: 100%;
+    object-fit: cover;
+    max-height: 80vh;
+    background: var(--body-text);
+    display: block;
+    aspect-ratio: inherit;
+}
+.sick-video-wrapper iframe { height: 100%; }
+.sick-video-wrapper video[data-loaded="true"] + img.sick-poster,
+.sick-video-wrapper iframe[data-loaded="true"] + img.sick-poster {
+    animation: 1s fadeOut linear normal 1 forwards;
+    animation-delay: 500ms;
+}
+
+.sick-video-wrapper {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio : 16 / 9;
+}
+.sick-video-wrapper img.sick-poster {
+    position: absolute;
+    width: 100%;
+    object-fit: cover;
+    aspect-ratio: inherit;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+
+.is-style-aspect-16-9 .sick-video-wrapper { aspect-ratio: 16 / 9;}
+.is-style-aspect-9-16 .sick-video-wrapper { aspect-ratio:  9 / 16;}
+.is-style-aspect-4-3 .sick-video-wrapper { aspect-ratio: 4 / 3;}
+
+
+.wp-block-beech-header.is-style-home + .wp-block-beech-scroll-video .video-wrapper {
+    padding-top: 0;
+    padding-bottom: 0;
+}
+.wp-block-beech-header.is-style-home + .wp-block-beech-scroll-video {
+    margin-bottom: var(--block-space, 6rem);
+}
+
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
+}

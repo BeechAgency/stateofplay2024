@@ -1,0 +1,70 @@
+{
+    "name": "beech/image-text",
+    "title": "Image + Text",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./image-text.css" ],
+    "category": "formatting",
+    "icon": "columns",
+    "keywords": ["image-text", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "image-text.php"
+    },
+    "align": "full",
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": [
+            "full", 
+            "wide"
+        ],
+        "alignWide": true,
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "nested": false,
+        "multiple" : true,
+        "align_content" : true,
+        "allowVerticalAlignment": true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        },
+        "alignContent" : {
+            "type" : "string",
+            "default" : "center"
+        }
+    },
+    "styles": [
+        {
+            "name": "image-left",
+            "label": "Image Left",
+            "isDefault": true
+        },
+        {
+            "name": "image-right",
+            "label": "Image Right",
+            "isDefault": false
+        },
+        {
+            "name": "image-left-expand",
+            "label": "Left Expanded",
+            "isDefault": false
+        },
+        {
+            "name": "image-right-expand",
+            "label": "Right Expanded",
+            "isDefault": false
+        }
+    ],
+    "parent" : [
+        "core/post-content"
+    ]
+}

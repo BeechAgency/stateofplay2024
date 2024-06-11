@@ -1,0 +1,9 @@
+.accordions-wrapper {
+    padding-block: var(--block-space, 6rem);
+    padding-inline: var(--gutter, 2rem);
+}
+@media screen and (min-width: 1023px) {
+    .is-style-big-boiz.wp-block-beech-accordions {
+        /*max-width: calc(100% / 12 * 10);*/
+    }    
+}

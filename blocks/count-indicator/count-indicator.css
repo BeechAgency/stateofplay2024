@@ -1,0 +1,44 @@
+.scrolly-boi {
+  position: fixed;
+  right: 2rem;
+  bottom: 2rem;
+  translate: 0 calc(100% + 2rem);
+
+  width: 7.5rem;
+  height: 7.5rem;
+
+  padding: 1rem;
+  aspect-ratio: 1 / 1;
+  background-color: var(--wp--preset--color--rorange);
+  border-radius: 100%;
+  color: white;
+  text-transform: uppercase;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  z-index: 100;
+
+  font-size:  var(--wp--preset--font-size--2-xl);
+
+  transition: all 250ms ease-in-out;
+  transition-delay: 150ms;
+}
+
+.scrolly-boi.active {
+    translate: 0 0%;
+}
+/*
+.wp-block-beech-count-indicator {
+    border-top: 3px hotpink solid;
+}
+*/
+@media screen and (max-width: 480px) {
+  .scrolly-boi {
+    width: 5rem;
+    height: auto;
+    line-height: 0.5;
+    display: none !important;
+  }
+}

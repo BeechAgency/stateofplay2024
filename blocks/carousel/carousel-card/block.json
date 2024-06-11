@@ -1,0 +1,39 @@
+{
+    "name": "beech/carousel-card",
+    "title": "Carousel Item",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./carousel-card.css" ],
+    "category": "theme",
+    "icon": "id",
+    "keywords": ["carousel-card", "quote"],
+    "usesContext": ["acf/fields"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "carousel-card.php"
+    },
+    "align": "full",
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": [ "full" ],
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : false,
+            "margin" : false
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "parent" : [
+        "beech/carousel"
+    ]
+}

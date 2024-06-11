@@ -1,0 +1,62 @@
+.video-wrapper {
+    padding-block: var(--block-space, 6rem);
+}
+.video-inner {
+    --scroll-progress : 0;
+    --scroll-percent : calc( var(--scroll-progress) * 100%);
+
+    --clipping : var(--scroll-percent);
+
+    --_clipped : var(--clipping); /*calc(100% / 12 * 2);*/
+    --_clipped_alt : calc(100% - var(--clipping)); /*calc(100% - var(--_clipped));*/
+    /*width: calc(100% / 12 * 8);*/
+    width: 100%;
+    margin: 0 auto;
+    position: sticky;
+    top: 0rem;
+    clip-path: polygon(var(--_clipped) var(--_clipped), var(--_clipped_alt) var(--_clipped), var(--_clipped_alt) var(--_clipped_alt), var(--_clipped) var(--_clipped_alt));
+
+    /*animation: scrollIn 1s ease-in-out forwards;*/
+}
+.video-inner video,
+.video-inner .video {
+    max-width: 100%;
+    width: 100%;
+    height: 100vh;
+    object-fit: cover;
+    display: block;
+}
+.video-wrapper {
+    position: relative;
+    height: 130vh;
+    
+}
+
+@keyframes scrollIn {
+    0% {
+        --_clipped : calc(100% / 12 * 2);
+        --scroll-progress : 0;
+        width: calc(100% / 12 * 8);
+    }
+    100% {
+        --_clipped : 0%;
+        --scroll-progress : 1;
+        width: 100%;
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .wp-block-beech-scroll-video {
+        padding-top: var(--block-space);
+    }
+    
+    .wp-block-beech-scroll-video .video-inner {
+        --scroll-percent: calc( var(--scroll-progress) * 110%);
+    }
+
+    .wp-block-beech-scroll-video .video-inner video, .video-inner .video { 
+        height: auto;
+        aspect-ratio: 4 / 3;
+    }
+    .wp-block-beech-scroll-video .video-wrapper { height: auto; }
+}

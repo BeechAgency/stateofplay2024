@@ -1,0 +1,9 @@
+.menu-item:not(.menu-item-depth-0) .acf-menu-item-fields .acf-field-64c09d77acbd7, .menu-item:not(.menu-item-depth-0) .acf-menu-item-fields .acf-field-64c0993185718 {
+    display: none;
+}
+
+.menu-item.menu-item-depth-0 .acf-menu-item-fields .acf-field-64c096fe1f23c {
+    display: none;
+}
+
+.theme-browser .theme  .theme-id-container .theme-name { height: auto; }

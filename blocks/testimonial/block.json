@@ -1,0 +1,41 @@
+{
+    "name": "acf/testimonial",
+    "title": "Testimonial",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./testimonial.css" ],
+    "category": "formatting",
+    "icon": "admin-comments",
+    "keywords": ["testimonial", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "testimonial.php"
+    },
+    "align": "full",
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": ["full"],
+        "jsx": true,
+		"dimensions": true,
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "nested": false
+    },
+    "styles": [
+        {
+            "name": "large-dude",
+            "label": "Large Dude",
+            "isDefault": false
+        },
+        {
+            "name": "min-hero",
+            "label": "Mini Hero",
+            "isDefault": false
+        }
+    ],
+    "parent" : [
+        "core/post-content"
+    ]
+}

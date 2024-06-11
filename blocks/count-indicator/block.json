@@ -1,0 +1,48 @@
+{
+  "name": "beech/count-indicator",
+  "title": "Count Indicator",
+  "description": "A custom testimonial block that uses ACF fields.",
+  "style": ["file:./count-indicator.css"],
+  "script": ["scrolly-boi"],
+  "category": "theme",
+  "icon": "star-empty",
+  "keywords": ["text", "quote"],
+  "acf": {
+    "mode": "preview",
+    "renderTemplate": "count-indicator.php"
+  },
+  "align": "full",
+  "supports": {
+    "anchor": true,
+    "color": false,
+    "align": false,
+    "jsx": true,
+    "dimensions": {
+      "minHeight": true
+    },
+    "spacing": {
+      "padding": false,
+      "margin": false
+    },
+    "nested": false,
+    "multiple": true
+  },
+  "styles": [
+    {
+      "name": "step",
+      "label": "Step",
+      "isDefault": false
+    },
+    {
+      "name": "start",
+      "label": "Start",
+      "isDefault": false
+    },
+    {
+      "name": "end",
+      "label": "End",
+      "isDefault": false
+    }
+  ],
+  "parent": ["core/post-content"]
+}

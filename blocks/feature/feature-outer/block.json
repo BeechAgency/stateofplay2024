@@ -1,0 +1,53 @@
+{
+    "name": "beech/feature-outer",
+    "title": "Feature",
+    "description": "A custom testimonial block that uses ACF fields.",
+    "style": [ "file:./feature-outer.css" ],
+    "category": "formatting",
+    "icon": "groups",
+    "keywords": ["feature", "quote"],
+    "acf": {
+        "mode": "preview",
+        "renderTemplate": "feature-outer.php"
+    },
+    "supports": {
+        "anchor": true,
+        "color": true,
+        "align": ["full"],
+        "alignWide" : false,
+        "jsx": true,
+		"dimensions": {
+            "minHeight": true
+        },
+		"spacing": {
+            "padding" : true,
+            "margin" : false
+        },
+        "filter": {
+            "duotone": true
+        },
+        "nested": false,
+        "multiple" : true
+    },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
+    "styles": [
+        {
+            "name": "square",
+            "label": "Default",
+            "isDefault": true
+        },
+        {
+            "name": "rounded",
+            "label": "Rounded",
+            "isDefault": false
+        }
+    ],
+    "parent" : [
+        "core/post-content"    
+    ]
+}
