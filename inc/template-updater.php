@@ -77,7 +77,9 @@ class BeechAgency_Theme_Updater {
       if ( is_null( $this->github_response ) ) { // Do we have a response?
         $args = array();
         $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', $this->username, $this->repository ); // Build URI
-          
+        
+        $this->request_uri = $request_uri;
+
         $args = array();
         $this->log("Request URL: ". $request_uri);
 
@@ -141,7 +143,9 @@ class BeechAgency_Theme_Updater {
         $this->log("Modifying transient for theme: " . $this->theme);
 
         if( !property_exists( $transient, 'checked') ) return $transient;
-        if( $checked != $transient->checked ) return $transient; // Did Wordpress check for updates?
+        if( !$transient->checked ) return $transient; // Did Wordpress check for updates?
+
+        $checked = $transient->checked;
                     
         $this->get_repository_info(); // Get the repo info
         $this->log("Checking repository info: ". $this->theme);
@@ -164,10 +168,11 @@ class BeechAgency_Theme_Updater {
         $this->log("Theme out of date");
 
         $new_files = $this->github_response->zipball_url; // Get the ZIP
-
+        /*
         if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
             $new_files = $this->github_response->assets[0]->browser_download_url;
         }
+        */
 
         $this->log("Download url: ".$new_files);
 
@@ -175,13 +180,16 @@ class BeechAgency_Theme_Updater {
 
         $this->log("new slug: ". $slug);
 
+        $this->package_url = $new_files;
 
         $theme = array( // setup our theme info
             'url' => 'https://github.com/'.$this->username.'/'.$this->repository, //$this->themeObject["ThemeURI"],
-            'slug' => $this->theme,
+            'slug' => 'yolowhatever',
             'package' => $new_files,
             'new_version' => $this->github_response->tag_name
         );
+
+
 
         $this->log("Setting transient response with theme info: " . json_encode($theme));
 
@@ -194,6 +202,8 @@ class BeechAgency_Theme_Updater {
 
   public function download_package( $args, $url ) {
     // This function is just for adding auth prior to downloading the package.
+    
+    if(strpos($url, 'BeechAgency/beechagency2023') === false) return $args;
 
     //dump_it('Download Package', 'red');
     //dump_it($args, 'red');
@@ -216,7 +226,7 @@ class BeechAgency_Theme_Updater {
 
         global $wp_filesystem; // Get global FS object
 
-
+        $this->log("AFTER INSTALL BABY!!!!!!!" );
         $install_directory = get_theme_root(). '/' . $this->theme ; // Our theme directory
         $wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the theme dir
         $result['destination'] = $install_directory; // Set the destination for the rest of the stack
