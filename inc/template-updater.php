@@ -71,7 +71,7 @@ class BeechAgency_Theme_Updater {
   private function get_repository_info() {
       if ( is_null( $this->github_response ) ) { // Do we have a response?
         $args = array();
-        $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', $this->username, $this->repository ); // Build URI
+        $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest?recursive=1', $this->username, $this->repository ); // Build URI
           
         $args = array();
 
@@ -87,6 +87,8 @@ class BeechAgency_Theme_Updater {
               'ssl' => ["verify_peer"=>false, "verify_peer_name"=>false]
           ])
         ));
+
+        $this->log("GitHub response: " . json_encode($response));
 
         /*
         dump_it('Github Response', 'aqua');
@@ -118,7 +120,8 @@ class BeechAgency_Theme_Updater {
   }
 
   public function modify_transient( $transient ) {
-    
+      $this->log("Modifying transient for theme: " . $this->theme);
+
       if( property_exists( $transient, 'checked') ) { // Check if transient has a checked property
 
         //dump_it($transient->checked, 'yellow');
@@ -144,37 +147,8 @@ class BeechAgency_Theme_Updater {
                   $new_files = $this->github_response->zipball_url; // Get the ZIP
 
                   // Handle Extra Github folder of annoyingness
-                  // Download the zip file
-                    $temp_zip = download_url($new_files);
-                      
-                    if (is_wp_error($temp_zip)) {
-                        // Handle error
-                        $this->log("Temp zip error, unable to be created.");
-                        return $transient;
-                    }
-
-                    $this->log("Set temp zip.");
-
-                    // Extract the zip file to a temporary directory
-                    $temp_dir = wp_tempnam($temp_zip);
-                    unzip_file($temp_zip, $temp_dir);
-
-                    $this->log("Set temp directory." . $temp_dir);
-                    // Find the inner folder containing the theme files
-                    $inner_folders = glob($temp_dir . '/*', GLOB_ONLYDIR);
-                    if (!empty($inner_folders)) {
-                        $inner_folder = reset($inner_folders);
-                        $this->log("New files set: ");
-                        // Update the new files path to point to the inner folder
-                        $new_files = trailingslashit($inner_folder);
-                    }
-
-                    // Clean up temporary files
-                    unlink($temp_zip);
-                    $this->rrmdir($temp_dir); // Define this function to recursively remove directories
-
-                    $this->log("Extra folder handled.");
-                    // END: Handle Extra Github folder of annoyingness
+                  
+                  // END: Handle Extra Github folder of annoyingness
                     
                   $slug = current( explode('/', $this->theme ) ); // Create valid slug
 
@@ -187,42 +161,32 @@ class BeechAgency_Theme_Updater {
                       'new_version' => $this->github_response->tag_name
                   );
 
+                  $this->log("Setting transient response with theme info: " . json_encode($theme));
+
                   $transient->response[$this->theme] = $theme; // Return it in response
 
               }
           }
       }
-
+      
+      $this->log("Modified transient: " . json_encode($transient));
       return $transient; // Return filtered transient
   }
-    private function rrmdir($dir) {
-        if (is_dir($dir)) {
-            $objects = scandir($dir);
-            foreach ($objects as $object) {
-                if ($object != '.' && $object != '..') {
-                    if (is_dir($dir . '/' . $object)) {
-                        $this->rrmdir($dir . '/' . $object);
-                    } else {
-                        unlink($dir . '/' . $object);
-                    }
-                }
-            }
-            rmdir($dir);
-        }
-    }
 
   public function download_package( $args, $url ) {
 
     //dump_it('Download Package', 'red');
     //dump_it($args, 'red');
-
-    $this->log("downloading package: ". $this->theme);
+    $this->log("Attempting to download package from URL: $url");
+    $this->log("Download Package Args (before modification): " . json_encode($args));
 
       if ( null !== $args['filename'] ) {
           if( $this->authorize_token ) { 
               $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
           }
       }
+
+    $this->log("Download Package Args (after modification): " . json_encode($args));
       
       remove_filter( 'http_request_args', [ $this, 'download_package' ] );
 
