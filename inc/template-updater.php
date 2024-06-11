@@ -53,10 +53,15 @@ class BeechAgency_Theme_Updater {
       $this->version  = wp_get_theme($this->theme)->get('Version');
       $this->themeObject = wp_get_theme($this->theme);
       $this->active	= $this->theme === get_stylesheet() ? true : false;
+      $this->theme_dir = get_theme_root();
+      $this->theme_name = get_option('stylesheet');
+      $this->theme_template = get_stylesheet_directory(); // Folder name of the current theme
+      $this->theme_uri = get_stylesheet_directory_uri(); // URL of the current theme folder
   }
 
   public function set_theme( $theme ) {
       $this->theme = $theme;
+      $this->theme_slug = $theme;
   }
   public function set_username( $username ) {
       $this->username = $username;
@@ -107,6 +112,18 @@ class BeechAgency_Theme_Updater {
   public function initialize() {
       $this->log("Initializing GitHub Updater for ". $this->theme);
 
+      $details = array();
+
+      $details['theme_name'] = $this->theme;
+      $details['theme_dir'] = $this->theme_dir;
+      $details['theme_slug'] = $this->theme_slug;
+      $details['active'] = $this->active;
+      $details['theme_template'] = $this->theme_template;
+      $details['theme_uri'] = $this->theme_uri;
+      $details['version'] = $this->version;
+
+      $this->log("Details are: ". json_encode($details));
+
       add_filter( 'pre_set_site_transient_update_themes', array( $this, 'modify_transient' ), 10, 1 );
       //add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3);
       add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
@@ -120,65 +137,60 @@ class BeechAgency_Theme_Updater {
       );
   }
 
-  public function modify_transient( $transient ) {
-      $this->log("Modifying transient for theme: " . $this->theme);
+    public function modify_transient( $transient ) {
+        $this->log("Modifying transient for theme: " . $this->theme);
 
-      if( property_exists( $transient, 'checked') ) { // Check if transient has a checked property
-
-          if( $checked = $transient->checked ) { // Did Wordpress check for updates?
-              
-            $this->get_repository_info(); // Get the repo info
-              $this->log("Checking repository info: ". $this->theme);
-
-              if( gettype($this->github_response) === "boolean" ) { return $transient; }
-
-              $github_version = filter_var($this->github_response->tag_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
-              
-              $out_of_date = version_compare( 
-                  $github_version, 
-                  $checked[ $this->theme ], 
-                  'gt' 
-              ); // Check if we're out of date
-
-              $this->log("Repo version checked and compared: ". $out_of_date .' | Remote: '.$github_version .' | Local: '. $checked[ $this->theme ]);
-
-              if( $out_of_date ) {
-                $this->log("Theme out of date");
-
-                $new_files = $this->github_response->zipball_url; // Get the ZIP
-                
-
-                 if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
-                    $new_files = $this->github_response->assets[0]->browser_download_url;
-                 }
-                $this->log("Download url: ".$new_files);
-                 
-                  // Handle Extra Github folder of annoyingness
-                  // END: Handle Extra Github folder of annoyingness
+        if( !property_exists( $transient, 'checked') ) return $transient;
+        if( $checked != $transient->checked ) return $transient; // Did Wordpress check for updates?
                     
-                  $slug = current( explode('/', $this->theme ) ); // Create valid slug
+        $this->get_repository_info(); // Get the repo info
+        $this->log("Checking repository info: ". $this->theme);
 
-                  $this->log("new slug: ". $slug);
-                  
+        if( gettype($this->github_response) === "boolean" ) { return $transient; }
 
-                  $theme = array( // setup our theme info
-                      'url' => 'https://beech.agency', //$this->themeObject["ThemeURI"],
-                      'slug' => $slug,
-                      'package' => $new_files,
-                      'new_version' => $this->github_response->tag_name
-                  );
+        $github_version = filter_var($this->github_response->tag_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
-                  $this->log("Setting transient response with theme info: " . json_encode($theme));
+        $out_of_date = version_compare( 
+            $github_version, 
+            $checked[ $this->theme ], 
+            'gt' 
+        ); // Check if we're out of date
 
-                  $transient->response[$this->theme] = $theme; // Return it in response
+        $this->log("Repo version checked and compared: ". $out_of_date .' | Remote: '.$github_version .' | Local: '. $checked[ $this->theme ]);
 
-              }
-          }
-      }
+        // If she not out of date get outta here.
+        if( !$out_of_date )  return $transient; 
 
-      $this->log("Modified transient for ". $this->theme." | " . json_encode($transient) );
-      return $transient; // Return filtered transient
-  }
+        $this->log("Theme out of date");
+
+        $new_files = $this->github_response->zipball_url; // Get the ZIP
+
+        if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
+            $new_files = $this->github_response->assets[0]->browser_download_url;
+        }
+
+        $this->log("Download url: ".$new_files);
+
+        $slug = current( explode('/', $this->theme ) ); // Create valid slug
+
+        $this->log("new slug: ". $slug);
+
+
+        $theme = array( // setup our theme info
+            'url' => 'https://github.com/'.$this->username.'/'.$this->repository, //$this->themeObject["ThemeURI"],
+            'slug' => $this->theme,
+            'package' => $new_files,
+            'new_version' => $this->github_response->tag_name
+        );
+
+        $this->log("Setting transient response with theme info: " . json_encode($theme));
+
+        $transient->response[$this->theme] = $theme; // Return it in response
+
+
+        $this->log("Modified transient for ". $this->theme." | " . json_encode($transient) );
+        return $transient; // Return filtered transient
+    }
 
   public function download_package( $args, $url ) {
     // This function is just for adding auth prior to downloading the package.
