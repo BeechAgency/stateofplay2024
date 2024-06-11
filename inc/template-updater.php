@@ -168,7 +168,7 @@ class BeechAgency_Theme_Updater {
               }
           }
       }
-      
+
       $this->log("Modified transient: " . json_encode($transient));
       return $transient; // Return filtered transient
   }
@@ -186,12 +186,41 @@ class BeechAgency_Theme_Updater {
           }
       }
 
-    $this->log("Download Package Args (after modification): " . json_encode($args));
+      //$this->log("Download Package Args (after modification): " . json_encode($args));
+        // Using wp_remote_get for better WordPress compatibility
+        $response = wp_remote_get($url, $args);
+
+        // Log HTTP response
+        if (is_wp_error($response)) {
+            $this->log("HTTP error: " . $response->get_error_message());
+        } else {
+            $this->log("HTTP response received: " . json_encode($response));
+            
+            $body = wp_remote_retrieve_body($response);
+            $filename = $args['filename'];
+
+            // Attempt to write the file
+            if (!empty($body)) {
+                file_put_contents($filename, $body);
+                if ($this->verify_package($filename)) {
+                    $this->log("Package downloaded and verified successfully: " . $filename);
+                } else {
+                    $this->log("Package download failed verification or is corrupt: " . $filename);
+                }
+            } else {
+                $this->log("Empty body in HTTP response.");
+            }
+        }
+
       
       remove_filter( 'http_request_args', [ $this, 'download_package' ] );
 
       return $args;
   }
+
+    private function verify_package($file) {
+        return file_exists($file) && filesize($file) > 0;
+    }
 
     public function after_install( $response, $hook_extra, $result ) {
 
