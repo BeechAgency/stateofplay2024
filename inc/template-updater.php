@@ -28,6 +28,7 @@ class BeechAgency_Theme_Updater {
   public function __construct( $file ) {
       $this->file = $file;
       $this->set_theme_properties();
+      $this->log_file = __DIR__ . '/update_log.txt'; // Set log file path
 
       //add_action( 'admin_init', array( $this, 'set_theme_properties' ) );
 
@@ -40,6 +41,7 @@ class BeechAgency_Theme_Updater {
 
       $timestamp = date("Y-m-d H:i:s");
       file_put_contents($this->log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
+      error_log( print_r("GitUpdater: [$timestamp] $message"));
   }
 
   public function set_logging( $status = false ) {
@@ -94,7 +96,7 @@ class BeechAgency_Theme_Updater {
         if( is_array( $response ) ) { // If it is an array
             $response = current( $response ); // Get the first item
         }
-
+        $this->log("Github response set for ". $this->theme);
         $this->github_response = $response; // Set it to our property
       }
   }
@@ -135,13 +137,15 @@ class BeechAgency_Theme_Updater {
                   'gt' 
               ); // Check if we're out of date
 
-              $this->log("Repo version checked and compared: ". $out_of_date,  $github_version, $checked[ $this->theme ]);
+              $this->log("Repo version checked and compared: ". $out_of_date .' | Remote: '.$github_version .' | Local: '. $checked[ $this->theme ]);
 
               if( $out_of_date ) {
 
                   $new_files = $this->github_response->zipball_url; // Get the ZIP
                     
                   $slug = current( explode('/', $this->theme ) ); // Create valid slug
+
+                  $this->log("new slug: ". $slug);
 
                   $theme = array( // setup our theme info
                       'url' => 'https://beech.agency', //$this->themeObject["ThemeURI"],
@@ -164,6 +168,8 @@ class BeechAgency_Theme_Updater {
     //dump_it('Download Package', 'red');
     //dump_it($args, 'red');
 
+    $this->log("downloading package: ". $this->theme);
+
       if ( null !== $args['filename'] ) {
           if( $this->authorize_token ) { 
               $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
@@ -179,13 +185,13 @@ class BeechAgency_Theme_Updater {
 
         global $wp_filesystem; // Get global FS object
 
-        $this->log("Attempt after install: ". $this->theme);
+        $this->log("attempt after install: ". $this->theme);
         // Get the parent directory of the destination (the theme directory)
         $destination = $result['destination'];
         $theme_root = get_theme_root();
         $theme_directory = $theme_root . '/' . $this->theme;
 
-        $this->log("Desination: ".  $destination);
+        $this->log("desination: ".  $destination);
         $this->log("theme_root: ".  $theme_root);
 
         // Locate the extracted folder (which includes the branch name suffix)
@@ -214,7 +220,7 @@ class BeechAgency_Theme_Updater {
 
 
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
-$updater->set_logging(false);
+$updater->set_logging(true);
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'beechagency2023' );
 $updater->set_theme('beechagency2023'); 
