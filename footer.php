@@ -59,7 +59,6 @@ $formatted_date = date( 'j F Y \a\t g:ia', $not_formatted_date );
 			</div>
 		</section>
 		<section class="max-logo">
-
 			<div class="acknowledgement acknowledgement-mobile" data-xy="col 2xl:8 xl:8 md:12 sm:12 xs:12">
 				<p>Beech acknowledges the Awabakal people, the traditional custodians of the land on which we work. We pay our respects to their elders both past and present.</p>
 				<p>© <?= date('Y'); ?> Beech Agency</p>

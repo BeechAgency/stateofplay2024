@@ -119,13 +119,6 @@ class BeechAgency_Theme_Updater {
                   'gt' 
               ); // Check if we're out of date
 
-              /*
-              dump_it('Git response tag_name (salmon) and theme (pink)', 'salmon');
-              dump_it($this->github_response->tag_name, 'salmon');
-              dump_it($checked[ $this->theme ], 'hotpink');
-              dump_it('Out of date', 'lightblue');
-              dump_it($out_of_date, 'lightblue');
-              */
 
               if( $out_of_date ) {
 
@@ -146,50 +139,8 @@ class BeechAgency_Theme_Updater {
           }
       }
 
-      //dump_it('Filtered Transient', 'lightblue');
-      //dump_it($transient, 'lightblue');
-
       return $transient; // Return filtered transient
   }
-
-/*
-  public function plugin_popup( $result, $action, $args ) {
-
-      if( ! empty( $args->slug ) ) { // If there is a slug
-          
-          if( $args->slug == current( explode( '/' , $this->basename ) ) ) { // And it's our slug
-
-              $this->get_repository_info(); // Get our repo info
-
-              // Set it to an array
-              $plugin = array(
-                  'name'				=> $this->plugin["Name"],
-                  'slug'				=> $this->basename,
-                  'requires'					=> '5.1',
-                  'tested'						=> '6.0.2',
-                  'rating'						=> '100.0',
-                  'num_ratings'				=> '5',
-                  'downloaded'				=> '5',
-                  'added'							=> '2020-07-08',
-                  'version'			=> $this->github_response['tag_name'],
-                  'author'			=> $this->plugin["AuthorName"],
-                  'author_profile'	=> $this->plugin["AuthorURI"],
-                  'last_updated'		=> $this->github_response['published_at'],
-                  'homepage'			=> $this->plugin["PluginURI"],
-                  'short_description' => $this->plugin["Description"],
-                  'sections'			=> array(
-                      'Description'	=> $this->plugin["Description"],
-                      'Updates'		=> $this->github_response['body'],
-                  ),
-                  'download_link'		=> $this->github_response['zipball_url']
-              );
-
-              return (object) $plugin; // Return the data
-          }
-
-      }
-      return $result; // Otherwise return default
-  }*/
 
   public function download_package( $args, $url ) {
 
@@ -207,24 +158,36 @@ class BeechAgency_Theme_Updater {
       return $args;
   }
 
-  public function after_install( $response, $hook_extra, $result ) {
+    public function after_install( $response, $hook_extra, $result ) {
 
-    //dump_it('After install', 'hotpink');
-    //dump_it($result, 'hotpink');
+        global $wp_filesystem; // Get global FS object
 
-      global $wp_filesystem; // Get global FS object
 
-      $install_directory = get_theme_root(). '/' . $this->theme ; // Our theme directory
-      $wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the theme dir
-      $result['destination'] = $install_directory; // Set the destination for the rest of the stack
+        // Get the parent directory of the destination (the theme directory)
+        $destination = $result['destination'];
+        $theme_root = get_theme_root();
+        $theme_directory = $theme_root . '/' . $this->theme;
 
-  /*
-      if ( $this->active ) { // If it was active
-          activate_plugin( $this->basename ); // Reactivate
-      }*/
+        // Locate the extracted folder (which includes the branch name suffix)
+        $extracted_folder = $wp_filesystem->find_folder($destination);
+        $subfolders = array_filter(glob($extracted_folder . '/*'), 'is_dir');
 
-      return $result;
-  }
+        // Assuming there's only one subfolder in the extracted directory
+        if (!empty($subfolders)) {
+            $source = reset($subfolders);
+            
+            // Move files from extracted folder to the theme directory
+            $wp_filesystem->move($source, $theme_directory, true);
+        }
+
+        // Remove the empty extracted folder
+        $wp_filesystem->delete($destination, true);
+
+        // Update the result destination
+        $result['destination'] = $theme_directory;
+
+        return $result;
+    }
 }
 
 
