@@ -144,8 +144,14 @@ class BeechAgency_Theme_Updater {
 
               if( $out_of_date ) {
 
-                  $new_files = $this->github_response->zipball_url; // Get the ZIP
+                $new_files = $this->github_response->zipball_url; // Get the ZIP
 
+
+                 if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
+                    $new_files = $this->github_response->assets[0]->browser_download_url;
+                 }
+
+                 
                   // Handle Extra Github folder of annoyingness
                   // END: Handle Extra Github folder of annoyingness
                     
