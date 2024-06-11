@@ -143,14 +143,15 @@ class BeechAgency_Theme_Updater {
               $this->log("Repo version checked and compared: ". $out_of_date .' | Remote: '.$github_version .' | Local: '. $checked[ $this->theme ]);
 
               if( $out_of_date ) {
+                $this->log("Theme out of date");
 
                 $new_files = $this->github_response->zipball_url; // Get the ZIP
-
+                
 
                  if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
                     $new_files = $this->github_response->assets[0]->browser_download_url;
                  }
-
+                $this->log("Download url: ".$new_files);
                  
                   // Handle Extra Github folder of annoyingness
                   // END: Handle Extra Github folder of annoyingness
@@ -158,6 +159,7 @@ class BeechAgency_Theme_Updater {
                   $slug = current( explode('/', $this->theme ) ); // Create valid slug
 
                   $this->log("new slug: ". $slug);
+                  
 
                   $theme = array( // setup our theme info
                       'url' => 'https://beech.agency', //$this->themeObject["ThemeURI"],
@@ -174,7 +176,7 @@ class BeechAgency_Theme_Updater {
           }
       }
 
-      $this->log("Modified transient: " . json_encode($transient));
+      $this->log("Modified transient for ". $this->theme." | " . json_encode($transient) );
       return $transient; // Return filtered transient
   }
 
