@@ -77,7 +77,7 @@ class BeechAgency_Theme_Updater {
 
     private function get_repository_info() {
         if ( !is_null( $this->github_response ) ) {
-            return // We already have a response so bail.
+            return; // We already have a response so bail.
         }
 
         $args = array();
