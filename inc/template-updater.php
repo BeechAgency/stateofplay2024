@@ -15,69 +15,74 @@ function dump_it($what, $color) {
 }
 
 class BeechAgency_Theme_Updater {
-  private $file;    
-  private $theme;    
-  private $themeObject;
-  private $version;    
-  private $active;    
-  private $username;    
-  private $repository;    
-  private $authorize_token;
-  private $github_response;
+    private $file;    
+    private $theme;    
+    private $themeObject;
+    private $version;    
+    private $active;    
+    private $username;    
+    private $repository;    
+    private $authorize_token;
+    private $github_response;
+    private $package_url;
+    private $request_uri;
+    private $logging = false;
+    private $log_file;
 
-  public function __construct( $file ) {
-      $this->file = $file;
-      $this->set_theme_properties();
-      $this->log_file = __DIR__ . '/update_log.txt'; // Set log file path
 
-      //add_action( 'admin_init', array( $this, 'set_theme_properties' ) );
+    public function __construct( $file ) {
+        $this->file = $file;
+        $this->set_theme_properties();
+        $this->log_file = __DIR__ . '/update_log.txt'; // Set log file path
 
-      return $this;
-  }
+        return $this;
+    }
 
-  // Provides logging
-  private function log($message) {
-      if ( !$this->logging ) return;
+    // Provides logging
+    private function log($message) {
+        if ( !$this->logging ) return;
 
-      $timestamp = date("Y-m-d H:i:s");
-      file_put_contents($this->log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
-      //error_log( print_r("GitUpdater: [$timestamp] $message"));
-  }
+        $timestamp = date("Y-m-d H:i:s");
+        file_put_contents($this->log_file, "[$timestamp] $message" . PHP_EOL, FILE_APPEND);
+        //error_log( print_r("GitUpdater: [$timestamp] $message"));
+    }
 
-  public function set_logging( $status = false ) {
+    public function set_logging( $status = false ) {
         $this->logging =  $status;
-  }
+    }
 
+    public function set_theme_properties() {
+        $this->version  = wp_get_theme($this->theme)->get('Version');
+        $this->themeObject = wp_get_theme($this->theme);
+        $this->active	= $this->theme === get_stylesheet() ? true : false;
+        $this->theme_dir = get_theme_root();
+        $this->theme_name = get_option('stylesheet');
+        $this->theme_template = get_stylesheet_directory(); // Folder name of the current theme
+        $this->theme_uri = get_stylesheet_directory_uri(); // URL of the current theme folder
+    }
 
-  public function set_theme_properties() {
-      $this->version  = wp_get_theme($this->theme)->get('Version');
-      $this->themeObject = wp_get_theme($this->theme);
-      $this->active	= $this->theme === get_stylesheet() ? true : false;
-      $this->theme_dir = get_theme_root();
-      $this->theme_name = get_option('stylesheet');
-      $this->theme_template = get_stylesheet_directory(); // Folder name of the current theme
-      $this->theme_uri = get_stylesheet_directory_uri(); // URL of the current theme folder
-  }
+    public function set_theme( $theme ) {
+        $this->theme = $theme;
+        $this->theme_slug = $theme;
+    }
+    public function set_username( $username ) {
+        $this->username = $username;
+    }
+    public function set_repository( $repository ) {
+        $this->repository = $repository;
+    }
+    public function authorize( $token ) {
+        $this->authorize_token = $token;
+    }
 
-  public function set_theme( $theme ) {
-      $this->theme = $theme;
-      $this->theme_slug = $theme;
-  }
-  public function set_username( $username ) {
-      $this->username = $username;
-  }
-  public function set_repository( $repository ) {
-      $this->repository = $repository;
-  }
-  public function authorize( $token ) {
-      $this->authorize_token = $token;
-  }
+    private function get_repository_info() {
+        if ( !is_null( $this->github_response ) ) {
+            return // We already have a response so bail.
+        }
 
-  private function get_repository_info() {
-      if ( is_null( $this->github_response ) ) { // Do we have a response?
         $args = array();
         $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', $this->username, $this->repository ); // Build URI
-        
+
         $this->request_uri = $request_uri;
 
         $args = array();
@@ -88,69 +93,73 @@ class BeechAgency_Theme_Updater {
         }
 
         $response = json_decode(
-          file_get_contents(
+            file_get_contents(
             'https://api.github.com/repos/'.$this->username.'/'.$this->repository.'/releases/latest', false,
-      	    stream_context_create([
-              'http' => ['header' => "User-Agent: ".$this->username."\r\n"],
-              'ssl' => ["verify_peer"=>false, "verify_peer_name"=>false]
-          ])
+            stream_context_create([
+                'http' => ['header' => "User-Agent: ".$this->username."\r\n"],
+                'ssl' => ["verify_peer"=>false, "verify_peer_name"=>false]
+            ])
         ));
 
         $this->log("GitHub response: " . json_encode($response));
 
-        /*
-        dump_it('Github Response', 'aqua');
-        dump_it($response, 'aqua');
-        */
-
         if( is_array( $response ) ) { // If it is an array
             $response = current( $response ); // Get the first item
         }
+
         $this->log("Github response set for ". $this->theme);
+
         $this->github_response = $response; // Set it to our property
-      }
-  }
 
-  public function initialize() {
-      $this->log("Initializing GitHub Updater for ". $this->theme);
+        return;
+    }
 
-      $details = array();
+    public function initialize() {
+        $this->log("Initializing GitHub Updater for ". $this->theme);
 
-      $details['theme_name'] = $this->theme;
-      $details['theme_dir'] = $this->theme_dir;
-      $details['theme_slug'] = $this->theme_slug;
-      $details['active'] = $this->active;
-      $details['theme_template'] = $this->theme_template;
-      $details['theme_uri'] = $this->theme_uri;
-      $details['version'] = $this->version;
+        $details = array();
 
-      $this->log("Details are: ". json_encode($details));
+        $details['theme_name'] = $this->theme;
+        $details['theme_dir'] = $this->theme_dir;
+        $details['theme_slug'] = $this->theme_slug;
+        $details['active'] = $this->active;
+        $details['theme_template'] = $this->theme_template;
+        $details['theme_uri'] = $this->theme_uri;
+        $details['version'] = $this->version;
 
-      add_filter( 'pre_set_site_transient_update_themes', array( $this, 'modify_transient' ), 10, 1 );
-      //add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3);
-      add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
-      
-      // Add Authorization Token to download_package
-      add_filter( 'upgrader_pre_download',
-          function() {
-              add_filter( 'http_request_args', [ $this, 'download_package' ], 15, 2 );
-              return false; // upgrader_pre_download filter default return value.
-          }
-      );
-  }
+        $this->log("Details are: ". json_encode($details));
+
+        add_filter( 'pre_set_site_transient_update_themes', array( $this, 'modify_transient' ), 10, 1 );
+        //add_filter( 'plugins_api', array( $this, 'plugin_popup' ), 10, 3);
+        add_filter( 'upgrader_post_install', array( $this, 'after_install' ), 10, 3 );
+
+        // Add Authorization Token to download_package
+        add_filter( 'upgrader_pre_download',
+            function() {
+                add_filter( 'http_request_args', [ $this, 'download_package' ], 15, 2 );
+                return false; // upgrader_pre_download filter default return value.
+            }
+        );
+    }
 
     public function modify_transient( $transient ) {
         $this->log("Modifying transient for theme: " . $this->theme);
 
-        if( !property_exists( $transient, 'checked') ) return $transient;
-        if( !$transient->checked ) return $transient; // Did Wordpress check for updates?
+        if( !property_exists( $transient, 'checked') ) {
+            return $transient;
+        }
+        if( !$transient->checked ) {
+            return $transient; // Did Wordpress check for updates?
+        }
 
         $checked = $transient->checked;
-                    
+        
         $this->get_repository_info(); // Get the repo info
         $this->log("Checking repository info: ". $this->theme);
 
-        if( gettype($this->github_response) === "boolean" ) { return $transient; }
+        if( gettype($this->github_response) === "boolean" ) { 
+            return $transient; 
+        }
 
         $github_version = filter_var($this->github_response->tag_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
@@ -163,24 +172,26 @@ class BeechAgency_Theme_Updater {
         $this->log("Repo version checked and compared: ". $out_of_date .' | Remote: '.$github_version .' | Local: '. $checked[ $this->theme ]);
 
         // If she not out of date get outta here.
-        if( !$out_of_date )  return $transient; 
+        if( !$out_of_date )  {
+            return $transient; 
+        }
 
         $this->log("Theme out of date");
 
         $new_files = $this->github_response->zipball_url; // Get the ZIP
-        /*
+
+        /* Optional: Get the assets instead of the zip. Not required here.
         if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
             $new_files = $this->github_response->assets[0]->browser_download_url;
         }
         */
 
-        $this->log("Download url: ".$new_files);
-
         $slug = current( explode('/', $this->theme ) ); // Create valid slug
+        $this->package_url = $new_files;
 
+        $this->log("Download url: ".$new_files);
         $this->log("new slug: ". $slug);
 
-        $this->package_url = $new_files;
 
         $theme = array( // setup our theme info
             'url' => 'https://github.com/'.$this->username.'/'.$this->repository, //$this->themeObject["ThemeURI"],
@@ -190,86 +201,47 @@ class BeechAgency_Theme_Updater {
         );
 
 
-
         $this->log("Setting transient response with theme info: " . json_encode($theme));
 
         $transient->response[$this->theme] = $theme; // Return it in response
 
-
         $this->log("Modified transient for ". $this->theme." | " . json_encode($transient) );
+
         return $transient; // Return filtered transient
     }
 
-  public function download_package( $args, $url ) {
-    // This function is just for adding auth prior to downloading the package.
-    
-    if(strpos($url, 'BeechAgency/beechagency2023') === false) return $args;
+    public function download_package( $args, $url ) {
+        // This function is just for adding auth prior to downloading the package.
 
-    //dump_it('Download Package', 'red');
-    //dump_it($args, 'red');
-    $this->log("Attempting to download package from URL: $url");
-    $this->log("Download Package Args (before modification): " . json_encode($args));
+        if(strpos($url, $this->username.'/'.$this->repository) === false) {
+            return $args;
+        }
 
-      if ( null !== $args['filename'] ) {
-          if( $this->authorize_token ) { 
-              $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
-          }
-      }
-      
-      remove_filter( 'http_request_args', [ $this, 'download_package' ] );
+        $this->log("Attempting to download package from URL: $url");
+        $this->log("Download Package Args (before modification): " . json_encode($args));
 
-      return $args;
-  }
+        if ( null !== $args['filename'] ) {
+            if( $this->authorize_token ) { 
+                $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
+            }
+        }
+
+        remove_filter( 'http_request_args', [ $this, 'download_package' ] );
+
+        return $args;
+    }
 
 
     public function after_install( $response, $hook_extra, $result ) {
-
         global $wp_filesystem; // Get global FS object
 
         $this->log("AFTER INSTALL BABY!!!!!!!" );
+
         $install_directory = get_theme_root(). '/' . $this->theme ; // Our theme directory
         $wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the theme dir
         $result['destination'] = $install_directory; // Set the destination for the rest of the stack
 
-
         $this->log("attempt after install: ". $this->theme);
-        // Get the parent directory of the destination (the theme directory)
-        /*
-        $destination = $result['destination'];
-        $theme_root = get_theme_root();
-        $theme_directory = $theme_root . '/' . $this->theme;
-
-        $this->log("desination: ".  $destination);
-        $this->log("theme_root: ".  $theme_root);
-
-        // Locate the extracted folder (which includes the branch name suffix)
-        $extracted_folder = $wp_filesystem->find_folder($destination);
-        $subfolders = array_filter(glob($extracted_folder . '/*'), 'is_dir');
-
-        $this->log("extracted_folder: ".  $extracted_folder);
-
-        // Assuming there's only one subfolder in the extracted directory
-        if (!empty($subfolders)) {
-            $source = reset($subfolders);
-            
-            // If there's another level of folder, navigate into it
-            $sub_subfolders = array_filter(glob($source . '/*'), 'is_dir');
-            if (!empty($sub_subfolders)) {
-                $source = reset($sub_subfolders);
-            }
-
-            // Move files from extracted folder to the theme directory
-            $wp_filesystem->move($source, $theme_directory, true);
-        }
-
-        // Remove the empty extracted folder
-        $wp_filesystem->delete($destination, true);
-
-        // Update the result destination
-        $result['destination'] = $theme_directory;
-        */
-
-
 
         return $result;
     }
@@ -277,17 +249,12 @@ class BeechAgency_Theme_Updater {
 
 
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
-$updater->set_logging(true);
+$updater->set_logging(false);
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'beechagency2023' );
 $updater->set_theme('beechagency2023'); 
 
-
+/**
+ * Call the updater and initialize it.
+ */
 $updater->initialize();
-
-//dump_it($updater, 'white');
-
-/*
-$updater->authorize( 'abcdefghijk1234567890' ); // Your auth code goes here for private repos
-*/
-
