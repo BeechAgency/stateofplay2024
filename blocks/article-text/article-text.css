@@ -60,10 +60,13 @@
 .article-text__aside.toc {
     position: relative;
 }
-.article-text__aside.toc > .toc {
+.article-text__aside aside.single-sidebar {
     position: sticky;
     top: 3rem;
     max-width: 18rem;
+    display: flex;
+    flex-direction: column;
+    gap: 3rem;
 }
 
 .wp-block-beech-article-text h2 {

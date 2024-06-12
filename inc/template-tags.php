@@ -159,3 +159,13 @@ function generate_toc_and_save_to_meta($content) {
 }
 
 add_filter('the_content', 'generate_toc_and_save_to_meta');
+
+
+
+if ( ! function_exists( 'beech_social_sharers' ) ) :
+
+	function beech_social_sharers() {
+		get_template_part('template-parts/social', 'sharers');
+	}
+
+endif;

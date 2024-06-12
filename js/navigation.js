@@ -150,7 +150,9 @@ function createCursorFollower() {
 		body.classList.add(classes[currentIndex]);
 	});
 
+}() );
 
+( function() {
 	// Handle ToC when on pages.
 	document.addEventListener('DOMContentLoaded', function () {
 		console.log('Doing the thing')
@@ -185,6 +187,44 @@ function createCursorFollower() {
 
 		// Observe each heading
 		headings.forEach(heading => observer.observe(heading));
+	});
+
+	document.addEventListener('DOMContentLoaded', function () {
+		const shareButtons = document.querySelectorAll('.social-sharing-buttons a');
+		const copyLinkButton = document.querySelector('.copy-link-button');
+		const copyToast = document.querySelector('#copy-toast');
+
+		shareButtons.forEach(button => {
+			button.addEventListener('click', function (event) {
+				if (!this.classList.contains('copy-link-button')) {
+					event.preventDefault();
+					const width = 600, height = 400;
+					const left = (screen.width / 2) - (width / 2);
+					const top = (screen.height / 2) - (height / 2);
+					const url = this.href;
+					window.open(url, 'Share', `width=${width},height=${height},top=${top},left=${left}`);
+				}
+			});
+		});
+
+		if (copyLinkButton) {
+			copyLinkButton.addEventListener('click', function (event) {
+				event.preventDefault();
+				const url = this.getAttribute('data-url');
+
+				navigator.clipboard.writeText(url).then(() => {
+					//alert('Link copied to clipboard!');
+					copyToast.classList.add('active');
+
+					setTimeout( ()=> {
+						copyToast.classList.remove('active');
+					}, 1500)
+
+				}).catch(err => {
+					console.error('Could not copy text: ', err);
+				});
+			});
+		}
 	});
 
 }() );

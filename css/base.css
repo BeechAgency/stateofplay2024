@@ -812,7 +812,8 @@ img.alignleft {
 html:has( .toc ) {
     scroll-behavior: smooth;
 }
-.toc > .toc-title {
+.toc > .toc-title,
+.social-sharers-title {
     font-size: var(--wp--preset--font-size--medium);
     margin-bottom: 1rem;
 }
@@ -832,4 +833,53 @@ html:has( .toc ) {
 }
 .toc > ul > li:not(:last-child) {
     margin-bottom: 0.75rem;
+}
+
+.social-sharing-buttons {
+    display: flex;
+    gap: 1.25rem;
+}
+.social-sharing-button {
+    display: block;
+    color: var(--wp--preset--color--light-gray);
+    transition: all 150ms ease;
+    width: 100%;
+    max-width: 1.75rem;
+}
+.social-sharing-button:hover {
+    color: var(--wp--preset--color--rorange);
+}
+.social-sharing-button svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 1 / 1;
+}
+
+#copy-toast {
+    position: fixed;
+    z-index: 100;
+    padding: 0.5rem 2rem 0.5rem 1rem;
+    border-radius: 0rem;
+    
+    color: var(--wp--preset--color--black);
+    background-color: var( --wp--preset--color--yellow );
+    box-shadow: 1px -1px 11px -3px color-mix(in srgb, var(--body-bg) 20%, var(--wp--preset--color--rorange));
+
+    font-weight: bold;
+    font-size: 1.2rem;
+
+    top: 0%;
+    right: 0%;
+
+    translate: 120% var(--gutter);
+    transition: all 250ms ease;
+    opacity: 1;
+}
+
+#copy-toast.active {
+    translate: 0 var(--gutter);
+}
+#copy-toast.out {
+    opacity: 0;
 }

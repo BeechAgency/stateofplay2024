@@ -12,7 +12,7 @@
  {
     width: 100%;
     position: relative;
-    z-index: 1;
+    z-index: 0;
 }
 .wp-block-beech-header .header__inner {
     padding-inline: var(--gutter);

@@ -95,7 +95,12 @@ if($style === 'meta') {
              <?php if($style === 'toc'): 
                 $toc = get_post_meta(get_the_ID(), '_toc_meta_field', true);
                 if ($toc) {
+                    echo '<aside class="single-sidebar">';
                     echo $toc;
+
+                    echo '<div class="social-sharers-wrap"><div class="social-sharers-title">Share:</div>';
+                    beech_social_sharers();
+                    echo '</div></aside>';
                 }
             endif; ?>
         </div>
