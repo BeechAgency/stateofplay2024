@@ -50,3 +50,4 @@ wp-config.php
 *.DS_Store
 .DS_Store
 blocks/.DS_Store
+inc/update_log.txt
