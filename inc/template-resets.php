@@ -1,11 +1,23 @@
 <?php
+/**
+ * The code in this file basically resets or removes some basic wordpress functionality.
+ * This can be used across any site without modification.
+ * 
+ * It :
+ *  1. Removes JQuery Migrate
+ *  2. Removes some Wordpress SVG filter fluff
+ *  3. Disables Comments
+ *  4. Allows SVG uploads
+ *  5. Sanitizes SVG files
+ *  6. Removes the Image Filter Threshold
+ *  7. Removes the Wincher Dashboard Widget that Yoast annoyingly adds by default.
+ *  8. Removes Archive Prefixes (which I find annoying)
+ */
 
 /* 
 	Remove all the extra styles and junk WP adds
 */
-//remove_action( 'wp_enqueue_scripts', 'wp_enqueue_global_styles' );
 remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
-
 
 // Remove JQuery migrate
 function beechblocks_remove_jquery_migrate( $scripts ) {
@@ -18,24 +30,8 @@ function beechblocks_remove_jquery_migrate( $scripts ) {
 		}	
   	}
 }
- add_action( 'wp_default_scripts', 'beechblocks_remove_jquery_migrate' );
 
- //Remove Gutenberg Block Library CSS from loading on the frontend
- /*
- function beechblocks_remove_wp_block_library_css(){
-	wp_dequeue_style( 'wp-block-library' );
-	wp_dequeue_style( 'wp-block-library-theme' );
-	wp_dequeue_style( 'wc-blocks-style' ); // Remove WooCommerce block CSS
-	wp_dequeue_style( 'classic-theme-styles-css' );
-   } 
- add_action( 'wp_enqueue_scripts', 'beechblocks_remove_wp_block_library_css', 100 );
-*/
-
-/**
- * Remove support for custom gradients
- */
-//add_theme_support('disable-custom-gradients', true);
-
+add_action( 'wp_default_scripts', 'beechblocks_remove_jquery_migrate' );
 
 /**
  * COMPLETELY DISABLE COMMENTS
@@ -85,3 +81,88 @@ add_action('init', function () {
 /**
  * END: COMPLETELY DISABLE COMMENTS
  */
+
+
+/**
+ * Adds custom classes to the array of body classes.
+ *
+ * @param array $classes Classes for the body element.
+ * @return array
+ */
+function sop_body_classes( $classes ) {
+	// Adds a class of hfeed to non-singular pages.
+	if ( ! is_singular() ) {
+		$classes[] = 'hfeed';
+	}
+
+	// Adds a class of no-sidebar when there is no sidebar present.
+	if ( ! is_active_sidebar( 'sidebar-1' ) ) {
+		$classes[] = 'no-sidebar';
+	}
+
+	return $classes;
+}
+add_filter( 'body_class', 'sop_body_classes' );
+
+/**
+ * Add a pingback url auto-discovery header for single posts, pages, or attachments.
+ */
+function sop_pingback_header() {
+	if ( is_singular() && pings_open() ) {
+		printf( '<link rel="pingback" href="%s">', esc_url( get_bloginfo( 'pingback_url' ) ) );
+	}
+}
+add_action( 'wp_head', 'sop_pingback_header' );
+
+
+
+// Disable WordPress' automatic image scaling feature
+function sop_image_filter_threshold() {
+	return false;
+}
+
+add_filter( 'big_image_size_threshold', 'sop_image_filter_threshold' );
+
+
+
+function sop_remove_wpseo_wincher_dashboard_widget() {
+    remove_meta_box('wpseo-wincher-dashboard-overview', 'dashboard', 'normal');
+}
+add_action('wp_dashboard_setup', 'sop_remove_wpseo_wincher_dashboard_widget');
+
+
+
+// Allow SVG file upload
+function sop_mime_types($mimes) {
+  $mimes['svg'] = 'image/svg+xml';
+  return $mimes;
+}
+add_filter('upload_mimes', 'sop_mime_types');
+
+// Sanitize SVG files
+function sop_sanitize_svg($file) {
+  if ($file['type'] == 'image/svg+xml') {
+    $file_content = file_get_contents($file['tmp_name']);
+    $file_content = str_replace('<script', '', $file_content);
+    file_put_contents($file['tmp_name'], $file_content);
+  }
+  return $file;
+}
+add_filter('wp_handle_upload_prefilter', 'sop_sanitize_svg');
+
+// Fix SVG display in media library
+function sop_fix_svg() {
+  echo '<style type="text/css">
+    .attachment-266x266, .thumbnail img {
+      width: 100% !important;
+      height: auto !important;
+    }
+  </style>';
+}
+add_action('admin_head', 'sop_fix_svg');
+
+
+/*
+ * Remove archive prefixes
+ */ 
+add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );

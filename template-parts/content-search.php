@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
- * @package beechblocks
+ * @package sop
  */
 
 ?>
@@ -16,14 +16,12 @@
 		<?php if ( 'post' === get_post_type() ) : ?>
 		<div class="entry-meta">
 			<?php
-			beechblocks_posted_on();
-			beechblocks_posted_by();
 			?>
 		</div><!-- .entry-meta -->
 		<?php endif; ?>
 	</header><!-- .entry-header -->
 
-	<?php beechblocks_post_thumbnail(); ?>
+
 
 	<div class="entry-summary">
 		<?php the_excerpt(); ?>

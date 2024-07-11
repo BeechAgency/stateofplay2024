@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package beechblocks
+ * @package sop
  */
 
 $page_for_posts = get_option( 'page_for_posts' );
@@ -86,7 +86,7 @@ $formatted_date = date( 'j F Y \a\t g:ia', $not_formatted_date );
 					<path class='letter agency' d="M587.8,33.1v20.4h-20.5V33.1L548.1,1.5h23.5l7.7,15.5l8.1-15.5h20.5L587.8,33.1z"/>
 				</g>
 			</svg>
-			<div class="mobile-logo"><?php beech_logo_svg(); ?></div>
+			<div class="mobile-logo"><?php sop_logo_svg(); ?></div>
 		</section>
 	</footer><!-- #colophon -->
 </div><!-- #page -->

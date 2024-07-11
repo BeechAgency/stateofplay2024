@@ -4,7 +4,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/theme-functions/
  *
- * @package beechblocks
+ * @package sop
  */
 
 $THEME_VERSION = wp_get_theme()->get('Version');

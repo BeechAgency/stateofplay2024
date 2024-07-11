@@ -6,7 +6,7 @@
  *
  * @link https://developer.wordpress.org/themes/basics/template-files/#template-partials
  *
- * @package beechblocks
+ * @package sop
  */
 
 $page_for_posts = get_option( 'page_for_posts' );
@@ -38,7 +38,7 @@ $black_header = get_field('black_header', $page_ID);
 		<div class="site-branding">
 			<div class="site-title">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>" alt="<?php bloginfo( 'name' ); ?>" rel="home">
-					<?php beech_logo_svg(); ?>
+					<?php sop_logo_svg(); ?>
 				</a>
 			</div>
 		</div><!-- .site-branding -->

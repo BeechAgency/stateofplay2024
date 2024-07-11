@@ -98,14 +98,10 @@ function post_custom_column ( $column, $post_id ) {
 add_action ( 'manage_posts_custom_column', 'post_custom_column', 10, 2 );
 
 
-function remove_wpseo_wincher_dashboard_widget() {
-    remove_meta_box('wpseo-wincher-dashboard-overview', 'dashboard', 'normal');
-}
-add_action('wp_dashboard_setup', 'remove_wpseo_wincher_dashboard_widget');
 
 
-add_action( 'admin_enqueue_scripts', 'beech_admin_style');
+add_action( 'admin_enqueue_scripts', 'sop_admin_style');
 
-function beech_admin_style() {
+function sop_admin_style() {
   wp_enqueue_style( 'admin-style', get_stylesheet_directory_uri() . '/admin-style.css' );
 }

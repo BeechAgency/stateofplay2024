@@ -8,7 +8,6 @@ function get_acf_image($field, $size = 'full', $type = 'sub', $postId = null, $c
     }
 }
 
-
 function the_image($imageId, $args = null) {
 
     $size = !empty($args['size']) ? $args['size'] : 'full';

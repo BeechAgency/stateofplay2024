@@ -1,5 +1,60 @@
 <?php
 
+$themeBlocks = array(
+    array('name' => 'core/paragraph'),
+    array('name' => 'core/heading'),
+    array('name' => 'core/button'),
+    array('name' => 'core/buttons'),
+    array('name' => 'core/code'),
+    array('name' => 'core/list'),
+    array('name' => 'core/list-item'),
+    array('name' => 'core/pullquote'),
+    array('name' => 'core/quote'),
+    array('name' => 'core/table'),
+    array('name' => 'core/shortcode'),
+    array('name' => 'core/html'),
+    array('name' => 'core/image'),
+    array('name' => 'core/video'),
+    array('name' => 'core/embed'),
+    array('name' => 'acf/testimonial', 'args' => array('requiresRegister' => true)),
+    array('name' => 'gravityforms/form', 'args' => array('requiresRegister' => true)),
+    array('name' => 'beech/header', 'args' => array('path' => '/blocks/header', 'requiresRegister' => true)),
+    array('name' => 'beech/block-template', 'args' => array('path' => '/blocks/block-template', 'requiresRegister' => true)),
+    array('name' => 'beech/testimonial', 'args' => array('path' => '/blocks/testimonial', 'requiresRegister' => true)),
+    array('name' => 'beech/text-area', 'args' => array('path' => '/blocks/text-area', 'requiresRegister' => true)),
+    array('name' => 'beech/text-row', 'args' => array('path' => '/blocks/text-row', 'requiresRegister' => true)),
+    array('name' => 'beech/feature-inner', 'args' => array('path' => '/blocks/feature/feature-inner', 'requiresRegister' => true)),
+    array('name' => 'beech/feature-outer', 'args' => array('path' => '/blocks/feature/feature-outer', 'requiresRegister' => true)),
+    array('name' => 'beech/image-text', 'args' => array('path' => '/blocks/image-text', 'requiresRegister' => true)),
+    array('name' => 'beech/articles', 'args' => array('path' => '/blocks/articles', 'requiresRegister' => true)),
+    array('name' => 'beech/cta', 'args' => array('path' => '/blocks/cta', 'requiresRegister' => true)),
+    array('name' => 'beech/scroll-video', 'args' => array('path' => '/blocks/scroll-video', 'requiresRegister' => true)),
+    array('name' => 'beech/article-text', 'args' => array('path' => '/blocks/article-text', 'requiresRegister' => true)),
+    array('name' => 'beech/images', 'args' => array('path' => '/blocks/images', 'requiresRegister' => true)),
+    array('name' => 'beech/carousel-section', 'args' => array('path' => '/blocks/carousel/carousel-section', 'requiresRegister' => true)),
+    array('name' => 'beech/carousel-card', 'args' => array('path' => '/blocks/carousel/carousel-card', 'requiresRegister' => true)),
+    array('name' => 'beech/carousel', 'args' => array('path' => '/blocks/carousel/carousel', 'requiresRegister' => true)),
+    array('name' => 'beech/outcomes-outer', 'args' => array('path' => '/blocks/outcomes/outcomes-outer', 'requiresRegister' => true)),
+    array('name' => 'beech/outcomes-inner', 'args' => array('path' => '/blocks/outcomes/outcomes-inner', 'requiresRegister' => true)),
+    array('name' => 'beech/outcome', 'args' => array('path' => '/blocks/outcomes/outcome', 'requiresRegister' => true)),
+    array('name' => 'beech/team-grid', 'args' => array('path' => '/blocks/team/team-grid', 'requiresRegister' => true)),
+    array('name' => 'beech/team-member', 'args' => array('path' => '/blocks/team/team-member', 'requiresRegister' => true)),
+    array('name' => 'beech/team-section', 'args' => array('path' => '/blocks/team/team-section', 'requiresRegister' => true)),
+    array('name' => 'beech/accordions', 'args' => array('path' => '/blocks/accordion/accordions', 'requiresRegister' => true)),
+    array('name' => 'beech/accordion-item', 'args' => array('path' => '/blocks/accordion/accordion-item', 'requiresRegister' => true)),
+    array('name' => 'beech/accordion-outer', 'args' => array('path' => '/blocks/accordion/accordion-outer', 'requiresRegister' => true)),
+    array('name' => 'beech/marquee', 'args' => array('path' => '/blocks/marquee', 'requiresRegister' => true)),
+    array('name' => 'beech/count-indicator', 'args' => array('path' => '/blocks/count-indicator', 'requiresRegister' => true)),
+    array('name' => 'beech/showcase', 'args' => array('path' => '/blocks/showcase', 'requiresRegister' => true)),
+    array('name' => 'beech/contact', 'args' => array('path' => '/blocks/contact-details', 'requiresRegister' => true)),
+    array('name' => 'beech/spacer', 'args' => array('path' => '/blocks/spacer', 'requiresRegister' => true)),
+    array('name' => 'beech/sick-video', 'args' => array('path' => '/blocks/sick-video', 'requiresRegister' => true)),
+    array('name' => 'beech/eyebrow', 'args' => array('path' => '/blocks/eyebrow', 'requiresRegister' => true)),
+    array('name' => 'beech/date-category', 'args' => array('path' => '/blocks/date-category', 'requiresRegister' => true)),
+    array('name' => 'beech/reading-time', 'args' => array('path' => '/blocks/reading-time', 'requiresRegister' => true)),
+    array('name' => 'beech/epic-header', 'args' => array('path' => '/blocks/epic-header', 'requiresRegister' => true))
+);
+
 function beechblocks_register_acf_blocks() {
     /**
      * We register our block's with WordPress's handy
@@ -9,118 +64,28 @@ function beechblocks_register_acf_blocks() {
      */
 	$themeDir = dirname(__DIR__);
 
-	register_block_type( $themeDir . '/blocks/header' );
+	foreach ($themeBlocks as $block) {
+		if(!isset($block['args']) && !isset($block['args']['path'])) continue; // If there are args and a path
+		if(isset($block['args']['requiresRegister']) && $block['args']['requiresRegister'] !== true ) continue; // If requiresRegister is not true exit
 
-    register_block_type( $themeDir . '/blocks/block-template' );
-	register_block_type( $themeDir . '/blocks/testimonial' );
-	register_block_type( $themeDir . '/blocks/text-area' );
-	register_block_type( $themeDir . '/blocks/text-row' );
+		$blockPath = $block['args']['path'];
 
-	register_block_type( $themeDir . '/blocks/feature/feature-inner' );
-	register_block_type( $themeDir . '/blocks/feature/feature-outer' );
-	register_block_type( $themeDir . '/blocks/image-text' );
-	register_block_type( $themeDir . '/blocks/articles' );
-	register_block_type( $themeDir . '/blocks/cta' );
-	register_block_type( $themeDir . '/blocks/scroll-video' );
-	
-	register_block_type( $themeDir . '/blocks/article-text' );
-	register_block_type( $themeDir . '/blocks/images' );
-
-
-	register_block_type( $themeDir . '/blocks/carousel/carousel-section' );
-	register_block_type( $themeDir . '/blocks/carousel/carousel-card' );
-	register_block_type( $themeDir . '/blocks/carousel/carousel' );
-
-	register_block_type( $themeDir . '/blocks/outcomes/outcomes-outer' );
-	register_block_type( $themeDir . '/blocks/outcomes/outcomes-inner' );
-	register_block_type( $themeDir . '/blocks/outcomes/outcome' );
-
-	register_block_type( $themeDir . '/blocks/team/team-grid' );
-	register_block_type( $themeDir . '/blocks/team/team-member' );
-	register_block_type( $themeDir . '/blocks/team/team-section' );
-
-	register_block_type( $themeDir . '/blocks/accordion/accordions' );
-	register_block_type( $themeDir . '/blocks/accordion/accordion-item' );
-	register_block_type( $themeDir . '/blocks/accordion/accordion-outer' );
-
-	register_block_type( $themeDir . '/blocks/marquee' );
-	register_block_type( $themeDir . '/blocks/count-indicator' );
-	register_block_type( $themeDir . '/blocks/showcase' );
-	register_block_type( $themeDir . '/blocks/contact-details' );
-	register_block_type( $themeDir . '/blocks/spacer' );
-	register_block_type( $themeDir . '/blocks/sick-video' );
-	register_block_type( $themeDir . '/blocks/eyebrow' );
-
-	register_block_type( $themeDir . '/blocks/date-category' );
-	register_block_type( $themeDir . '/blocks/reading-time' );
-
-
-	register_block_type( $themeDir . '/blocks/epic-header' );
+		register_block_type( $themeDir . $blockPath ); // $themeBlocks
+	}
 }
 // Here we call our beechblocks_register_acf_block() function on init.
 add_action( 'init', 'beechblocks_register_acf_blocks' );
 
 
 function beecbblocks_allowed_block_types() {
-	return array(
-		'core/paragraph',
-		'core/heading',
-		'core/button',
-		'core/buttons',
-		'core/code',
-		'core/list',
-		'core/list-item',
-		'core/pullquote',
-		'core/quote',
-		'core/table',
-		'core/shortcode',
-		'core/html',
-		'core/image',
-		'core/video',
-		'core/embed',
-		'acf/testimonial',
-		'beech/header',
-		'beech/articles',
-		'beech/cta',
-		'beech/scroll-video',
-		'beech/carousel',
-		'beech/carousel-card',
-		'beech/carousel-section',
-		'beech/article-text',
-		'beech/text-area',
-		'beech/text-row',
-		'beech/images',
-		'beech/outcomes-outer',
-		'beech/outcomes-inner',
-		'beech/outcome',
-		'beech/team-member',
-		'beech/team-grid',
-		'beech/team-section',
-		'beech/accordion-item',
-		'beech/accordions',
-		'beech/accordion-outer',
-		'beech/marquee',
-		'beech/count-indicator',
-		'beech/showcase',
-		'beech/contact',
-		'beech/spacer',
-		'beech/sick-video',
-		'beech/eyebrow',
-		'beech/date-category',
-		'beech/reading-time',
-		'beech/epic-header',
-		'gravityforms/form'
-	);
 
-	/*
-		'core/embed',
-		'beech/feature-inner',
-		'beech/feature-outer',
-		'beech/image-text',
-		'core/group',
-		'core/columns',
-		'core/column',
-	*/
+	$blocks = array();
+
+	foreach ($themeBlocks as $block) {
+		$blocks[] = $block['name'];
+	}
+
+	return $blocks;
 }
 add_filter( 'allowed_block_types', 'beecbblocks_allowed_block_types' );
 
@@ -236,12 +201,3 @@ add_action( 'init', 'beechblocks_register_block_script' );
 
 //add_filter( 'should_load_separate_core_block_assets', '__return_true' );
 
-/*
- * Remove archive prefixes
- */ 
-add_filter( 'get_the_archive_title_prefix', '__return_empty_string' );
-
-/* Testing removing <stuff></stuff> */
-
-
-remove_action( 'wp_body_open', 'wp_global_styles_render_svg_filters' );
