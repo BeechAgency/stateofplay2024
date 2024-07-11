@@ -189,9 +189,9 @@ function beechblocks_scripts() {
 	wp_enqueue_script( 'beechblocks-navigation', get_template_directory_uri() . '/js/navigation.js', array('lozad'), _S_VERSION, true );
 
 	wp_enqueue_script( 'lozad', get_template_directory_uri() . '/js/vendor/lozad.min.js', [] );
-	wp_enqueue_script( 'splitting', get_template_directory_uri() . '/js/vendor/splitting.min.js', [] );
-	wp_enqueue_script( 'simpleParallax', get_template_directory_uri() . '/js/vendor/simpleParallax.min.js', [] );
-	wp_enqueue_script( 'sugar', get_template_directory_uri() . '/js/sugar.js?v=', ['splitting', 'simpleParallax'], _S_VERSION, true );
+	//wp_enqueue_script( 'splitting', get_template_directory_uri() . '/js/vendor/splitting.min.js', [] );
+	//wp_enqueue_script( 'simpleParallax', get_template_directory_uri() . '/js/vendor/simpleParallax.min.js', [] );
+	//wp_enqueue_script( 'sugar', get_template_directory_uri() . '/js/sugar.js?v=', ['splitting', 'simpleParallax'], _S_VERSION, true );
 }
 add_action( 'wp_enqueue_scripts', 'beechblocks_scripts' );
 

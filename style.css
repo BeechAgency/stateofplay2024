@@ -1,11 +1,11 @@
 /*!
-Theme Name: Beech Agency 2023
-Theme URI: http:/beech.agency/
-Author: Beech Agency
-Author URI: http:/beech.agency/
-Description: A block theme for Beech Agency
+Theme Name: State of Play
+Theme URI: https://thestateofplay.au/
+Author: State of Play
+Author URI: https://thestateofplay.au/
+Description: A block theme for State of Play
 Version: 3.1.6
-Tested up to: 6.5
+Tested up to: 6.7
 Requires PHP: 8.1
 Slug: beechagency2023
 License: GNU General Public License v2 or later
@@ -14,7 +14,6 @@ Text Domain: beechagency2023
 Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-comments, translation-ready
 */
 
-@import url('css/xylem.v2.css?v=3.1.6');
 @import url('css/base.css?v=3.1.6');
 @import url('css/header.css?v=3.1.6');
 @import url('css/footer.css?v=3.1.6');
@@ -22,7 +21,3 @@ Tags: custom-background, custom-logo, custom-menu, featured-images, threaded-com
 
 @import url('css/_tablet.css?v=3.1.6');
 @import url('css/_mobile.css?v=3.1.6');
-
-
-@import url('css/metal.css?v=3.1.6');
-@import url('css/sugar.css?v=3.1.6');
