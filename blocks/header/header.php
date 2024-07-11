@@ -202,7 +202,7 @@ if($style === 'article-image') {
         <?php 
         if($style === 'home' || $style === 'side-dude'): 
             $boiz_class = $style === 'home' ? '' : 'vertical'; 
-            beech_color_boiz($boiz_class);
+            //beech_color_boiz($boiz_class);
         endif; ?>
     </div>
 

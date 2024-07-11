@@ -33,10 +33,11 @@ get_header();
 				$path = '/work';
 			}
 
-
+			/*
 			echo '<div class="filter-list-wrapper">';
 			beech_taxonomy_value_filter_list($tax, $path);
 			echo '</div>';
+			*/
 			echo '<div class="archive-page-articles" data-xy="grid">';
 			/* Start the Loop */
 			while ( have_posts() ) :
@@ -54,7 +55,7 @@ get_header();
 			endwhile;
 			echo '</div>';
 
-			beech_number_pagination();
+			//beech_number_pagination();
 
 		else :
 

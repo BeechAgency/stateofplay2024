@@ -38,9 +38,11 @@ if(is_home()) {
 
 
 		if ( have_posts() ) :
+			/*
 			echo '<div class="filter-list-wrapper">';
 			beech_taxonomy_value_filter_list('category', '/latest');
 			echo '</div>';
+			*/
 			echo '<div class="archive-page-articles" data-xy="grid">';
 
 			if ( is_home() && ! is_front_page() ) :
@@ -66,7 +68,7 @@ if(is_home()) {
 			endwhile;
 			echo '</div>';
 
-			beech_number_pagination();
+			//beech_number_pagination();
 
 		else :
 

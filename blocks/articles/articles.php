@@ -93,8 +93,9 @@ $post_count = $post_count === 0 ? 3 : $post_count;
         />
     </div>
     <?php if(!empty($display_filters) && $display_filters === true):  
-
+        /*
         beech_taxonomy_value_filter_list( $filter_tax , get_the_permalink( $page_id ) );
+        */
      endif; ?>
     <div class="articles-track">
         <div class="articles-wrapper <?= !empty($post_type) ? $post_type[0] : ''; ?>" style="--article-count: <?= $post_count; ?>;">

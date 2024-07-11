@@ -33,7 +33,7 @@ $formatted_date = date( 'j F Y \a\t g:ia', $not_formatted_date );
 				<p>
 					<?= get_field('address', 'options'); ?>
 				</p>
-				<?= beech_color_boiz(); ?>
+
 			</div>
 			<div data-xy="col 2xl:6 xl:6 md:6 sm:12 xs:12">
 

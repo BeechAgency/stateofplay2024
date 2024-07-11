@@ -1,6 +1,6 @@
 <?php
 
-$themeBlocks = array(
+$THEME_BLOCKS = array(
     array('name' => 'core/paragraph'),
     array('name' => 'core/heading'),
     array('name' => 'core/button'),
@@ -64,24 +64,33 @@ function beechblocks_register_acf_blocks() {
      */
 	$themeDir = dirname(__DIR__);
 
-	foreach ($themeBlocks as $block) {
-		if(!isset($block['args']) && !isset($block['args']['path'])) continue; // If there are args and a path
-		if(isset($block['args']['requiresRegister']) && $block['args']['requiresRegister'] !== true ) continue; // If requiresRegister is not true exit
+	global $THEME_BLOCKS;
 
+	foreach ($THEME_BLOCKS as $block) {
+		// Check if 'args' exists and 'path' exists within 'args'
+		if (!isset($block['args']['path'])) continue;
+		
+		// Check if 'requiresRegister' is set and its value is true
+		if (!isset($block['args']['requiresRegister']) || $block['args']['requiresRegister'] !== true) continue;
+
+		// 'path' exists, and 'requiresRegister' is true
 		$blockPath = $block['args']['path'];
 
-		register_block_type( $themeDir . $blockPath ); // $themeBlocks
+		// Register the block type
+		register_block_type($themeDir . $blockPath);
 	}
+
 }
 // Here we call our beechblocks_register_acf_block() function on init.
 add_action( 'init', 'beechblocks_register_acf_blocks' );
 
 
 function beecbblocks_allowed_block_types() {
+	global $THEME_BLOCKS;
 
 	$blocks = array();
 
-	foreach ($themeBlocks as $block) {
+	foreach ($THEME_BLOCKS as $block) {
 		$blocks[] = $block['name'];
 	}
 
