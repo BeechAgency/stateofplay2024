@@ -44,10 +44,9 @@ if(typeof AnalyticsHandler !== 'function') {
                 const caroTitle = caro.parentElement.parentElement.previousElementSibling.innerText;
                 handleChangeEvent(index, caroTitle)
             })
-
         })
 
-        doTheFollower();
+        //doTheFollower();
     });
 }());
 

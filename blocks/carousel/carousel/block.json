@@ -36,14 +36,9 @@
     },
     "styles": [
         {
-            "name": "photos",
-            "label": "Photos",
-            "isDefault": true
-        },
-        {
             "name": "logos",
             "label": "Logos",
-            "isDefault": false
+            "isDefault": true
         }
     ],
     "parent" : [

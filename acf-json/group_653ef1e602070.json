@@ -16,7 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "Card name",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -58,6 +58,7 @@
             },
             "return_format": "id",
             "library": "all",
+            "default_value": 162,
             "min_width": "",
             "min_height": "",
             "min_size": "",
@@ -81,7 +82,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "Message goes here",
             "maxlength": "",
             "rows": 3,
             "placeholder": "",
@@ -136,5 +137,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1698628976
+    "modified": 1720755908
 }

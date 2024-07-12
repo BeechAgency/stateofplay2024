@@ -9,20 +9,11 @@
     max-width: calc( (100% - var(--gutter) *2) / 12 * 9 ); 
 }
 
-
 .block-editor-block-list__layout .carousel__target {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
 }
-.block-editor-block-list__layout .carousel__target .carousel-item {
-    width: 100%;
-}
-
-.block-editor-block-list__layout .carousel__target .carousel-card__inner {
-    flex-direction: row;
-}
-.block-editor-block-list__layout .is-style-logos .carousel__target .carousel-card__inner {flex-direction: column;}
 
 @media screen and (max-width: 480px ) {
     .carousel-section__inner > *:not(.wp-block-beech-carousel) {

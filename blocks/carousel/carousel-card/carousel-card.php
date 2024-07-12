@@ -1,15 +1,15 @@
 <?php
 /**
- * Team Member Block
+ * Carousel Card Item
  *
  * @param array $block The block settings and attributes.
  */
 
 // Load values and assign defaults.
-$name        = get_field( 'name' );
+$name        = get_field('name');
 $title        = get_field( 'title' );
 $image        = get_field( 'image' );
-$message        = get_field( 'message' );
+$message        = get_field( 'message');
 $background_color = get_field( 'background_color' );
 
 // Support custom "anchor" values.
@@ -18,10 +18,7 @@ if ( ! empty( $block['anchor'] ) ) {
     $anchor = esc_attr( $block['anchor'] );
 }
 
-
-// Need to null coallese for preview mode. Kind of stupid how it works.
-$type = $context['acf/fields']['type'] ?? $context['acf/fields']['field_653f01506d6b9'];
-
+$type ='logos';
 $class_name = 'carousel-item card__'.$type;
 ?>
 

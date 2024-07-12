@@ -1,10 +1,9 @@
 <?php
 /**
- * Team Section Block
+ * Carousel Section Block
  *
  * @param array $block The block settings and attributes.
  */
-
 
 // Support custom "anchor" values.
 $anchor = '';
@@ -13,32 +12,37 @@ if ( ! empty( $block['anchor'] ) ) {
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
-
 $class_name = '';
-
 if ( !empty($block['alignContent']) ) {
     $class_name .= ' align-content-'.$block['alignContent'];
 }
 
-
 $allowed_blocks = array( 'beech/carousel', 'core/heading', 'core/paragraph', 'core/button', 'core/buttons' );
 
-$template = array(
-	array('beech/carousel', array(
-		'content' => '',
-	))
-);
+$templateCaroCard = array(
+    'content' => '',
+    'data' => array(
+        'name' => 'Carousel Card Name',
+        'title' => 'Carousel Card Title',
+        'message' => 'Carousel Card Message',
+        'image'=> '162'
+    )
+    );
 
-/*
-echo '<pre>';
-var_dump(get_block_wrapper_attributes());
-echo '</pre>';
-*/
-/*
-echo '<pre>';
-var_dump($block);
-echo '</pre>';
-*/
+$template = array(
+    array('core/heading', array(
+                'level' => 2,
+                'content' => 'This is a carousel section',
+    )),
+	array('beech/carousel', 
+        array(), 
+        array(
+            array('beech/carousel-card', $templateCaroCard),
+            array('beech/carousel-card', $templateCaroCard),
+            array('beech/carousel-card', $templateCaroCard)
+        )
+    )
+);
 ?>
 
 <div <?= get_block_wrapper_attributes( array(

@@ -3,20 +3,52 @@
     padding-top: var(--block-space, 6rem);
     padding-bottom: var(--block-space, 6rem);
 }
+
 .carousel__target .flickity-viewport { 
     overflow: visible; 
 }
-.carousel__target .flickity-slider {}
 
 .carousel-item {
-    width: calc( (100% - var(--gutter) * 2 ) / 12 * 8);
+    width: calc( (100% ) / 12 * 4);
     margin-right: 1rem;
 }
-
-.is-style-logos .carousel-item {
-    width: calc( (100% ) / 12 * 4);
+@media screen and (max-width: 768px) { 
+    .carousel-item { width: calc( (100% ) / 12 * 6); }
+}
+@media screen and (max-width: 480px) {
+    .carousel-item { width: calc( (100% ) / 12 * 11); }
 }
 
+/* Dark Mode */
+body.dark-mode .carousel-card__inner img {
+    filter: invert(1);
+}
+
+@media (prefers-color-scheme: dark) {
+    .is-style-logos .carousel-card__inner img {
+        filter: invert(1);
+    }
+}
+
+
+/* Guttenberg Fix */
+.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel .carousel {
+    overflow: scroll;
+}
+.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel .carousel__target {
+    width: 300vw;
+    display: flex;
+    flex-wrap: nowrap;
+}
+.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel .wp-block-beech-carousel-card {
+    width: auto;
+    max-width: 28rem;
+}
+.block-editor-block-list__block .wp-block-beech-carousel .block-list-appender.block-list-appender {
+    position: static;
+}
+
+/*
 .cursor-follower {
     position: fixed;
     padding: 3rem 1rem;
@@ -33,50 +65,7 @@
     aspect-ratio: 1 / 1;
     scale: 1;
     transition: scale 150ms ease, background-color 150ms ease;
-    /*backdrop-filter: invert(100%);*/
+
 }
 .cursor-follower.fade { scale: 0; background-color: var(--wp--preset--color--blue); }
-
-@media screen and (max-width: 1480px) and (min-width: 1281px)  { .is-style-photos .carousel-card__content .carsouel-card__message { font-size: var(--wp--preset--font-size--large); } }
-@media screen and (max-width: 940px) and (min-width: 768px)  { .is-style-photos .carousel-card__content .carsouel-card__message { font-size: var(--wp--preset--font-size--large); } }
-
-
-@media screen and (max-width: 1280px) {
-    .carousel-item { width: calc( (100% - var(--gutter) * 2 ) / 12 * 10); }
-}
-@media screen and (max-width: 768px) { 
-    .carousel-item { width: calc( (100% - var(--gutter) * 2 ) / 12 * 12); }
-    .is-style-logos .carousel-item { width: calc( (100% ) / 12 * 6); }
-}
-
-@media screen and (max-width: 680px) {  .carousel-item { width: calc( (100% - var(--gutter) * 2 ) / 12 * 16); } }
-@media screen and (max-width: 480px) {
-    .carousel-item { width: calc( (100% - var(--gutter) * 2 ) / 12 * 24); }
-    .is-style-logos .carousel-item { width: calc( (100% ) / 12 * 11); }
-}
-.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel .carousel {
-    overflow: scroll;
-}
-.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel .carousel__target {
-    width: 300vw;
-    display: flex;
-    flex-wrap: nowrap;
-}
-.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel .wp-block-beech-carousel-card {
-    width: auto;
-    max-width: 62rem;
-}
-
-.block-editor-block-list__block.acf-block-preview.wp-block-beech-carousel.is-style-logos .wp-block-beech-carousel-card {
-    max-width: 28rem;
-}
-
-body.dark-mode .is-style-logos .carousel-card__inner img {
-    filter: invert(1);
-}
-
-@media (prefers-color-scheme: dark) {
-    .is-style-logos .carousel-card__inner img {
-        filter: invert(1);
-    }
-}
+*/
