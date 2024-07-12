@@ -1,4 +1,10 @@
-.image-text__inner-wrap {
+.wp-block-beech-image-text {
+    --block-gutter : var(--gutter, 2rem);
+    padding-inline: var(--block-gutter);
+    padding-block: var(--block-space, 6rem);
+}
+
+.image-text__inner-blocks {
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 2rem;
@@ -6,35 +12,50 @@
     width: 100%;
     margin-inline: auto;
 }
-.wp-block-beech-image-text {
-    --block-gutter : var(--gutter, 2rem);
-    padding-inline: var(--block-gutter);
-}
-.align-content-center .image-text__inner-wrap { align-items: center; }
-.align-content-top .image-text__inner-wrap { align-items: start; }
-.align-content-bottom .image-text__inner-wrap { align-items: end; }
 
-.alignwide .image-text__inner-wrap {
-    max-width: var(--wp--style--global--wide-size);
-}
-.alignfull .image-text__inner-wrap {
-    max-width: 100%;
-}
-.align .image-text__inner-wrap,
-.aligncontent .image-text__inner-wrap { 
-    max-width: var(--wp--style--global--content-size);
-}
-
-.is-style-image-left-expand img,
-.is-style-image-right-expand img {
+.is-style-expanded img {
     width: calc(100% + var(--block-gutter));
     max-width: calc(100% + var(--block-gutter));
     object-fit: cover;
 }
-.is-style-image-left-expand img {
+
+.is-style-expanded figure:nth-child(2n - 1) img {
     translate: calc(var(--block-gutter) * -1) 0;
 }
 
-.block-editor-block-list__block.wp-block-beech-image-text {
-    max-width: 100% !important;
+/* Guttenberg editor view fixes */
+.block-editor-block-list__block .is-style-expanded img {
+    width: calc(100% + var(--block-gutter)) !important;
+    max-width: calc(100% + var(--block-gutter)) !important;
+}
+
+.wp-block-beech-image-text .components-resizable-box__container {
+    width: auto !important;
+}
+/* End: Guttenberg editor view fixes */
+
+
+@media screen and (481px <= width <= 768px) {
+    .image-text__inner-blocks:has(figure:first-child) {
+        background-color: hotpink;
+        grid-template-columns: 2fr 3fr;
+    }
+    .image-text__inner-blocks:has(figure:nth-child(2)) {
+        background-color: lightblue;
+        grid-template-columns: 3fr 2fr;
+    }
+}
+@media screen and (max-width: 480px) {
+    .image-text__inner-blocks {
+        display: flex;
+        flex-direction: column;
+    }
+    .is-style-expanded img {
+        width: calc(100% + 2 * var(--block-gutter));
+        max-width: calc(100% + 2 * var(--block-gutter));
+        translate: calc(var(--block-gutter) * -1) 0;
+    }
+    .image-text__inner-blocks:has(figure:nth-child(2)) {
+        flex-direction: column-reverse;
+    }
 }

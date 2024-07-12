@@ -44,23 +44,13 @@
     },
     "styles": [
         {
-            "name": "image-left",
-            "label": "Image Left",
+            "name": "inline",
+            "label": "Image Inline",
             "isDefault": true
         },
         {
-            "name": "image-right",
-            "label": "Image Right",
-            "isDefault": false
-        },
-        {
-            "name": "image-left-expand",
-            "label": "Left Expanded",
-            "isDefault": false
-        },
-        {
-            "name": "image-right-expand",
-            "label": "Right Expanded",
+            "name": "expanded",
+            "label": "Image Expanded",
             "isDefault": false
         }
     ],

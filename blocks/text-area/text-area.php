@@ -6,12 +6,6 @@
  */
 
 
-// Load values and assign defaults.
-$do_a_think        = get_field( 'do_a_thing' );
-$quote_attribution = '';
-
-$image = false;
-
 // Support custom "anchor" values.
 $anchor = '';
 if ( ! empty( $block['anchor'] ) ) {
@@ -55,16 +49,6 @@ if(!empty($block['className'])) {
     }
 }
 
-/*
-echo '<pre>';
-var_dump(get_block_wrapper_attributes());
-echo '</pre>';
-*/
-/*
-echo '<pre>';
-var_dump($block);
-echo '</pre>';
-*/
 ?>
 
 <div <?= get_block_wrapper_attributes( array(
@@ -75,7 +59,7 @@ echo '</pre>';
         <InnerBlocks 
             allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" 
             template="<?= esc_attr( wp_json_encode( $template ) ); ?>"
-            orientation="horizontal"
+            orientation="vertical"
             className="text-area__inner-blocks" />
     <?php endif; ?>
 </div>
