@@ -1,5 +1,5 @@
 .cta-wrapper {
-    padding-inline: var(--xy-gutter);
+    padding-inline: var(--gutter, 2rem);
     padding-block: var(--block-space, 6rem) var(--block-space-wide, 16rem);
     display: grid;
     grid-template-columns: repeat(12, 1fr);
@@ -21,62 +21,10 @@
     padding-bottom: 2rem;
 }
 
-.big-cta-btn {
-    position: relative;
-    display: inline-block;
+.cta-blocks p {
     font-size: var(--wp--preset--font-size--3-xl);
-    text-decoration: none;
-    margin-top: 2rem;
-
-}
-.big-cta-btn::after {
-    content: '';
-    position: absolute;
-    bottom: 0.25rem;
-    left: 0;
-    height: 0.25rem;
-    background-color: currentColor;
-    width: 100%;
-    /*animation-fill-mode: forwards;*/
-    animation-play-state: paused;
-}
-.big-cta-btn:hover::after {
-    /*animation: colorChange 1s linear infinite;*/
-    animation-play-state: running;
-}
-
-.big-cta-btn span { position: relative; z-index: 1;  transition: all 150ms ease;}
-
-.big-cta-btn .arrow {
-    display: inline-block;
-    transition: translate 150ms ease;
-    margin-left: 1rem;
-
-    animation: translateRight 750ms ease-in-out infinite alternate;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-}
-.big-cta-btn:hover .arrow {
-    translate: 2rem 0rem;
-    animation-play-state: running;
-}
-.big-cta-btn .arrow svg {
-    transition: all 150ms ease;
-    height: auto;
-    width: 3.56rem;
-}
-.big-cta-btn:hover {
-    --_bg : transparent;
-    --_color: currentColor;
-    animation-play-state: running;
-    color: var(--wp--preset--color--rorange);
-}
-.big-cta-btn:hover .arrow {
-}
-.big-cta-btn:hover .arrow svg {
-}
-.big-cta-btn:hover span {
-
+    line-height: 1.2;
+    letter-spacing: -0.025rem;
 }
 
 .is-style-borderless .cta-line {

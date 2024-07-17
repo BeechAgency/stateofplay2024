@@ -15,7 +15,14 @@
     --block-space-narrow : calc(var(--block-space) / 2);
     --block-space-wide: calc(var(--block-space) * 2);
     --selection-clr : yellow;
+
+    --wp--preset--color--rorange : orange;
+    --wp--preset--color--yellow : yellow;
+    --wp--preset--color--pink : hotpink;
+    --wp--preset--color--green : lightgreen;
+    --wp--preset--color--blue : lightblue;
 }
+
 html,body {
     font-size: clamp(16px, 1rem + ((0.5vw - 0.4rem) * 0.95), 22px);
 }
@@ -615,6 +622,8 @@ posts filter
     overflow: visible;
     translate: 0 0;
 }
+
+
 
 @keyframes bounceLogo {
     0% { translate: 0 0rem; }

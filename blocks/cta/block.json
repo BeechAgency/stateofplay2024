@@ -30,6 +30,10 @@
         "align" : {
             "type" : "string",
             "default" : "full"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default" : "off-black"
         }
     },
     "styles": [
