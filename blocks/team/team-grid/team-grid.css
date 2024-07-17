@@ -16,5 +16,5 @@
 
 .is-style-not-grid .team-grid__grid {
     grid-template-columns: repeat(12, 1fr);
-    gap: 7.5rem var(--xy-col-gap);
+    gap: 7.5rem var(--grid-col-gap);
 }

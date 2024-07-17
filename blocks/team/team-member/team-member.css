@@ -29,7 +29,7 @@ p.team-member__title {
 .is-style-not-grid .team-member__inner {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: var(--xy-col-gap);
+    gap: var(--grid-col-gap);
     grid-template-areas: "l l l . r r r";
 }
 

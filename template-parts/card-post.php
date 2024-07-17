@@ -20,6 +20,8 @@
 
     $video_url = null;
 
+    $title = get_the_title($id); 
+
     if($post_type === 'project') {
         $post_tags = wp_get_post_tags($id); 
         $tags = array();
@@ -30,11 +32,16 @@
 
         $categories_string = implode(', ', $tags);
         $video_url = get_field('featured_video', $id);
+
+        $client = get_field('client', $id);
+        $tagline = get_field('tagline', $id);
+
+        $title = (!empty($client) && !empty($tagline)) ? $client.' — <span class="tagline">'.$tagline.'</span>' : $title;
     }
 ?>
 <div class="bb-card bb-post-card type-<?= $post_type ?>" data-post-id="<?= $id ?>">
     <?php if($post_type === 'project' && !empty($video_url)): ?>
-    <a href="<?= get_the_permalink( $id ); ?>" title="<?= get_the_title($id); ?>" class="card-video-wrapper">
+    <a href="<?= get_the_permalink( $id ); ?>" title="<?= strip_tags($title); ?>" class="card-video-wrapper">
         <video width="100%" height="auto" playsinline="" loop="" muted="" autoplay="" class="bb-post-card-video lozad" data-placeholder-background="hsla(0, 0.00%, 0.00%, 1.00)" data-loaded="false">
             <source data-src="<?= $video_url ?>" src="">
             Your browser does not support the video tag.
@@ -42,17 +49,12 @@
         <img data-src="<?= get_the_post_thumbnail_url($id); ?>" data-placeholder-background="hsla(0, 0.00%, 0.00%, 1.00)" class="post-card video-poster lozad" style="background: rgb(0, 0, 0);" data-loaded="false">
     </a>
     <?php else: ?>
-    <a href="<?= get_the_permalink( $id ); ?>" title="<?= get_the_title($id); ?>">
+    <a href="<?= get_the_permalink( $id ); ?>" title="<?= strip_tags($title); ?>">
         <?= get_the_post_thumbnail($id, 'full', null ); ?>
     </a>
     <?php endif; ?>
 
-    <h4 class="card-title"><a href="<?= get_the_permalink( $id ); ?>"><?= get_the_title($id); ?></a></h4>
-    <div class="card-excerpt">
-        <?= get_the_excerpt( $id ); ?>
-    </div>
-    <div class="card-meta">
-        <div class="card-categories"><?= $categories_string; ?></div>
-        <div class="card-date"><?= get_the_date( null, $id ); ?></div>
-    </div>
+    <h4 class="card-title"><a href="<?= get_the_permalink( $id ); ?>" title="<?= strip_tags($title); ?>">
+        <?= $title; ?></a>
+    </h4>
 </div>

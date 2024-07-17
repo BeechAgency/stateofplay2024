@@ -33,7 +33,7 @@
 .has-mini-layout .images_block-inner-blocks {
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    gap: var(--xy-col-gap);
+    gap: var(--grid-col-gap);
 }
 .has-mini-layout .aligncontent .images_block-inner-blocks {
     grid-template-columns: repeat(10, 1fr);

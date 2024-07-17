@@ -15,7 +15,7 @@
 .wp-block-beech-outcomes-outer.block-editor-block-list__block:not(.is-style-big-n-wide) > div {
     display: grid;
     grid-template-columns: repeat(var(--xy-grid-cols), 1fr);
-    column-gap: var(--xy-col-gap);
+    column-gap: var(--grid-col-gap);
     row-gap: var(--xy-row-gap);
 }
 

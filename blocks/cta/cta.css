@@ -3,7 +3,7 @@
     padding-block: var(--block-space, 6rem) var(--block-space-wide, 16rem);
     display: grid;
     grid-template-columns: repeat(12, 1fr);
-    column-gap: var(--xy-col-gap);
+    column-gap: var(--grid-col-gap);
 }
 .cta-line {
     grid-column: span 13;

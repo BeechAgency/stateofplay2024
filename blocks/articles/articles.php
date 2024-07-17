@@ -1,6 +1,6 @@
 <?php
 /**
- * Feature Block!
+ * Articles/Projects Block!
  *
  * @param array $block The block settings and attributes.
  */
@@ -9,15 +9,15 @@
 // Load values and assign defaults.
 $type        = get_field( 'type' );
 $display_number = get_field( 'display_number');
-$display_pagination = get_field( 'display_pagination');
-$post_type = get_field( 'post_type');
-$category = get_field( 'category');
+$display_pagination = false; // get_field( 'display_pagination');
+$post_type = 'project'; // get_field( 'post_type');
+$category = false; //get_field( 'category');
 $specific_posts = get_field( 'specific_posts');
 $link = get_field( 'link');
 
-$display_filters = get_field( 'display_filters');
-$display_count = get_field( 'display_count');
-$filter_tax = get_field( 'filter_tax');
+//$display_filters = get_field( 'display_filters');
+//$display_count = get_field( 'display_count');
+//$filter_tax = get_field( 'filter_tax');
 
 $page_id = get_the_ID();
 
@@ -28,9 +28,6 @@ if ( ! empty( $block['anchor'] ) ) {
 }
 
 $type = $type === '' ? 'latest' : $type;
-//var_dump($type);
-
-// Create class attribute allowing for custom "className" and "align" values.
 
 $class_name = '';
 
@@ -39,7 +36,7 @@ $allowed_blocks = array( 'core/heading', 'core/paragraph', 'core/button', 'core/
 $template = array(
 	array('core/heading', array(
 		'level' => 3,
-		'placeholder' => 'Read on',
+		'placeholder' => 'View our work',
 	))
 );
 
@@ -61,7 +58,7 @@ if(!empty($category)) {
 $post_ids = $type === 'latest' ? beechblocks_post_list_ids($query_args) : $specific_posts;
 
 if(empty($block['className'])) {
-    $block['className'] = 'is-style-articles';
+    $block['className'] = 'is-style-projects';
 }
 
 if(!empty($block['className'])) {

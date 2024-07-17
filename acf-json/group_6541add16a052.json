@@ -3,6 +3,46 @@
     "title": "Project Info",
     "fields": [
         {
+            "key": "field_6697650ae5288",
+            "label": "Client",
+            "name": "client",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
+            "key": "field_66976593e6a6c",
+            "label": "Project Tagline",
+            "name": "tagline",
+            "aria-label": "",
+            "type": "text",
+            "instructions": "",
+            "required": 0,
+            "conditional_logic": 0,
+            "wrapper": {
+                "width": "",
+                "class": "",
+                "id": ""
+            },
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
+        },
+        {
             "key": "field_6541add18b0c6",
             "label": "Year",
             "name": "year",
@@ -25,11 +65,11 @@
             "append": ""
         },
         {
-            "key": "field_6541adfb8b0c7",
-            "label": "Team",
-            "name": "team",
+            "key": "field_66976566ac78c",
+            "label": "Role",
+            "name": "role",
             "aria-label": "",
-            "type": "select",
+            "type": "text",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -38,57 +78,11 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "Aemon": "Aemon",
-                "Chelsea": "Chelsea",
-                "Jacob": "Jacob",
-                "Sarah": "Sarah",
-                "Josh": "Josh",
-                "Emily": "Emily",
-                "Lachlan": "Lachlan",
-                "Candice": "Candice"
-            },
-            "default_value": [],
-            "return_format": "value",
-            "multiple": 1,
-            "allow_null": 0,
-            "ui": 1,
-            "ajax": 0,
-            "placeholder": ""
-        },
-        {
-            "key": "field_6542c5032b1a3",
-            "label": "Related",
-            "name": "related",
-            "aria-label": "",
-            "type": "relationship",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "post_type": [
-                "post",
-                "project"
-            ],
-            "post_status": [
-                "publish"
-            ],
-            "taxonomy": "",
-            "filters": [
-                "search",
-                "post_type",
-                "taxonomy"
-            ],
-            "return_format": "id",
-            "min": "",
-            "max": "",
-            "elements": "",
-            "bidirectional": 0,
-            "bidirectional_target": []
+            "default_value": "",
+            "maxlength": "",
+            "placeholder": "",
+            "prepend": "",
+            "append": ""
         },
         {
             "key": "field_65c0645c71568",
@@ -129,5 +123,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1707107506
+    "modified": 1721197985
 }

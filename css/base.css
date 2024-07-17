@@ -14,6 +14,10 @@
     --block-space : 6rem;
     --block-space-narrow : calc(var(--block-space) / 2);
     --block-space-wide: calc(var(--block-space) * 2);
+
+    --grid-col-gap : 1rem;
+    --grid-row-gap : 3rem;
+
     --selection-clr : yellow;
 
     --wp--preset--color--rorange : orange;
@@ -353,9 +357,6 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
     padding-right: 2rem;
 }
 .bb-post-card {
-    border-bottom: solid 1px var(--wp--preset--color--mid-gray);
-    padding-bottom: 1rem;
-
     display: flex;
     flex-direction: column;
     position: relative;
@@ -447,7 +448,7 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
     text-transform: uppercase;
     display: flex;
     flex-wrap: nowrap;
-    gap: var(--xy-col-gap);
+    gap: var(--grid-col-gap);
     font-size: var(--wp--preset--font-size--xs);
     margin-top: auto;
     padding-top: 3.5rem;
