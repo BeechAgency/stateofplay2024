@@ -51,12 +51,10 @@ $template = array(
 
 if($post_type === 'project') {
     $template = array(
-        array('beech/date-category', array()),
         array('core/heading', array(
             'level' => 1,
-            'placeholder' => get_the_title(),
-        )),
-        array('beech/reading-time', array())
+            'content' => '<mark style="background-color: rgba(0,0,0,0);" class="has-grape-color has-heading-font-family">Client name,</mark> An amazing thing that happened'
+        ))
     );
 
     $class_name .= ' project-type';

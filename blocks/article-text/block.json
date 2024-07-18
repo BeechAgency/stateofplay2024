@@ -1,7 +1,7 @@
 {
     "name": "beech/article-text",
-    "title": "Article Text",
-    "description": "A custom testimonial block that uses ACF fields.",
+    "title": "Project Text",
+    "description": "For when you got some text for a project",
     "style": [ "file:./article-text.css" ],
     "category": "theme",
     "icon": "text",
@@ -14,7 +14,7 @@
     "supports": {
         "anchor": true,
         "color": false,
-        "align": [ "full" ],
+        "align": ["full"],
         "jsx": true,
 		"dimensions": {
             "minHeight": true
@@ -26,26 +26,17 @@
         "nested": false,
         "multiple" : true
     },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
     "styles": [
         {
             "name": "default",
             "label": "Default",
             "isDefault": true
-        },
-        {
-            "name": "post-meta",
-            "label": "Post Meta",
-            "isDefault": false
-        },
-        {
-            "name": "quote",
-            "label": "Has Quote",
-            "isDefault": false
-        },
-        {
-            "name": "toc",
-            "label": "Has ToC",
-            "isDefault": false
         }
     ],
     "parent" : [

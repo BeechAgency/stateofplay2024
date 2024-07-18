@@ -33,7 +33,7 @@
         },
         "backgroundColor": {
             "type": "string",
-            "default" : "off-black"
+            "default" : "jet-black"
         }
     },
     "styles": [

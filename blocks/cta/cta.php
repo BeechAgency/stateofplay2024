@@ -36,8 +36,8 @@ if(!empty($block['className'])) {
     }
 }
 
-if(!empty($block['backgroundColor']) && $block['backgroundColor'] == 'off-black') {
-    $class_name .= ' has-off-black-background-color';
+if(!empty($block['backgroundColor']) && $block['backgroundColor'] == 'jet-black') {
+    $class_name .= ' has-jet-black-background-color';
 }
 
 

@@ -44,7 +44,7 @@
 }
 
 .single-project .site-footer {
-    background-color: var(--wp--preset--color--off-black);
+    background-color: var(--wp--preset--color--jet-black);
     color: var(--wp--preset--color--white);
 }
 .max-logo  .mobile-logo { display: none; }

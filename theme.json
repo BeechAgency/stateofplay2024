@@ -1,28 +1,23 @@
 {
     "$schema": "https://schemas.wp.org/trunk/theme.json",
-    "version": 2,
+    "version": 3,
     "settings": {
         "color": {
             "palette": [
                 {
-                    "name": "Black",
-                    "slug": "black",
-                    "color": "#000000"
+                    "name": "Jet Black",
+                    "slug": "jet-black",
+                    "color": "#171819"
                 },
                 {
-                    "name": "Off Black",
-                    "slug": "off-black",
-                    "color": "#111414"
+                    "name": "Jet Black (60%)",
+                    "slug": "jet-black-60",
+                    "color": "rgb(23 24 25 / 60%)"
                 },
                 {
-                    "name": "Mid Gray",
-                    "slug": "mid-gray",
-                    "color": "#747474"
-                },
-                {
-                    "name": "Light Gray",
-                    "slug": "light-gray",
-                    "color": "#A8A8A8"
+                    "name": "Jet Tint",
+                    "slug": "jet-tint",
+                    "color": "#f1f1f1"
                 },
                 {
                     "name": "White",
@@ -30,29 +25,29 @@
                     "color": "#ffffff"
                 },
                 {
-                    "name": "Blue",
-                    "slug": "blue",
-                    "color": "#0089D8"
+                    "name": "Grape",
+                    "slug": "grape",
+                    "color": "#753bbd"
                 },
                 {
-                    "name": "Pink",
-                    "slug": "pink",
-                    "color": "#F295CE"
+                    "name": "Blue Tang",
+                    "slug": "blue-tang",
+                    "color": "#2460D6"
                 },
                 {
-                    "name": "Rorange",
-                    "slug": "rorange",
-                    "color": "#FF5D36"
+                    "name": "Amethyst",
+                    "slug": "amethyst",
+                    "color": "#c1a7e2"
                 },
                 {
-                    "name": "Green",
-                    "slug": "green",
-                    "color": "#00AF9B"
+                    "name": "Celeste",
+                    "slug": "celeste",
+                    "color": "#bcfcf0"
                 },
                 {
-                    "name": "Yellow",
-                    "slug": "yellow",
-                    "color": "#FFD140"
+                    "name": "Lemon Sorbet",
+                    "slug": "lemon-sorbet",
+                    "color": "#fefaaa"
                 },
                 {
                     "name": "Transparent",
@@ -90,6 +85,7 @@
             }
         },
         "typography": {
+            "defaultFontSizes": false,
             "customFontSize": false,
             "lineHeight": true,
             "fluid": true,
@@ -101,136 +97,65 @@
             "dropCap": false,
             "fontSizes": [
               {
-                "slug": "xs",
-                "size": "0.869rem",
-                "name": "XS"
-              },
-              {
-                "slug": "x-small",
-                "size": "0.869rem",
-                "name": "XS"
-              },
-              {
                 "slug": "small",
                 "size": "1rem",
                 "name": "Small"
               },
               {
                 "slug": "medium",
-                "size": "1.125rem",
-                "name": "medium"
+                "size": "1.25rem",
+                "name": "Medium"
               },
               {
                 "slug": "large",
-                "size": "1.375rem",
-                "name": "large"
+                "size": "1.75rem",
+                "name": "Large"
               },
               {
                 "slug": "x-large",
-                "size": "1.75rem",
-                "name": "xl"
-              },
-              {
-                "slug": "xl",
-                "size": "1.75rem",
-                "name": "xl"
-              },
-              {
-                "slug": "1-xl",
                 "size": "3rem",
-                "name": "1xl"
+                "name": "XL"
               },
               {
                 "slug": "2-xl",
-                "size": "3.75rem",
+                "size": "4.5rem",
                 "name": "2xl"
               },
               {
                 "slug": "3-xl",
-                "size": "5rem",
-                "name": "3xl"
-              },
-              {
-                "slug": "4-xl",
                 "size": "6rem",
-                "name": "4xl"
+                "name": "3xl"
               }
             ],
             "fontFamilies":  [
               {
-                "fontFamily": "Söhne Buch, Helvetica Neue, Helvetica, Arial, sans-serif",
+                "fontFamily": "KH Giga, Helvetica Neue, Helvetica, Arial, sans-serif",
                 "slug": "headings",
-                "name": "Headings",
+                "name": "Giga",
                 "fontFace": [
                   {
-                    "fontFamily": "Söhne Buch",
-                    "fontWeight": "400",
+                    "fontFamily": "KH Giga",
+                    "fontWeight": "300",
                     "fontStyle": "normal",
                     "fontStretch": "normal",
                     "src": [
-                      "file:./assets/fonts/soehne-buch.woff2",
-                      "file:./assets/fonts/SohneBuch.ttf"
-                    ]
-                  },
-                  {
-                    "fontFamily": "Söhne Buch",
-                    "fontWeight": "700",
-                    "fontStyle": "bold",
-                    "fontStretch": "normal",
-                    "src": [
-                      "file:./assets/fonts/sohne-halbfett-webfont.woff2",
-                      "file:./assets/fonts/sohne-halbfett-webfont.woff"
+                      "file:./assets/fonts/KHGigaTRIAL-Light.woff2"
                     ]
                   }
                 ]
               },
               {
-                "fontFamily": "Söhne Buch, Helvetica Neue, Helvetica, Arial, sans-serif",
+                "fontFamily": "KH Teka, Helvetica Neue, Helvetica, Arial, sans-serif",
                 "slug": "body",
-                "name": "Body",
+                "name": "Teka",
                 "fontFace": [
                   {
-                    "fontFamily": "Söhne Buch",
+                    "fontFamily": "KH Teka",
                     "fontWeight": "400",
                     "fontStyle": "normal",
                     "fontStretch": "normal",
                     "src": [
-                      "file:./assets/fonts/soehne-buch.woff2",
-                      "file:./assets/fonts/SohneBuch.ttf"
-                    ]
-                  }
-                ]
-              },
-              {
-                "fontFamily": "Söhne Mono Buch, Helvetica Neue, Helvetica, Arial, sans-serif",
-                "slug": "mono",
-                "name": "Mono",
-                "fontFace": [
-                  {
-                    "fontFamily": "Söhne Mono Buch",
-                    "fontWeight": "400",
-                    "fontStyle": "normal",
-                    "fontStretch": "normal",
-                    "src": [
-                      "file:./assets/fonts/champion-heavyweight-regular.woff2",
-                      "file:./assets/fonts/SohneMonoBuch.ttf"
-                    ]
-                  }
-                ]
-              },
-              {
-                "fontFamily": "Champion HTF-Heavweight, Helvetica Neue, Helvetica, Arial, sans-serif",
-                "slug": "champion",
-                "name": "Champion",
-                "fontFace": [
-                  {
-                    "fontFamily": "Champion HTF-Heavweight",
-                    "fontWeight": "400",
-                    "fontStyle": "normal",
-                    "fontStretch": "normal",
-                    "src": [
-                      "file:./assets/fonts/champion-heavyweight-regular.woff2",
-                      "file:./assets/fonts/champion-heavyweight-regular.ttf"
+                      "file:./assets/fonts/KHTekaTRIAL-Regular.woff2"
                     ]
                   }
                 ]
@@ -251,12 +176,12 @@
     "styles": {
         "color" : {
             "background" : "var(--wp--preset--color--transparent)",
-            "text" : "var(--wp--preset--color--black)"
+            "text" : "var(--wp--preset--color--jet-black)"
         },
         "typography": {
             "fontSize": "var(--wp--preset--font-size--small)",
             "fontFamily": "var(--wp--preset--font-family--body)",
-            "lineHeight": "1.5"
+            "lineHeight": "1.45"
         },
         "elements": {
             "heading" : {
@@ -271,57 +196,61 @@
             },
             "h1": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--4-xl)",
+                    "fontSize": "var(--wp--preset--font-size--3-xl)",
                     "fontFamily": "var(--wp--preset--font-family--headings)",
-                    "lineHeight": "1.2"
+                    "lineHeight": "1.06",
+                    "letterSpacing" : "-0.046875rem"
                 }
             },
             "h2": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--3-xl)",
+                    "fontSize": "var(--wp--preset--font-size--2-xl)",
                     "fontFamily": "var(--wp--preset--font-family--headings)",
-                    "lineHeight": "1.2"
+                    "lineHeight": "1.08",
+                    "letterSpacing": "-0.03125rem"
                 }
             },
             "h3": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--2-xl)",
-                    "fontFamily": "var(--wp--preset--font-family--headings)",
-                    "lineHeight": "1.2"
+                    "fontSize": "var(--wp--preset--font-size--x-large)",
+                    "fontFamily": "var(--wp--preset--font-family--body)",
+                    "lineHeight": "1.24",
+                    "letterSpacing": "-0.021875rem"
                 }
             },
             "h4": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--xl)",
-                    "fontFamily": "var(--wp--preset--font-family--headings)",
-                    "lineHeight": "1.2"
+                    "fontSize": "var(--wp--preset--font-size--large)",
+                    "fontFamily": "var(--wp--preset--font-family--body)",
+                    "lineHeight": "1.35"
                 }
             },
             "h5": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--large)",
-                    "fontFamily": "var(--wp--preset--font-family--headings)",
-                    "lineHeight": "1.2"
+                    "fontSize": "var(--wp--preset--font-size--medium)",
+                    "fontFamily": "var(--wp--preset--font-family--body)",
+                    "lineHeight": "1.4"
                 }
             },
             "h6": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--x-medium)",
-                    "fontFamily": "var(--wp--preset--font-family--headings)",
-                    "lineHeight": "1.2"
+                    "fontSize": "var(--wp--preset--font-size--small)",
+                    "fontFamily": "var(--wp--preset--font-family--body)",
+                    "lineHeight": "1.45",
+                    "textTransform" : "uppercase"
                 }
             },
             "p": {
                 "typography": {
-                    "fontSize": "var(--wp--preset--font-size--medium)",
+                    "fontSize": "var(--wp--preset--font-size--small)",
                     "fontFamily": "var(--wp--preset--font-family--body)",
-                    "lineHeight": "1.5"
+                    "lineHeight": "1.45"
                 }
             },
             "link": {
-        		"color": {
- 			        "text": "var(--wp--preset--color--rorange)"
-		        }
+              "color": {
+                "text": "var(--wp--preset--color--grape)"
+              }
             }
         }
     }

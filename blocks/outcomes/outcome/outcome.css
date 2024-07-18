@@ -21,7 +21,7 @@
     line-height: 1;
 }
 .is-style-big-n-wide .outcome-item p {
-    color: var(--wp--preset--color--black);
+    color: var(--wp--preset--color--jet-black);
     width: 24%;
 }
 div:not(.is-style-big-n-wide) > .outcomes-wrapper .outcome-item {

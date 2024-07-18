@@ -34,7 +34,7 @@ $black_header = get_field('black_header', $page_ID);
 <div id="page" class="site">
 	<a class="skip-link screen-reader-text" href="#primary"><?php esc_html_e( 'Skip to content', 'beechblocks' ); ?></a>
 
-	<header id="masthead" class="site-header<?= $black_header ? ' has-off-black-background-color' : '' ?>">
+	<header id="masthead" class="site-header<?= $black_header ? ' has-jet-black-background-color' : '' ?>">
 		<div class="site-branding">
 			<div class="site-title">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>" alt="<?php bloginfo( 'name' ); ?>" rel="home">

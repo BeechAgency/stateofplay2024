@@ -35,7 +35,7 @@ $black_footer = get_field('black_footer', $page_ID);
 
 	</main><!-- #main -->
 <?php
-if($black_footer) { echo '<div class="has-off-black-background-color">';}
+if($black_footer) { echo '<div class="has-jet-black-background-color">';}
 dynamic_sidebar('pages-footer');
 if($black_footer) { echo '</div>';}
 get_footer();

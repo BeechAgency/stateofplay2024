@@ -89,5 +89,5 @@ label.toggle-item {
 }
 #page.site:has(header.wp-block-beech-epic-header) header.site-header {
     color: var(--wp--preset--color--white);
-    background-color: var(--wp--preset--color--off-black);
+    background-color: var(--wp--preset--color--jet-black);
 }

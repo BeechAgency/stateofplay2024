@@ -44,7 +44,7 @@ $black_footer = get_field('black_footer', $page_ID);
 
 <?php
 
-if($black_footer) { echo '<div class="has-off-black-background-color">';}
+if($black_footer) { echo '<div class="has-jet-black-background-color">';}
 
 if(get_post_type() === 'project') {
 

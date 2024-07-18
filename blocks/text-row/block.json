@@ -42,23 +42,8 @@
         "isDefault": true
       },
       {
-        "name": "five-six-one",
-        "label": "Offset",
-        "isDefault": false
-      },
-      {
         "name": "single",
         "label": "Single",
-        "isDefault": false
-      },
-      {
-        "name": "single-wide",
-        "label": "Single (Wide)",
-        "isDefault": false
-      },
-      {
-        "name": "equal-narrow",
-        "label": "Equal (Narrow Left)",
         "isDefault": false
       }
     ],

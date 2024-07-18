@@ -1,6 +1,15 @@
 .wp-block-beech-header {
     display: flex;
     position: relative;
+    padding-top: var(--block-space); 
+    padding-bottom: var(--block-space);
+
+    h1 {
+        font-size: var(--wp--preset--font-size--2-xl);
+        letter-spacing: -0.03125rem;
+        line-height: 1.08;
+        margin-bottom: 0;
+    }
 }
 .wp-block-beech-header header {
     width: 100%;
@@ -8,27 +17,48 @@
 .wp-block-beech-header .header__inner {
     width: 100%;
     padding-inline: var(--gutter);
+
     display: grid;
     grid-template-columns: repeat(12, 1fr);
     gap: var(--grid-col-gap);
 }
-
 .header__inner-blocks { 
     grid-column: span 11;
 }
-.wp-block-beech-header.project-type .header__inner-blocks {
-    grid-column: span 9;
+
+.wp-block-beech-header.project-type {
+    padding-top: 7.5rem;
+
+    h1 {
+        font-family: var(--wp--preset--font-family--body);
+
+        mark {
+            display: block;
+            font-family: var(--wp--preset--font-family--headings);
+        }
+    }
+
+
+    .header__inner-blocks {
+        grid-column: span 8;
+    }
 }
 
 .project-meta {
-    display: flex;
-    justify-content: space-between;
-    gap: 1rem;
+    display: grid;
+    grid-template-columns: subgrid;
+
+    padding-top: 7.5rem;
     padding-bottom: 1rem;
-    margin-top: 5rem;
     grid-column: span 12;
 
     .project-meta-item { 
+        grid-column: span 2;
+
+        &:last-child {
+            grid-column: span 8;
+        }
+
         span:first-child {
             opacity: 0.7;
             display: inline-block;
@@ -39,7 +69,7 @@
 .project-feature-image {
     grid-column: span 12;
 
-    img { aspect-ratio: 16 / 9;}
+    img { aspect-ratio: 16 / 9; width: 100%; }
 }
 
 

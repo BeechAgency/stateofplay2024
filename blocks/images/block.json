@@ -13,7 +13,7 @@
     "supports": {
         "anchor": true,
         "color": true,
-        "align": ["full","wide","content"],
+        "align": false,
         "alignWide" : true,
         "jsx": true,
 		"spacing": {
@@ -26,16 +26,22 @@
         "nested": false,
         "multiple" : true
     },
+    "attributes": {
+        "align" : {
+            "type" : "string",
+            "default" : "full"
+        }
+    },
 
     "styles": [
         {
             "name": "default",
-            "label": "Tight",
+            "label": "Full Dog",
             "isDefault": true
         },
         {
-            "name": "gappy",
-            "label": "Gappy",
+            "name": "feature",
+            "label": "10 / 12",
             "isDefault": false
         }
     ],

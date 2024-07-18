@@ -99,7 +99,7 @@ form:not(.search-form) input[type="submit"] {
 }
 form:not(.search-form) input[type*="submit"]:hover {
     background-color: var(--wp--preset--color--pink);
-    color: var(--wp--preset--color--off-black);
+    color: var(--wp--preset--color--jet-black);
 }
 
 form input[type*="file"] {

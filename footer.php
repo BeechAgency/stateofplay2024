@@ -23,7 +23,7 @@ $not_formatted_date = strtotime( $last_updated );
 $formatted_date = date( 'j F Y \a\t g:ia', $not_formatted_date ); 
 ?>
 
-	<footer id="colophon" class="site-footer has-gutter<?= $black_footer ? ' has-off-black-background-color' : ''; ?>">
+	<footer id="colophon" class="site-footer has-gutter<?= $black_footer ? ' has-jet-black-background-color' : ''; ?>">
 		<section class="footer-content" data-xy="grid">
 			<div class="contact-details" data-xy="col 2xl:6 xl:6 md:6 sm:6 xs:6 sm:start-7 xs:start-7">
 				<p>

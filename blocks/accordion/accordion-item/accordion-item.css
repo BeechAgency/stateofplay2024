@@ -54,7 +54,7 @@ details[open] .accordion-item__toggle svg{
 /* Handle the styles here - styles come from the parent */
 .is-style-big-boiz .accordion-item {
     border-top: solid 0px transparent;
-    color: var(--wp--preset--color--black);
+    color: var(--wp--preset--color--jet-black);
     /*min-height: 17rem;*/
 }
 
