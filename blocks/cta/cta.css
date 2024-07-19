@@ -13,18 +13,22 @@
 .cta-inner {
     grid-column: span 9;
 }
-.cta-inner > h2 {
-
-}
-.cta-inner.btn-below > h2 {
-    display: inline-block;
-    padding-bottom: 2rem;
-}
 
 .cta-blocks p {
     font-size: var(--wp--preset--font-size--3-xl);
     line-height: 1.2;
     letter-spacing: -0.025rem;
+
+    &:first-child {
+        font-family: var(--wp--preset--font-family--headings);
+    }
+}
+.wp-block-beech-cta a {
+    text-decoration-thickness: 0.25rem;
+    text-underline-offset: 0.75rem;
+}
+.wp-block-beech-cta.has-jet-black-background-color a {
+    color: var(--wp--preset--color--celeste);
 }
 
 .is-style-borderless .cta-line {

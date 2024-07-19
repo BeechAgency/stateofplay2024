@@ -352,9 +352,11 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
 /* Articles */
 
 .bb-post-card .card-title {
-    margin-top: 1rem;
+    margin-top: 0.625rem;
     margin-bottom: 1rem;
     padding-right: 2rem;
+
+    .tagline { opacity: 0.6;}
 }
 .bb-post-card {
     display: flex;
@@ -507,80 +509,6 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
     background-color: transparent;
 }
 
-/**
-posts filter
-*/
-.filter-list-wrapper {
-    padding-inline: var(--gutter);
-}
-.filter-list-inner {
-    display: flex;
-    align-items: flex-start;
-    width: 100%;
-    padding-top: 4rem;
-    padding-bottom: 1.5rem;
-    border-bottom: solid 1px var(--wp--preset--color--mid-gray);
-    gap: 1rem;
-}
-.filter-list-inner .title {
-    /* font-weight: bold; */
-    padding: calc(1rem + 2px) 0rem;
-}
-.filter-list {
-    margin: 0;
-    padding-inline: 0;
-    list-style: none;
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    width: 100%;
-}
-.filter-list .item { display: block; }
-.filter-list .item a {
-    text-decoration: none;
-    color: inherit;
-    padding: 1.5rem 2.65rem 1.55rem;
-    border: solid 1px currentColor;
-    border-radius: 3rem;
-    display: block;
-    transition: all 150ms ease;
-    position: relative;
-    line-height: 1;
-}
-.filter-list .item a:hover {
-    background-color: var(--wp--preset--color--pink);
-    border-color: var(--wp--preset--color--pink);
-}
-.filter-list .item:nth-child(5n+1) a:hover { 
-    background-color: var(--wp--preset--color--rorange);
-    border-color: var(--wp--preset--color--rorange); }
-.filter-list .item:nth-child(5n+2) a:hover { 
-    background-color: var(--wp--preset--color--yellow);
-    border-color: var(--wp--preset--color--yellow); }
-.filter-list .item:nth-child(5n+3) a:hover { 
-    background-color: var(--wp--preset--color--pink);
-    border-color: var(--wp--preset--color--pink); }
-.filter-list .item:nth-child(5n+4) a:hover { 
-    background-color: var(--wp--preset--color--green);
-    border-color: var(--wp--preset--color--green); }
-.filter-list .item:nth-child(5n+5) a:hover { 
-    background-color: var(--wp--preset--color--blue);
-    border-color: var(--wp--preset--color--blue); }
-
-.filter-list .item.active a {
-    color: var(--body-bg);
-    background-color: var(--body-text);
-}
-
-
-.filter-list .count {
-    vertical-align: super;
-    margin-left: 0.1rem;
-    color: var(--wp--preset--color--mid-gray);
-    font-size: 0.65em;
-    position: absolute;
-    margin-top: -0.15rem;
-}
 
 
 /* Animated Logo */

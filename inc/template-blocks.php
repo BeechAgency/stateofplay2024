@@ -17,7 +17,7 @@ $THEME_BLOCKS = array(
     array('name' => 'core/video'),
     array('name' => 'core/embed'),
     //array('name' => 'acf/testimonial', 'args' => array('requiresRegister' => true)),
-    array('name' => 'gravityforms/form', 'args' => array('requiresRegister' => true)),
+    array('name' => 'gravityforms/form'),
     array('name' => 'beech/header', 'args' => array('path' => '/blocks/header', 'requiresRegister' => true)),
     //array('name' => 'beech/block-template', 'args' => array('path' => '/blocks/block-template', 'requiresRegister' => true)),
     //array('name' => 'beech/testimonial', 'args' => array('path' => '/blocks/testimonial', 'requiresRegister' => true)),
@@ -53,6 +53,7 @@ $THEME_BLOCKS = array(
     //array('name' => 'beech/date-category', 'args' => array('path' => '/blocks/date-category', 'requiresRegister' => true)),
     //array('name' => 'beech/reading-time', 'args' => array('path' => '/blocks/reading-time', 'requiresRegister' => true)),
     //array('name' => 'beech/epic-header', 'args' => array('path' => '/blocks/epic-header', 'requiresRegister' => true))
+    array('name' => 'beech/epic-carousel', 'args' => array('path' => '/blocks/epic-carousel', 'requiresRegister' => true))
 );
 
 function beechblocks_register_acf_blocks() {

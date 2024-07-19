@@ -1,13 +1,13 @@
 {
-    "key": "group_653b493000276",
-    "title": "Block - Scroll Video",
+    "key": "group_6699b828cc5cb",
+    "title": "Block - Epic Carousel Showcase Thing",
     "fields": [
         {
-            "key": "field_653b49303cd57",
-            "label": "Type",
-            "name": "type",
+            "key": "field_6699b8728e23d",
+            "label": "Projects to Showcase",
+            "name": "items",
             "aria-label": "",
-            "type": "button_group",
+            "type": "post_object",
             "instructions": "",
             "required": 0,
             "conditional_logic": 0,
@@ -16,24 +16,27 @@
                 "class": "",
                 "id": ""
             },
-            "choices": {
-                "direct": "Direct URL",
-                "youtube": "YouTube",
-                "dropbox": "Dropbox",
-                "vimeo": "Vimeo"
-            },
-            "default_value": "direct",
-            "return_format": "value",
+            "post_type": [
+                "project"
+            ],
+            "post_status": [
+                "publish"
+            ],
+            "taxonomy": "",
+            "return_format": "id",
+            "multiple": 1,
             "allow_null": 0,
-            "layout": "horizontal"
+            "bidirectional": 0,
+            "ui": 1,
+            "bidirectional_target": []
         },
         {
-            "key": "field_653b49613cd58",
-            "label": "Video",
-            "name": "video",
+            "key": "field_6699b8298e23c",
+            "label": "Slide Duration",
+            "name": "duration",
             "aria-label": "",
-            "type": "text",
-            "instructions": "",
+            "type": "number",
+            "instructions": "In seconds.",
             "required": 0,
             "conditional_logic": 0,
             "wrapper": {
@@ -41,9 +44,11 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
-            "maxlength": "",
+            "default_value": "0.5",
+            "min": "",
+            "max": "",
             "placeholder": "",
+            "step": "0.1",
             "prepend": "",
             "append": ""
         }
@@ -53,7 +58,7 @@
             {
                 "param": "block",
                 "operator": "==",
-                "value": "beech\/scroll-video"
+                "value": "beech\/epic-carousel"
             }
         ]
     ],
@@ -63,8 +68,8 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": false,
+    "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1721348697
+    "modified": 1721350326
 }

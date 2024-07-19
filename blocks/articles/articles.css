@@ -55,7 +55,7 @@
 
 .bb-post-card img { aspect-ratio: auto; width: 100%; }
 .bb-post-card .card-title {
-    font-size: var(--wp--preset--font-size--large);
+    font-size: var(--wp--preset--font-size--medium);
     margin-top: 1.25rem;
     margin-bottom: 0.75rem;
 }

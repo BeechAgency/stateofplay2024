@@ -1,0 +1,119 @@
+#page:has(.entry-content header.wp-block-beech-epic-carousel:first-child) .site-header {
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    color: var(--wp--preset--color--white);
+}
+
+.epic-carousel__showcase--wrapper {
+    --_header-height :  95svh;
+    position: relative;
+    min-height: var(--_header-height);
+    /*padding-inline: var(--gutter);
+    padding-bottom: 1.5rem;*/
+
+
+    display: grid;
+    grid-template-columns: repeat(12 , 1fr);
+    gap: var(--grid-col-gap);
+    row-gap: 0;
+    align-content: end;
+
+    svg { display: block; }
+}
+
+.epic-carousel__track {
+    grid-column: 1 / 13;
+    grid-row: 1 / 1;
+
+    display: grid;
+    grid-template-columns: subgrid;
+}
+
+.epic-slide {
+    grid-column: 1 / 13;
+    grid-row: 1 / 1;
+    /*position: absolute;
+    inset: 0 0 0 0;*/
+    width: 100%;
+    height: 100%;
+    align-items: end;
+    justify-content: center;
+
+    display: none;
+
+    grid-template-columns: subgrid;
+    row-gap: 0;
+    opacity: 0;
+    transition: all 250ms ease;
+
+    &.epic-slide--active { 
+        opacity: 1; 
+        display: grid;
+    }
+
+    &.display { display: grid; }
+}
+.epic-slide__title {
+    grid-column: 1 / 6;
+    grid-row: 1 / 1;
+    z-index: 1;
+    padding-left: var(--gutter);
+    padding-bottom: 1.5rem;
+    font-size: var(--wp--preset--font-size--large);
+
+    .client {
+        font-family: var(--wp--preset--font-family--headings);
+    }
+}
+.epic-slide__image {
+    grid-column: 1 / 13;
+    grid-row: 1 / 1;
+    z-index: 0;
+}
+.epic-slide__image img {
+    object-fit: cover;
+    width: 100%;
+    height: var( --_header-height);
+    display: block;
+}
+
+.epic-carousel__controls--wrapper {
+    font-size: var(--wp--preset--font-size--large);
+    z-index: 25;
+    grid-column: 10 / 13;
+    grid-row: 1 / 1;
+
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    align-items: center;
+    align-self: end;
+    padding-bottom: 1.5rem;
+    padding-right: var(--gutter);
+}
+.epic-carousel__controls--circle svg {
+    --_size: var(--wp--preset--font-size--medium);
+    height: var(--_size);
+    width: var(--_size);
+}
+.epic-carousel__controls--arrows {
+    display: flex;
+    gap: 0.5rem;
+}
+.epic-carousel__controls--arrows button {
+    display: block;
+    appearance: none;
+    border: none;
+    background: transparent;
+    padding: 0 0.5rem;
+    cursor: pointer;
+}
+
+.progress-circle {
+    stroke: currentColor;
+    stroke-dasharray: 56.5486677646; /* This is 2 * π * r where r is 9 */
+    stroke-dashoffset: 56.5486677646;
+    transition: stroke-dashoffset 1s linear;
+}

@@ -1,0 +1,23 @@
+{
+    "key": "ui_options_page_6699a9ed8d9d4",
+    "title": "Site Options",
+    "active": true,
+    "menu_order": 0,
+    "page_title": "Site Options",
+    "menu_slug": "site-options",
+    "parent_slug": "options-general.php",
+    "advanced_configuration": false,
+    "icon_url": "",
+    "menu_title": "",
+    "position": null,
+    "redirect": false,
+    "description": "",
+    "menu_icon": [],
+    "update_button": "Update",
+    "updated_message": "Options Updated",
+    "capability": "edit_posts",
+    "data_storage": "options",
+    "post_id": "",
+    "autoload": false,
+    "modified": 1721346541
+}

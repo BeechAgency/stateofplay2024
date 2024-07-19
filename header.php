@@ -38,7 +38,7 @@ $black_header = get_field('black_header', $page_ID);
 		<div class="site-branding">
 			<div class="site-title">
 				<a href="<?php echo esc_url( home_url( '/' ) ); ?>" title="<?php bloginfo( 'name' ); ?>" alt="<?php bloginfo( 'name' ); ?>" rel="home">
-					<?php sop_logo_svg(); ?>
+					<?php sop_o_logo_svg(); ?>
 				</a>
 			</div>
 		</div><!-- .site-branding -->
