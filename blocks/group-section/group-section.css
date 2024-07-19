@@ -1,0 +1,8 @@
+.wp-block-beech-group-section {
+    padding-block: var(--block-space);
+}
+
+.group-section__inner > .wp-block-beech-text-area {
+    max-width: 52rem;
+    padding-inline: var(--gutter);
+}

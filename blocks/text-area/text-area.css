@@ -13,6 +13,11 @@
     opacity: 1;
 }
 
+.is-style-columns .text-area__inner-blocks {
+    columns: 2;
+    gap: var(--grid-col-gap);
+}
+
 .align-content-center .wp-block-beech-text-area { align-items: center; }
 .align-content-top .wp-block-beech-text-area { align-items: start; }
 .align-content-bottom .wp-block-beech-text-area { align-items: end; }

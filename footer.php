@@ -21,7 +21,7 @@ $not_formatted_date = strtotime( $last_updated );
 $formatted_date = date( 'j F Y \a\t g:ia', $not_formatted_date ); 
 ?>
 
-	<footer id="colophon" class="site-footer has-gutter has-jet-black-background-color">
+	<footer id="colophon" class="site-footer has-gutter">
 		<section class="footer-content">
 
 			<div class="contact-details">

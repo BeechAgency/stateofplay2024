@@ -15,7 +15,7 @@ if ( ! empty( $block['anchor'] ) ) {
 }
 
 // Create class attribute allowing for custom "className" and "align" values.
-$class_name = ' has-jet-black-background-color';
+$class_name = '';
 $items = get_field('items');
 $duration = empty(get_field('duration')) ? 0.5 : (int) get_field('duration');
 
@@ -25,13 +25,14 @@ $item_count = count($items);
 <header <?= get_block_wrapper_attributes( array(
     'class' => $class_name,
     'id' => $anchor )
-    ); ?>>
+    ); ?>> 
     <div class="epic-carousel__showcase--wrapper">
         <div class="epic-carousel__track" data-slide-duration="<?= $duration ?>">
             <?php 
             if($items && $item_count > 0): 
                 $i = 0;
                 foreach($items as $item) :  
+                    $video_url = get_field('featured_video', $item);
                 ?>
             <div class="epic-slide<?= $i === 0 ? ' epic-slide--active' : '' ?>" data-slide-index="<?= $i ?>">
                 <div class="epic-slide__title">
@@ -39,7 +40,15 @@ $item_count = count($items);
                     <span class="tagline"><?= get_field('tagline', $item) ?></span>
                 </div>
                 <div class="epic-slide__image">
-                    <?= get_the_post_thumbnail( $item, 'full', null ); ?>
+                    <?php  if( !empty($video_url)) :?>
+                        <video width="100%" height="auto" playsinline="" loop="" muted="" autoplay="" class="bb-post-card-video lozad" data-placeholder-background="hsla(0, 0.00%, 0.00%, 1.00)" data-loaded="false">
+                        <source data-src="<?= $video_url ?>" src="">
+                        Your browser does not support the video tag.
+                    </video>
+                    <img data-src="<?= get_the_post_thumbnail_url($item); ?>" data-placeholder-background="hsla(0, 0.00%, 0.00%, 1.00)" class="post-card video-poster lozad" style="background: rgb(0, 0, 0);" data-loaded="false">
+                    <?php else: 
+                        echo get_the_post_thumbnail( $item, 'full', null );
+                     endif; ?>
                 </div>
             </div>
             <?php
@@ -94,6 +103,7 @@ $item_count = count($items);
                         slide.classList.add('epic-slide--active');
                         currentNumber.textContent = (i + 1).toString().padStart(2, '0');
                     }, 10);
+
                 } else {
                     slide.classList.remove('epic-slide--active');
                     setTimeout(() => slide.classList.remove('display'), 1000); // Match this timeout with the CSS transition duration

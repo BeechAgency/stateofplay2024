@@ -44,13 +44,14 @@ $black_header = get_field('black_header', $page_ID);
 		</div><!-- .site-branding -->
 
 		<div class="nav-wrap"> 
+			<!--
 			<div class="darkmode toggle-wrapper">
         		<div class="toggle">
             		<input id="darkmodeInput" type="checkbox">
             		<label class="toggle-item" for="darkmodeInput"></label>
         		</div>
     		</div>
-
+			-->
 			<?php
 			wp_nav_menu(
 				array(

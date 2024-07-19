@@ -82,6 +82,7 @@ $post_count = $post_count === 0 ? 3 : $post_count;
     'class' => $class_name,
     'id' => $anchor )
     ); ?>>
+    <!--
     <div class="articles-header">        
         <InnerBlocks 
             allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" 
@@ -89,11 +90,7 @@ $post_count = $post_count === 0 ? 3 : $post_count;
             className="articles__inner-blocks"
         />
     </div>
-    <?php if(!empty($display_filters) && $display_filters === true):  
-        /*
-        beech_taxonomy_value_filter_list( $filter_tax , get_the_permalink( $page_id ) );
-        */
-     endif; ?>
+    -->
     <div class="articles-track">
         <div class="articles-wrapper <?= !empty($post_type) ? $post_type[0] : ''; ?>" style="--article-count: <?= $post_count; ?>;">
             <?php 
@@ -112,16 +109,8 @@ $post_count = $post_count === 0 ? 3 : $post_count;
     <?php if(!empty($link) && $link['url']): ?>
     <div class="article-footer">
         <a class="bb-btn read-more" href="<?= $link['url']; ?>" target="<?= $link['target'] ?>">
+            <?= sop_o_logo_svg(); ?>
             <?= $link['title'] ?>
-            <?php 
-            if($display_count):
-                $post_count = wp_count_posts(!empty($post_type) ? $post_type[0] : 'post');
-
-                echo '<span class="count">';
-                echo $post_count->publish;
-                echo '</span>';
-            endif;
-            ?>
         </a>
     </div>
     <?php endif; ?>

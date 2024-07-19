@@ -31,7 +31,7 @@ $class_name = 'carousel-item card__'.$type;
             <?= wp_get_attachment_image( $image, 'full'); ?>
         </div>
         <div class="carousel-card__content <?= $background_color; ?>">
-            <h6 class='carsouel-card__name'><?= $name ?></h6>
+            <h4 class='carsouel-card__name'><?= $name ?></h4>
             <?= !empty($title) ? "<p class='carsouel-card__title'>$title</p>" : '' ?>
             <p class='carsouel-card__message'><?= $message ?></p>
         </div>

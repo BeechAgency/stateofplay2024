@@ -6,10 +6,23 @@
     flex-direction: column;
     align-items: stretch;
     justify-content: flex-start;
+
+    background-color: var(--wp--preset--color--jet-black);
+    color: var(--wp--preset--color--white);
 }
+#page:has( header.has-jet-black-background-color ) .site-footer {
+    color: var(--wp--preset--color--jet-black);
+    background-color: var(--wp--preset--color--white);
+
+    .footer-logo { 
+        color: var(--wp--preset--color--grape);
+    }
+}
+
+
 .site-footer .footer-content {
     padding-top: 2rem;
-    border-top: solid 1px var(--wp--preset--color--jet-tint);
+    border-top: solid 1px color-mix(in srgb, currentColor, 30% transparent);
 
     display: grid;
     grid-template-columns: repeat(12, 1fr);

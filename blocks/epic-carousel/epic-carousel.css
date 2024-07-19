@@ -6,6 +6,11 @@
     color: var(--wp--preset--color--white);
 }
 
+.wp-block-beech-epic-carousel {
+    background-color: var(--wp--preset--color--jet-black);
+    color: var(--wp--preset--color--white);
+}
+
 .epic-carousel__showcase--wrapper {
     --_header-height :  95svh;
     position: relative;
@@ -116,4 +121,45 @@
     stroke-dasharray: 56.5486677646; /* This is 2 * π * r where r is 9 */
     stroke-dashoffset: 56.5486677646;
     transition: stroke-dashoffset 1s linear;
+}
+
+
+
+/** Videos */
+.epic-slide__image video {
+    object-fit: cover;
+    width: 100%;
+    height: var( --_header-height);
+    background: var(--body-text);
+    display: block;
+}
+.epic-slide__image video[data-loaded="true"] + img.video-poster {
+    animation: 1s fadeOut linear normal 1 forwards;
+    animation-delay: 500ms;
+}
+.epic-slide__image {
+    position: relative;
+}
+.epic-slide__image img.video-poster {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+}
+
+.loaded .epic-slide__image video[data-loaded="true"] + img.video-poster {
+    opacity: 0;
+    animation: none;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+
+    to {
+        opacity: 0;
+    }
 }

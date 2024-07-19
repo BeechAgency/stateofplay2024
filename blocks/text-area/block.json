@@ -28,12 +28,17 @@
     },
     "styles": [
         {
+            "name": "columns",
+            "label": "Columns",
+            "isDefault": false
+        },
+        {
             "name": "spacer",
             "label": "Spacer",
             "isDefault": false
         }
     ],
     "parent" : [
-        "core/text-block", "beech/image-text"
+        "core/text-block", "beech/image-text", "beech/group-section"
     ]
 }

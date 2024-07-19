@@ -45,6 +45,8 @@
 }
 .carsouel-card__message {
     color: var(--wp--preset--color--mid-gray);
+    font-size: var(--wp--preset--font-size--medium);
+    opacity: 0.7;
 }
 .carousel-card__content {
     padding: 0;
