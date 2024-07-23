@@ -70,7 +70,7 @@
 .project-feature-image {
     grid-column: span 12;
 
-    img { aspect-ratio: 16 / 9; width: 100%; }
+    img { aspect-ratio: 16 / 9; width: 100%; height: auto; object-fit: cover;}
 }
 
 
