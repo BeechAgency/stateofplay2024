@@ -268,6 +268,11 @@ if ( ! function_exists( 'beechblocks_post_list_ids') ) :
 			'post_type' => $postType
 		);
 
+		if(!empty($args['order'])) {
+			$queryArgs['order'] = $args['order'];
+			$queryArgs['orderby'] = $args['orderby'];
+		}
+
 		if(!empty($hasPagination)) {
 			$queryArgs['paged'] = $hasPagination;
 		}
