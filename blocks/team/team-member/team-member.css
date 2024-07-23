@@ -79,7 +79,7 @@ p.team-member__title {
 
 
     .is-style-not-grid .team-member__inner {
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(var(--grid-cols,12), 1fr);
         grid-template-areas: "l l l l l . r r r r r .";
     }
 
@@ -98,7 +98,7 @@ p.team-member__title {
     }
 
     .is-style-not-grid .team-member__inner {
-        grid-template-columns: repeat(12, 1fr);
+        grid-template-columns: repeat(var(--grid-cols,12), 1fr);
         grid-template-areas: "l l l l l l l r r r r r";
         gap: 2rem;
     }

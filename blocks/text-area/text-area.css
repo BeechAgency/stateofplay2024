@@ -21,3 +21,21 @@
 .align-content-center .wp-block-beech-text-area { align-items: center; }
 .align-content-top .wp-block-beech-text-area { align-items: start; }
 .align-content-bottom .wp-block-beech-text-area { align-items: end; }
+
+.wp-block-heading {
+    sup {
+        font-size: var(--wp--preset--font-size--small);
+        line-height: 1;
+        font-family: inherit;
+        opacity: 0.7;
+        margin-top: 0.4em;
+    }
+
+    &:has( sup ) {
+        display: flex;
+        align-items: flex-start;
+        gap: 0.25em;
+        line-height: 1;
+    }
+
+}

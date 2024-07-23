@@ -6,3 +6,6 @@
     max-width: 52rem;
     padding-inline: var(--gutter);
 }
+.group-section__inner > .wp-block-beech-text-area {
+    padding-bottom: calc(var(--block-space) / 2);
+}

@@ -46,7 +46,7 @@ if(!empty($block['backgroundColor']) && $block['backgroundColor'] == 'jet-black'
     'id' => $anchor )
     ); ?>>
     <div class="cta-wrapper">
-        <div class="cta-line"></div>
+        <!--<div class="cta-line"></div>-->
         <div class="cta-inner">
             <InnerBlocks 
                 allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ); ?>"

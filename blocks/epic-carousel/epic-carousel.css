@@ -9,6 +9,8 @@
 .wp-block-beech-epic-carousel {
     background-color: var(--wp--preset--color--jet-black);
     color: var(--wp--preset--color--white);
+
+    margin-bottom: calc(var(--block-space) / 2);
 }
 
 .epic-carousel__showcase--wrapper {
@@ -87,7 +89,7 @@
 .epic-carousel__controls--wrapper {
     font-size: var(--wp--preset--font-size--large);
     z-index: 25;
-    grid-column: 10 / 13;
+    grid-column: 5 / 13;
     grid-row: 1 / 1;
 
     display: flex;
@@ -161,5 +163,31 @@
 
     to {
         opacity: 0;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    #page:has(.entry-content header.wp-block-beech-epic-carousel:first-child) .site-header {
+        background: linear-gradient(to top, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.7) 100%);
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    .epic-carousel__controls--wrapper {
+        grid-column: 1 / 13;
+        justify-content: space-between;
+        padding-left: var(--gutter);
+    }
+    .epic-carousel__controls--circle {
+        margin-right: auto;
+    }
+    .epic-slide__title {
+        font-size: var(--wp--preset--font-size--x-large);
+        padding-right: var(--gutter);
+        grid-column: 1 / 13;
+        padding-bottom: 4rem;
+        padding-top: 2rem;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0) 0%,rgba(0, 0, 0, 0.3) 30%, rgba(0, 0, 0, 0.7) 100%);
     }
 }

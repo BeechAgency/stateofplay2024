@@ -6,7 +6,7 @@
 
 .wp-block-beech-images.is-style-feature {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     column-gap: var(--grid-col-gap);
 
     .images_block-inner-blocks {
@@ -40,3 +40,9 @@
 
 .wp-block-beech-images .wp-block-embed__wrapper > * { width: 100%; }
 .wp-block-beech-images .wp-block-embed__wrapper iframe { aspect-ratio: 16 / 9; height: auto; }
+
+@media screen and (max-width: 780px) { 
+    .wp-block-beech-images.is-style-feature .images_block-inner-blocks {
+        grid-column: span 12;
+    }
+}

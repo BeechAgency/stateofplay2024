@@ -32,7 +32,8 @@ $allowed_blocks = array(
     'core/button', 
     'core/buttons', 
     'core/image', 
-    'beech/eyebrow' 
+    'beech/eyebrow',
+    'beech/superscript' 
 );
 
 $template = array(

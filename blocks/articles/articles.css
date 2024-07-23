@@ -5,7 +5,7 @@
 
 .articles-wrapper {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     gap: var(--grid-col-gap);
 }
 
@@ -183,13 +183,5 @@
 }
 
 @media screen and (max-width: 480px) {
-    .wp-block-beech-articles .articles-wrapper {
-        width: calc( (var(--article-count) ) * 80vw );
-        gap: var(--gutter);
-    }
-
-    .bb-post-card .card-categories {
-        width: 80%;
-    }
 }
 

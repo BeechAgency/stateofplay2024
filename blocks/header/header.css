@@ -10,6 +10,10 @@
         line-height: 1.08;
         margin-bottom: 0;
     }
+
+    &.has-jet-black-background-color {
+        margin-top: -1px;
+    }
 }
 .wp-block-beech-header header {
     width: 100%;
@@ -19,7 +23,7 @@
     padding-inline: var(--gutter);
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     gap: var(--grid-col-gap);
 }
 .header__inner-blocks { 
@@ -89,6 +93,24 @@
 .is-style-contact .header__inner-blocks > .wp-block-beech-contact:first-of-type {
     margin-right: 2rem;
     width: calc(50% - 2rem);
+}
+
+@media screen and (max-width: 780px) {
+    .project-meta {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5rem;
+
+        .project-meta-item {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: var(--grid-col-gap);
+
+            > span:last-child {
+                grid-column: span 5;
+            }
+        }
+    }
 }
 
 

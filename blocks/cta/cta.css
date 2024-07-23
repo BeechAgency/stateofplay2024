@@ -2,7 +2,7 @@
     padding-inline: var(--gutter, 2rem);
     padding-block: var(--block-space, 6rem) var(--block-space-wide, 16rem);
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     column-gap: var(--grid-col-gap);
 }
 .cta-line {
@@ -42,5 +42,6 @@
 }
 
 @media screen and (max-width: 768px) { 
-    .cta-inner { grid-column: span 12; }
+    
+    .cta-inner { grid-column: span 6; }
 }

@@ -25,7 +25,7 @@
     border-top: solid 1px color-mix(in srgb, currentColor, 30% transparent);
 
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     gap: var(--grid-col-gap);
 
 

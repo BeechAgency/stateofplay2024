@@ -6,10 +6,17 @@
 
 .article-text__inner {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     gap: var(--grid-col-gap);
 }
 
 .article-text__inner-blocks {
     grid-column: 7 / 12;
+}
+
+@media screen and (max-width: 780px) {
+    
+    .article-text__inner-blocks {
+        grid-column: span 6;
+    }
 }

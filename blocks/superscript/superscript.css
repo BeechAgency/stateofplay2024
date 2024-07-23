@@ -1,0 +1,26 @@
+h6.wp-block-beech-eyebrow,
+.eyebrow__wrap h6.wp-block-heading {
+    display: flex;
+    gap: 0.5rem;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+h6.wp-block-beech-eyebrow svg,
+.eyebrow__wrap h6.wp-block-heading svg {
+    width: 0.5em;
+    height: 0.5em;
+    fill: currentColor;
+    /*animation: colorChange 10s linear infinite;*/
+}
+
+
+h6.wp-block-beech-eyebrow:hover svg,
+.eyebrow__wrap h6.wp-block-heading:hover svg {
+    fill: currentColor;
+    /*animation: colorChange 1s linear infinite;*/
+}
+
+.block-editor-block-list__layout .wp-block-beech-eyebrow svg { 
+    background-color: currentColor;
+}

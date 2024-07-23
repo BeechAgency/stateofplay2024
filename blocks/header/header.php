@@ -74,9 +74,9 @@ if($post_type === 'project') {
 
         <?php if($post_type === 'project'): ?>
         <div class="project-meta">
-            <div class="project-meta-item"><?php echo !empty($client = get_field('client', $post_id)) ? '<span>Client</span> '.$client : '' ?></div>
-            <div class="project-meta-item"><?php echo !empty($year = get_field('year', $post_id)) ? '<span>Year</span> '.$year : '' ?></div>
-            <div class="project-meta-item"><?php echo !empty($role = get_field('role', $post_id)) ? '<span>Role</span> '.$role : '' ?></div>
+            <div class="project-meta-item"><?php echo !empty($client = get_field('client', $post_id)) ? '<span>Client</span> <span>'.$client.'</span>' : '' ?></div>
+            <div class="project-meta-item"><?php echo !empty($year = get_field('year', $post_id)) ? '<span>Year</span> <span>'.$year.'</span>' : '' ?></div>
+            <div class="project-meta-item"><?php echo !empty($role = get_field('role', $post_id)) ? '<span>Role</span> <span>'.$role.'</span>' : '' ?></div>
         </div>
         <div class="project-feature-image">
             <?= get_the_post_thumbnail( null, 'full', null ); ?>

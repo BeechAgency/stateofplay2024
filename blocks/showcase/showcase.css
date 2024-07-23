@@ -4,7 +4,7 @@
 }
 .showcase__items-grid {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
 }
 .showcase__image-wrap {
     grid-column: span 4;

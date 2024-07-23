@@ -15,6 +15,7 @@
     --block-space-narrow : calc(var(--block-space) / 2);
     --block-space-wide: calc(var(--block-space) * 2);
 
+    --grid-cols : 12;
     --grid-col-gap : 2.5rem;
     --grid-row-gap : 3rem;
 
@@ -101,6 +102,10 @@ p, h1, h2, h3, h4, h5, h6, ul, ol {
 
 p {
     margin: 0 0 1.5rem;
+    
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
 
 img {
@@ -114,7 +119,13 @@ u span { text-decoration: underline;}
 .has-gutter {
     padding-inline: var(--gutter);
 }
-a { cursor: pointer;}
+a,button { cursor: pointer;}
+
+.has-jet-black-background-color + .has-jet-black-background-color {
+    margin-top : -1px;
+}
+
+
 
 /* Button Hovers */
 .menu a { position: relative; }
@@ -513,54 +524,7 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
 
 
 
-/* Animated Logo */
-#beechLogo path.logo-letter {
-    transition: fill 500ms ease;
-    transition-delay: calc( (var(--_delay-step, 0) * 25ms) + 250ms);
-}
-#beechLogo:hover path.logo-letter { 
-    animation: bounceLogo 200ms ease-in-out 1; 
-    animation-delay: calc(var(--_delay-step, 0) * 25ms); 
-    fill: var(--_change-fill);
-    transition-delay: 0;
-}
 
-#page:has( main .is-style-home.is-rorange-background ) #beechLogo path.logo-letter:nth-child(2),
-#page:has( main .is-style-home.is-yellow-background ) #beechLogo path.logo-letter:nth-child(3),
-#page:has( main .is-style-home.is-pink-background ) #beechLogo path.logo-letter:nth-child(4),
-#page:has( main .is-style-home.is-green-background ) #beechLogo path.logo-letter:nth-child(5),
-#page:has( main .is-style-home.is-blue-background ) #beechLogo path.logo-letter:nth-child(6) { --_change-fill: var(--body-text); }
-
-
-#beechLogo path.logo-letter:nth-child(2) { --_delay-step: 0; --_change-fill : var(--wp--preset--color--rorange); }
-#beechLogo path.logo-letter:nth-child(3) { --_delay-step: 1; --_change-fill : var(--wp--preset--color--yellow); }
-#beechLogo path.logo-letter:nth-child(4) { --_delay-step: 2; --_change-fill : var(--wp--preset--color--pink); }
-#beechLogo path.logo-letter:nth-child(5) { --_delay-step: 3; --_change-fill : var(--wp--preset--color--green); }
-#beechLogo path.logo-letter:nth-child(6) { --_delay-step: 4; --_change-fill : var(--wp--preset--color--blue); }
-
-
-.menu-transition #beechLogo path.logo-letter { animation: colorChange 250ms linear 1; }
-
-.menu-transition #beechLogo path.logo-letter:nth-child(1) { --_delay-step: 0; animation-delay: 0ms;  animation-duration: 250ms;   }
-.menu-transition #beechLogo path.logo-letter:nth-child(2) { --_delay-step: 1; animation-delay: 50ms;  animation-duration: 250ms; }
-.menu-transition #beechLogo path.logo-letter:nth-child(3) { --_delay-step: 2; animation-delay: 75ms;  animation-duration: 250ms;  }
-.menu-transition #beechLogo path.logo-letter:nth-child(4) { --_delay-step: 3; animation-delay: 125ms;  animation-duration: 250ms;  }
-.menu-transition #beechLogo path.logo-letter:nth-child(5) { --_delay-step: 4; animation-delay: 150ms;  animation-duration: 250ms; }
-
-
-#beechLogoFull path {
-    fill: currentColor;
-    overflow: visible;
-    translate: 0 0;
-}
-
-
-
-@keyframes bounceLogo {
-    0% { translate: 0 0rem; }
-    50% { translate: 0 -4rem; }
-    100% { translate: 0 0rem; }
-}
 
 @keyframes colorChange {
     0% { color: var(--wp--preset--color--rorange);  }
@@ -590,31 +554,6 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
     25% { color: currentColor; }
     100% { color: currentColor; }
 }
-
-
-#beechLogoFull:hover path.letter { 
-    --_duration : 750ms; 
-    --_factor : 12; 
-    animation: colorChange var(--_duration) linear 2; 
-    animation-play-state: running;
-}
-#beechLogoFull path.letter { 
-    animation-play-state: paused;
-
-}
-
-#beechLogoFull:hover path.letter:nth-child(2) { animation-delay: calc( var(--_duration) / var(--_factor) * 1 ); }
-#beechLogoFull:hover path.letter:nth-child(3) { animation-delay: calc( var(--_duration) / var(--_factor) * 2 ); }
-#beechLogoFull:hover path.letter:nth-child(4) { animation-delay: calc( var(--_duration) / var(--_factor) * 3 ); }
-#beechLogoFull:hover path.letter:nth-child(5) { animation-delay: calc( var(--_duration) / var(--_factor) * 4 ); }
-#beechLogoFull:hover path.letter:nth-child(6) { animation-delay: calc( var(--_duration) / var(--_factor) * 5 ); }
-#beechLogoFull:hover path.letter:nth-child(7) { animation-delay: calc( var(--_duration) / var(--_factor) * 6 ); }
-#beechLogoFull:hover path.letter:nth-child(8) { animation-delay: calc( var(--_duration) / var(--_factor) * 7 ); }
-#beechLogoFull:hover path.letter:nth-child(9) { animation-delay: calc( var(--_duration) / var(--_factor) * 8 ); }
-#beechLogoFull:hover path.letter:nth-child(10) { animation-delay: calc( var(--_duration) / var(--_factor) * 9 ); }
-#beechLogoFull:hover path.letter:nth-child(11) { animation-delay: calc( var(--_duration) / var(--_factor) * 10 ); }
-
-
 
 span.edit-link a {
     position: fixed;
@@ -664,6 +603,8 @@ div#page:has(header.is-style-contact) footer#colophon {
     margin-left: auto;
     margin-right: calc(  100% / 12  );
 }
+
+
 
 
 /**
@@ -725,101 +666,4 @@ img.alignleft {
 }
 .wysiwyg + .btn {
     margin-top: 1rem;
-}
-
-
-/* Author Profile Tag */
-.author-profile__inner {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-}
-.author-profile__image img {
-    border-radius: 100%;
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    aspect-ratio: 1 / 1;
-    max-width: 5rem;
-}
-.author-profile__text .author-profile__title {
-    font-size: var(--wp--preset--font-size--xs);
-    color: var(--wp--preset--color--mid-gray);
-}
-
-/* TOC Tag */
-
-html:has( .toc ) {
-    scroll-behavior: smooth;
-}
-.toc > .toc-title,
-.social-sharers-title {
-    font-size: var(--wp--preset--font-size--medium);
-    margin-bottom: 1rem;
-}
-.toc ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    line-height: 1.2;
-}
-.toc ul a {
-    text-decoration: none;
-    color: inherit;
-    transition: all 150ms ease;
-}
-.toc ul li:not(.active) a {
-    opacity: 0.5;
-}
-.toc > ul > li:not(:last-child) {
-    margin-bottom: 0.75rem;
-}
-
-.social-sharing-buttons {
-    display: flex;
-    gap: 1.25rem;
-}
-.social-sharing-button {
-    display: block;
-    color: var(--wp--preset--color--light-gray);
-    transition: all 150ms ease;
-    width: 100%;
-    max-width: 1.75rem;
-}
-.social-sharing-button:hover {
-    color: var(--wp--preset--color--rorange);
-}
-.social-sharing-button svg {
-    display: block;
-    width: 100%;
-    height: auto;
-    aspect-ratio: 1 / 1;
-}
-
-#copy-toast {
-    position: fixed;
-    z-index: 100;
-    padding: 0.5rem 2rem 0.5rem 1rem;
-    border-radius: 0rem;
-    
-    color: var(--wp--preset--color--jet-black);
-    background-color: var( --wp--preset--color--yellow );
-    box-shadow: 1px -1px 11px -3px color-mix(in srgb, var(--body-bg) 20%, var(--wp--preset--color--rorange));
-
-    font-weight: bold;
-    font-size: 1.2rem;
-
-    top: 0%;
-    right: 0%;
-
-    translate: 120% var(--gutter);
-    transition: all 250ms ease;
-    opacity: 1;
-}
-
-#copy-toast.active {
-    translate: 0 var(--gutter);
-}
-#copy-toast.out {
-    opacity: 0;
 }

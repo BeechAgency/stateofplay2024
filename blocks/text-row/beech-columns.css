@@ -24,7 +24,7 @@
 
 .text-row__inner {
     display: grid;
-    grid-template-columns: repeat(12, 1fr);
+    grid-template-columns: repeat(var(--grid-cols,12), 1fr);
     gap: var(--grid-col-gap);
     padding-inline: var(--gutter, 2rem);
     overflow: hidden;
@@ -47,8 +47,8 @@
     border-top: solid 1px currentColor;
     opacity: 0.7;
 }
-.border-top .hr:first-child { margin-bottom: 3rem; }
-.border-bottom .hr:last-child { margin-top: 3rem; }
+.border-top .hr:first-child { margin-bottom: calc(var(--block-space) / 2); }
+.border-bottom .hr:last-child { margin-top: calc(var(--block-space) / 2); }
 
 
 /* For Gutten */
@@ -57,4 +57,11 @@
 
 .block-editor-block-list__block.is-selected.wp-block-beech-text-row > div > .text-row__inner > .wp-block {
     outline: yellow 2px solid;
+}
+
+/* Tablet */
+@media screen and (max-width: 780px) {
+    .text-row__inner {
+        row-gap: 3rem;
+    }
 }

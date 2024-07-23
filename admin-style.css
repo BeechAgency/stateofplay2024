@@ -8,8 +8,11 @@
 
 .theme-browser .theme  .theme-id-container .theme-name { height: auto; }
 
+.column-image {
+    width: 150px;
+}
 .column-image img {
-    width: 100%;
+    width: 150px;
     height: auto;
     display: block;
     aspect-ratio: 16 / 9;
@@ -19,7 +22,8 @@
 .column-has_video {
     width: 40px;
 }
-
+/*
 .fixed .column-tags {
     width: 90px;
 }
+*/

@@ -54,6 +54,7 @@ $THEME_BLOCKS = array(
     //array('name' => 'beech/reading-time', 'args' => array('path' => '/blocks/reading-time', 'requiresRegister' => true)),
     //array('name' => 'beech/epic-header', 'args' => array('path' => '/blocks/epic-header', 'requiresRegister' => true))
     array('name' => 'beech/epic-carousel', 'args' => array('path' => '/blocks/epic-carousel', 'requiresRegister' => true)),
+    //array('name' => 'beech/superscript', 'args' => array('path' => '/blocks/superscript', 'requiresRegister' => true)),
     array('name' => 'beech/group-section', 'args' => array('path' => '/blocks/group-section', 'requiresRegister' => true))
 );
 

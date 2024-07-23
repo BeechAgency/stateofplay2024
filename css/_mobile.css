@@ -1,9 +1,45 @@
+@media screen and (max-width: 780px) { 
+  :root {
+    --grid-cols : 6;
+    --grid-col-gap : 1rem;
+  }
+  .site-footer {
+    min-height: 0;
+  }
+
+  .footer-content {
+    min-height: 95svh;
+
+    .footer-nav {
+      grid-column: span 2;
+    }
+    .footer-acknowledgement {
+      grid-column: span 5;
+      padding-top: 20vh;
+      padding-bottom: 20vh;
+    }
+    .footer-logo {
+      margin-top: auto;
+      padding-bottom : 0;
+    }
+  }
+
+  .site-footer .contact-details {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+  }
+}
+
+
+
+
 /* SM */
 @media screen and (max-width: 768px) {
   :root {
     --xy-gutter : 1rem;
     --gutter : 1rem;
-    --block-space: 4rem;
+    --block-space: 2.5rem;
   }
   .archive-page-articles {
      --card-cols: 12;
@@ -29,19 +65,8 @@
     order: 2;
     margin-bottom: 2rem;
   }
-  .site-footer .contact-details {
-    display: flex;
-    flex-direction: column;
-  }
   .site-footer #footer-menu a {
     font-size: var(--wp--preset--font-size--large);
-  }
-
-  .max-logo  .mobile-logo { display: block; }
-  .max-logo #beechLogoFull { display: none; }
-
-  .acknowledgement {
-    margin-top: 2rem;
   }
 
   .menu-header-menu-container {
@@ -49,13 +74,6 @@
   }
   .menu-open .site-branding {  color: var(--wp--preset--color--white); }
 
-  .site-footer .max-logo {
-    margin-top: auto;
-  }
-  .big-cta-btn .arrow { margin-left: 0.5rem; }
-  .big-cta-btn .arrow svg {
-    width: 2.25rem;
-  }
 }
 
 /* XS */
@@ -69,12 +87,5 @@
 
   .site-branding svg {
     height: 1.125rem;
-  }
-
-  .site-footer .acknowledgement.acknowledgement-desktop { display: none; }
-  .site-footer .acknowledgement.acknowledgement-mobile { display: block; margin-bottom: 2rem; }
-
-  .site-footer {
-    min-height: calc(100vh + 3rem);
   }
 }
