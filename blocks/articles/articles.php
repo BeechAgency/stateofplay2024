@@ -47,6 +47,11 @@ $query_args = array(
 );
 //var_dump($query_args);
 
+if($type === 'latest') {
+    $query_args['orderby'] = 'date';
+    $query_args['order'] = 'DESC';
+}
+
 if($display_pagination) {
     $query_args['paged'] = ( get_query_var( 'paged' ) ) ? get_query_var( 'paged' ) : 1;
 }
