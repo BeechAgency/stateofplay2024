@@ -47,7 +47,7 @@ $template = array(
 
 ?>
 
-<div <?= get_block_wrapper_attributes( array(
+<section <?= get_block_wrapper_attributes( array(
     'class' => $class_name,
     'id' => $anchor )
     ); ?>>
@@ -55,4 +55,4 @@ $template = array(
         allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" 
         template="<?= esc_attr( wp_json_encode( $template ) ); ?>"
         className="group-section__inner" />
-</div>
+</section>

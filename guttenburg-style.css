@@ -5,6 +5,10 @@ html, body {
     font-size: 13px;
 }
 
+.editor-styles-wrapper .is-layout-flow > * {
+    margin-block-start: 0px !important;
+}
+
 .edit-post-visual-editor { background-color: #fff; }
 
 .editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper {
@@ -18,7 +22,8 @@ html, body {
 
 .editor-styles-wrapper .edit-post-visual-editor__post-title-wrapper h1 {
     position: relative;
-    font-size: var(--wp--preset--font-size--1-xl);
+    font-size: var(--wp--preset--font-size--x-large);
+    font-family: var(--wp--preset--font-family--body);
     color: #1e1e1e;
     text-align: center;
 }

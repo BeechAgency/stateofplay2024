@@ -60,3 +60,19 @@ function sop_logo_svg() {
 }
 
 
+
+
+// Hides the post menu hopefully
+function hide_posts_menu() {
+    remove_menu_page('edit.php'); // Removes the 'Posts' menu item
+}
+add_action('admin_menu', 'hide_posts_menu');
+
+// Ensure that the main posts page displays proejects
+function modify_main_query_for_projects($query) {
+    if ( $query->is_home() && $query->is_main_query() ) {
+        $query->set('post_type', 'project');
+    }
+}
+
+add_action('pre_get_posts', 'modify_main_query_for_projects');

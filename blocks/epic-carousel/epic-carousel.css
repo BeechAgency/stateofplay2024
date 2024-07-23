@@ -51,7 +51,7 @@
     grid-template-columns: subgrid;
     row-gap: 0;
     opacity: 0;
-    transition: all 250ms ease;
+    transition: all 350ms ease;
 
     &.epic-slide--active { 
         opacity: 1; 
@@ -149,7 +149,7 @@
     height: 100%;
 }
 
-.loaded .epic-slide__image video[data-loaded="true"] + img.video-poster {
+.has-shown .epic-slide__image video[data-loaded="true"] + img.video-poster {
     opacity: 0;
     animation: none;
 }

@@ -8,6 +8,7 @@
     &.is-style-single {
         h1,h2,h3 {
             text-indent: 14%;
+            text-wrap: pretty;
         }
     }
 }

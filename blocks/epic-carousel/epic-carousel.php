@@ -102,6 +102,10 @@ $item_count = count($items);
                     setTimeout(() => {
                         slide.classList.add('epic-slide--active');
                         currentNumber.textContent = (i + 1).toString().padStart(2, '0');
+
+                        if(!slide.classList.contains('yolo')) {
+                            setTimeout(() => slide.classList.add('has-shown'), duration/2);
+                        }
                     }, 10);
 
                 } else {

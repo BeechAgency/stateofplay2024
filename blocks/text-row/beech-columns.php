@@ -86,7 +86,7 @@ if($style === 'single') {
 
 ?>
 
-<div <?= get_block_wrapper_attributes( array(
+<section <?= get_block_wrapper_attributes( array(
     'class' => $class_name,
     'id' => $anchor )
     ); ?>>
@@ -96,4 +96,4 @@ if($style === 'single') {
         template="<?= esc_attr( wp_json_encode( $template ) ); ?>"
         className="text-row__inner" />
     <?= $border_bottom ? '<div class="hr"></div>' : ''; ?>
-</div>
+</section>

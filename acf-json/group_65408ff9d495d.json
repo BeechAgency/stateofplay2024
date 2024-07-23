@@ -1,89 +1,7 @@
 {
     "key": "group_65408ff9d495d",
     "title": "Block - Images",
-    "fields": [
-        {
-            "key": "field_65408ffa9900a",
-            "label": "Style",
-            "name": "style",
-            "aria-label": "",
-            "type": "button_group",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": 0,
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "choices": {
-                "single-cover": "Single Cover Image",
-                "equal": "Multiple Equal Width",
-                "mini": "A feature with a mini",
-                "letterbox": "Narrow with text overlay"
-            },
-            "default_value": "",
-            "return_format": "value",
-            "allow_null": 0,
-            "layout": "vertical"
-        },
-        {
-            "key": "field_65b1b7a04b1a2",
-            "label": "Image Height",
-            "name": "force_aspect_ratio",
-            "aria-label": "",
-            "type": "true_false",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_65408ffa9900a",
-                        "operator": "!=",
-                        "value": "letterbox"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "message": "",
-            "default_value": 0,
-            "ui_on_text": "Same",
-            "ui_off_text": "Original",
-            "ui": 1
-        },
-        {
-            "key": "field_65ee9010397fc",
-            "label": "Overlay Text",
-            "name": "text",
-            "aria-label": "",
-            "type": "text",
-            "instructions": "",
-            "required": 0,
-            "conditional_logic": [
-                [
-                    {
-                        "field": "field_65408ffa9900a",
-                        "operator": "==",
-                        "value": "letterbox"
-                    }
-                ]
-            ],
-            "wrapper": {
-                "width": "",
-                "class": "",
-                "id": ""
-            },
-            "default_value": "",
-            "maxlength": "",
-            "placeholder": "",
-            "prepend": "",
-            "append": ""
-        }
-    ],
+    "fields": [],
     "location": [
         [
             {
@@ -99,8 +17,8 @@
     "label_placement": "top",
     "instruction_placement": "label",
     "hide_on_screen": "",
-    "active": true,
+    "active": false,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1710133476
+    "modified": 1721694764
 }

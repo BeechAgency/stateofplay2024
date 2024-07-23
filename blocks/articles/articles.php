@@ -78,12 +78,12 @@ foreach( $post_ids as $id ) {
 $post_count = $post_count === 0 ? 3 : $post_count;
 ?>
 
-<div <?= get_block_wrapper_attributes( array(
+<section <?= get_block_wrapper_attributes( array(
     'class' => $class_name,
     'id' => $anchor )
     ); ?>>
     <!--
-    <div class="articles-header">        
+    < class="articles-header">        
         <InnerBlocks 
             allowedBlocks="<?= esc_attr( wp_json_encode( $allowed_blocks ) ); ?>" 
             template="<?= esc_attr( wp_json_encode( $template ) ); ?>"
@@ -114,4 +114,4 @@ $post_count = $post_count === 0 ? 3 : $post_count;
         </a>
     </div>
     <?php endif; ?>
-</div>
+</section>

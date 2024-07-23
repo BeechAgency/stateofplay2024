@@ -7,3 +7,18 @@
 }
 
 .theme-browser .theme  .theme-id-container .theme-name { height: auto; }
+
+.column-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    aspect-ratio: 16 / 9;
+}
+
+.column-has_video {
+    width: 40px;
+}
+
+.fixed .column-tags {
+    width: 90px;
+}

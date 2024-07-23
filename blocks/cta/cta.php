@@ -39,11 +39,9 @@ if(!empty($block['className'])) {
 if(!empty($block['backgroundColor']) && $block['backgroundColor'] == 'jet-black') {
     $class_name .= ' has-jet-black-background-color';
 }
-
-
 ?>
 
-<div <?= get_block_wrapper_attributes( array(
+<section <?= get_block_wrapper_attributes( array(
     'class' => $class_name,
     'id' => $anchor )
     ); ?>>
@@ -58,4 +56,4 @@ if(!empty($block['backgroundColor']) && $block['backgroundColor'] == 'jet-black'
             />
         </div>
     </div>
-</div>
+</section>

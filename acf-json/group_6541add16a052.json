@@ -16,7 +16,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "Name McName",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -36,7 +36,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "A tagline that is a zinger",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -56,7 +56,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": 2023,
+            "default_value": 2024,
             "min": "",
             "max": "",
             "placeholder": "",
@@ -78,7 +78,7 @@
                 "class": "",
                 "id": ""
             },
-            "default_value": "",
+            "default_value": "A list of things we did, design, strategy, make money, look good",
             "maxlength": "",
             "placeholder": "",
             "prepend": "",
@@ -123,5 +123,5 @@
     "active": true,
     "description": "",
     "show_in_rest": 0,
-    "modified": 1721197985
+    "modified": 1721695006
 }

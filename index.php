@@ -36,14 +36,13 @@ if(is_home()) {
 		endif;
 
 
-
 		if ( have_posts() ) :
 			/*
 			echo '<div class="filter-list-wrapper">';
 			beech_taxonomy_value_filter_list('category', '/latest');
 			echo '</div>';
 			*/
-			echo '<div class="archive-page-articles" data-xy="grid">';
+			echo '<section class="is-style-projects wp-block-beech-articles"><div class="articles-track"><div class="articles-wrapper p">';
 
 			if ( is_home() && ! is_front_page() ) :
 				?><!--
@@ -56,17 +55,18 @@ if(is_home()) {
 			/* Start the Loop */
 			while ( have_posts() ) :
 				the_post();
+				
 				/*
 				 * Include the Post-Type-specific template for the content.
 				 * If you want to override this in a child theme, then include a file
 				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
 				 */
 				//echo '<li data-xy="col 2xl:3 xl:3 lg:4 md:4 sm:6 xs:12">';
-				get_template_part( 'template-parts/card', get_post_type() );
+				get_template_part( 'template-parts/card', 'post' );
 				//echo '</li>';
 
 			endwhile;
-			echo '</div>';
+			echo '</div></div></section>';
 
 			//beech_number_pagination();
 

@@ -26,7 +26,8 @@
     grid-column: span 11;
 }
 
-.wp-block-beech-header.project-type {
+.wp-block-beech-header.project-type,
+.wp-block-beech-header .project-type {
     padding-top: 7.5rem;
 
     h1 {

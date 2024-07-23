@@ -45,7 +45,7 @@ $template = array(
 );
 ?>
 
-<div <?= get_block_wrapper_attributes( array(
+<section <?= get_block_wrapper_attributes( array(
     'class' => $class_name,
     'id' => $anchor )
     ); ?>>
@@ -54,4 +54,4 @@ $template = array(
         template="<?= esc_attr( wp_json_encode( $template ) ); ?>"
         className="carousel-section__inner"
         />
-</div>
+</section>

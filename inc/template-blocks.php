@@ -8,14 +8,14 @@ $THEME_BLOCKS = array(
     array('name' => 'core/code'),
     array('name' => 'core/list'),
     array('name' => 'core/list-item'),
-    array('name' => 'core/pullquote'),
-    array('name' => 'core/quote'),
-    array('name' => 'core/table'),
-    array('name' => 'core/shortcode'),
+    //array('name' => 'core/pullquote'),
+    //array('name' => 'core/quote'),
+    //array('name' => 'core/table'),
+    //array('name' => 'core/shortcode'),
     array('name' => 'core/html'),
     array('name' => 'core/image'),
     array('name' => 'core/video'),
-    array('name' => 'core/embed'),
+    //array('name' => 'core/embed'),
     //array('name' => 'acf/testimonial', 'args' => array('requiresRegister' => true)),
     array('name' => 'gravityforms/form'),
     array('name' => 'beech/header', 'args' => array('path' => '/blocks/header', 'requiresRegister' => true)),
@@ -160,27 +160,52 @@ function beechblocks_register_page_template() {
     $project_type_object = get_post_type_object( 'project' );
 
 	if(!empty($project_type_object)) :
+        $placeholder = get_template_directory_uri() . '/assets/gradient.jpg';
+
 		$project_type_object->template = array(
 			array( 'beech/header' , array(
 				'styles' => 'article',
-				'className' => 'is-style-project'
-			)),
-			array('beech/images', array(
-				'align'=> 'full'
-			)),
-			array('beech/images', array(
-				'align'=> 'full'
-			)),
-			array('beech/article-text', array(
-			)),
-			array('beech/images', array(
-				'align'=> 'full',
-				'className' => 'is-style-gappy'
-			)),
+				'className' => 'is-style-project')
+            ),
+			array('beech/images', 
+                array('align'=> 'full', 'className' => 'is-style-feature'), 
+                array( array( 'core/image', array('url' => $placeholder)))
+            ),
+			array('beech/article-text', 
+                array() 
+            ),
 			array('beech/images', array(
 				'align'=> 'full',
-				'className' => 'is-style-gappy'
-			))
+				'className' => ''
+			), array( array( 'core/image', array('url' => $placeholder)))),
+			array('beech/images', 
+                array(
+				    'align'=> 'full',
+				    'className' => ''
+                ),
+                array( 
+                    array( 'core/image', array('url' => $placeholder)),
+                    array( 'core/image', array('url' => $placeholder)),
+                    array( 'core/image', array('url' => $placeholder))
+                )
+            ),
+			array('beech/article-text', 
+                array() 
+            ),
+			array('beech/images', array(
+				'align'=> 'full',
+				'className' => ''
+			), array( array( 'core/image', array('url' => $placeholder)))),
+			array('beech/images', 
+                array(
+				    'align'=> 'full',
+				    'className' => ''
+                ),
+                array( 
+                    array( 'core/image', array('url' => $placeholder)),
+                    array( 'core/image', array('url' => $placeholder))
+                )
+            )
 		);
 	endif;
 }

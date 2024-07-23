@@ -85,18 +85,20 @@ body.dark-mode span.edit-link a {box-shadow: 0px 0px 30px -10px rgb(255 255 255)
 
 h1, h2, h3, h4, h5, h6 {
     font-weight: lighter;
+    text-wrap: balance;
+
+    &:last-child {
+        margin-bottom: 0;
+    }
 }
-h1 { letter-spacing: -0.125rem;} 
-h2 { letter-spacing: -0.025rem;} 
+
 /* h1 {letter-spacing:-2px;}
 h2 {letter-spacing:-0.5px;} */
 
 p, h1, h2, h3, h4, h5, h6, ul, ol {
     overflow-wrap: break-word;
 }
-.has-4-xl-font-size {
-    letter-spacing: -0.075rem;
-}
+
 p {
     margin: 0 0 1.5rem;
 }
