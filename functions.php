@@ -277,28 +277,6 @@ if ( ! function_exists( 'beechblocks_post_list_ids') ) :
 			$queryArgs['paged'] = $hasPagination;
 		}
 
-		// Apply the initiative taxonomy query
-		/*
-		if(!empty($initiatives)) {
-			//var_dump($initiatives);
-	
-			$initiativeSlugs = array();
-
-			foreach($initiatives as $initative):
-				$initiativeSlugs[] = $initative->slug;
-			endforeach;
-
-			$queryArgs['tax_query'] = array(
-				array(
-					'taxonomy' => 'initiative',
-					'field' => 'slug',
-					'terms' => $initiativeSlugs, // ENsure that this is an array
-					'operator' => 'IN'
-				)
-			);
-		}*/
-
-
 		// Standard category filter
 		if(!empty($category)) {
 			$queryArgs['category_name'] = $category;
@@ -313,16 +291,6 @@ if ( ! function_exists( 'beechblocks_post_list_ids') ) :
 		if(!empty($postIds)) {
 			$queryArgs['post__in'] = $postIds;
 		}
-
-
-		$queryArgs['meta_query'] = array(
-			'relation' => 'OR',
-			array(
-				'key'     => 'is_hidden',
-				'value'   => true,
-				'compare' => '!=', // Fetch posts where the field 'is_hidden' doesn't exist or is set to a value other than 'true'
-			)
-		);
 
 		$postQuery = new WP_Query(
 			$queryArgs
