@@ -68,7 +68,7 @@ if(is_home()) {
 			endwhile;
 			echo '</div></div></section>';
 
-			//beech_number_pagination();
+			sop_number_pagination();
 
 		else :
 

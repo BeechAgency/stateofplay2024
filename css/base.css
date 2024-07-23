@@ -489,19 +489,17 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
 .posts-pagination {
     padding-inline: var(--gutter);
     padding-block: 5rem 5rem;
-    text-align: center;
-}
-.posts-pagination {
     display: flex;
+    text-align: center;
     justify-content: center;
     gap: 1rem;
 }
 .posts-pagination .page-numbers {
-    padding: 0.25rem;
-    border-radius: 100%;
-    background-color: var(--wp--preset--color--light-gray);
-    color: var(--wp--preset--color--white);
-    border: solid 3px var(--_highlight);
+    padding: 0.25rem 0.125rem;
+    border-radius: 0;
+    background-color: transparent;
+    color: currentColor;
+    border-bottom: solid 2px transparent;
     aspect-ratio: 1 / 1;
     width: 2.5rem;
     display: flex;
@@ -510,17 +508,15 @@ i.dot.pink { background-color:  var(--wp--preset--color--pink); }
     text-decoration: none;
     transition: ease 150ms ease;
 }
-.posts-pagination .page-numbers:nth-child(5n+1) { background-color: var(--wp--preset--color--rorange); --_highlight : var(--wp--preset--color--rorange);  }
-.posts-pagination .page-numbers:nth-child(5n+2) { background-color: var(--wp--preset--color--yellow); --_highlight : var(--wp--preset--color--yellow); }
-.posts-pagination .page-numbers:nth-child(5n+3) { background-color: var(--wp--preset--color--pink); --_highlight : var(--wp--preset--color--pink); }
-.posts-pagination .page-numbers:nth-child(5n+4) { background-color: var(--wp--preset--color--green); --_highlight : var(--wp--preset--color--green); }
-.posts-pagination .page-numbers:nth-child(5n+5) { background-color: var(--wp--preset--color--blue); --_highlight : var(--wp--preset--color--blue); }
 
-.posts-pagination .page-numbers.current, .posts-pagination a.page-numbers:hover {
+.posts-pagination .page-numbers.current, 
+.posts-pagination a.page-numbers:hover {
     border-color: var(--_highlight);
     color: var(--_highlight);
     background-color: transparent;
 }
+.posts-pagination .page-numbers.current { --_highlight: var(--wp--preset--color--grape); }
+.posts-pagination a.page-numbers:hover { --_highlight: var(--wp--preset--color--blue-tang); }
 
 
 

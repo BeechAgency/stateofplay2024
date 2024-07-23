@@ -336,11 +336,11 @@ if ( ! function_exists( 'beechblocks_post_list_ids') ) :
 endif;
 
 
-if ( ! function_exists( 'beechblocks_number_pagination') ) :
+if ( ! function_exists( 'sop_number_pagination') ) :
 	/**
 	* Displays A List of Posts
 	*/
-	function beechblocks_number_pagination() {
+	function sop_number_pagination() {
 		$args = array(
 			'base'               => '%_%',
 			'format'             => '?paged=%#%',
