@@ -345,6 +345,8 @@ body .gform_wrapper.gravity-theme .gform_validation_errors>h2 .gform-icon {
     display: none;
 }
 
+
+
 @media screen and (max-width: 768px) {
     body .gform_wrapper.gravity-theme .gform_validation_errors {padding: 1rem var(--gutter) 1rem calc(var(--gutter) * 1);}
     body .gform_wrapper.gravity-theme .gfield_validation_message, body .gform_wrapper.gravity-theme .validation_message { 

@@ -95,6 +95,10 @@
     width: calc(50% - 2rem);
 }
 
+.wp-block-beech-header .gform_wrapper {
+    margin-top: 6rem;
+}
+
 @media screen and (max-width: 780px) {
     .project-meta {
         display: flex;
