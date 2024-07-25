@@ -14,6 +14,7 @@
 .sick-video-wrapper iframe[data-loaded="true"] + img.sick-poster {
     animation: 1s fadeOut linear normal 1 forwards;
     animation-delay: 500ms;
+    pointer-events: none;
 }
 
 .sick-video-wrapper {

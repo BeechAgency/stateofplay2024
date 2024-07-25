@@ -68,17 +68,17 @@ function do_video_field($url, $type, $poster = '') {
     if(empty($url)) return;
 
     if($type === 'url' || $type === 'direct') {
-        return "<video class='video' autoplay muted loop playsinline poster='$poster'><source src='$url' type='video/mp4'></video>";
+        return "<video class='lozad sick-video video' autoplay muted loop playsinline poster='$poster'><source src='$url' type='video/mp4'></video>";
     }
     elseif($type === 'youtube') {
         $id = get_youtube_id($url);
-        return "<iframe class='video youtube' id='video' width='100%' height='600' src='https://www.youtube.com/embed/$id?rel=0&modestbranding=1&controls=0&color=009999' title='YouTube video player' frameborder='0' allow='autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
+        return "<iframe class='lozad sick-video video youtube' id='video' width='100%' height='600' src='https://www.youtube.com/embed/$id?rel=0&modestbranding=1&controls=0&color=009999' title='YouTube video player' frameborder='0' allow='autoplay; accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture' allowfullscreen></iframe>";
 
     } elseif($type === 'vimeo') { //347119375 // 107178137
 
         $id = get_vimeo_id($url);
 
-        return "<iframe class='video vimeo' id='video' width='100%' height='600' src='https://player.vimeo.com/video/$id?title=0&portrait=0&byline=0&color=009999&background=1' title='Vimeo video player' frameborder='0' allow='autoplay; clipboard-write; encrypted-media; picture-in-picture' allowfullscreen></iframe>";
+        return "<iframe class='lozad sick-video video vimeo' id='video' width='100%' height='600' src='https://player.vimeo.com/video/$id?title=0&portrait=0&byline=0&color=009999&background=1' title='Vimeo video player' frameborder='0' allow='autoplay; clipboard-write; encrypted-media; picture-in-picture' allowfullscreen></iframe>";
 
     } elseif($type === 'dropbox') {
         //https://dl.dropboxusercontent.com/scl/fi/ms2b9i1v1jnthxertnwp2/2_GFFA_Animation_NewLogoLockup.mp4?rlkey=xx28lvott2n7xfv5hpcci1lt2&dl=0
@@ -92,7 +92,7 @@ function do_video_field($url, $type, $poster = '') {
         //$repParts = explode("?", $rep);
         $rep = $rep . '&dl=0';
 
-        return "<video class='video' autoplay muted loop playsinline><source src='$rep' type='video/mp4'></video>";
+        return "<video class='lozad sick-video video' autoplay muted loop playsinline><source src='$rep' type='video/mp4'></video>";
 
     } else {
         return $url;
