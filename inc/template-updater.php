@@ -255,6 +255,11 @@ class BeechAgency_Theme_Updater {
 
         $result['destination'] = $install_directory; // Set the destination for the rest of the stack
 
+        // Clear theme cache
+        wp_clean_themes_cache();
+        // Force WordPress to scan themes again
+        wp_get_themes();
+        
         // Activate the theme if it's active
         if ($this->active) {
             switch_theme($this->theme);
