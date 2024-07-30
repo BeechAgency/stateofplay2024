@@ -235,13 +235,33 @@ class BeechAgency_Theme_Updater {
     public function after_install( $response, $hook_extra, $result ) {
         global $wp_filesystem; // Get global FS object
 
-        $this->log("AFTER INSTALL BABY!!!!!!!" );
+        $this->log("AFTER INSTALL PROCESS STARTED");
 
-        $install_directory = get_theme_root(). '/' . $this->theme ; // Our theme directory
-        $wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the theme dir
+        // Extracted directory name (usually same as the repo name)
+        $extracted_folder = $result['destination'];
+        $this->log("Extracted folder: " . $extracted_folder);
+
+        // Our desired theme directory
+        $install_directory = get_theme_root() . '/' . $this->theme;
+        $this->log("Install directory: " . $install_directory);
+
+        // If the extracted folder is not the same as the install directory, rename it
+        if (basename($extracted_folder) !== basename($install_directory)) {
+            $wp_filesystem->move($extracted_folder, $install_directory);
+            $this->log("Folder renamed from " . basename($extracted_folder) . " to " . basename($install_directory));
+        } else {
+            $this->log("Folder names match, no need to rename.");
+        }
+
         $result['destination'] = $install_directory; // Set the destination for the rest of the stack
 
-        $this->log("attempt after install: ". $this->theme);
+        // Activate the theme if it's active
+        if ($this->active) {
+            switch_theme($this->theme);
+            $this->log("Theme activated: " . $this->theme);
+        }
+
+        $this->log("AFTER INSTALL PROCESS COMPLETED");
 
         return $result;
     }
