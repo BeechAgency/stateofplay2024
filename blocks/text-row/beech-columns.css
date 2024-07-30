@@ -62,6 +62,13 @@
 /* Tablet */
 @media screen and (max-width: 780px) {
     .text-row__inner {
-        row-gap: 3rem;
+        row-gap: 2.5rem;
     }
+
+}
+
+@media screen and (max-width: 768px) {
+    .border-top .hr:first-child { margin-bottom: calc(var(--block-space)); }
+    .border-bottom .hr:last-child { margin-top: calc(var(--block-space)); }
+    .wp-block-beech-text-row { padding-block: calc(var(--block-space, 2.5rem)) 2rem; }
 }

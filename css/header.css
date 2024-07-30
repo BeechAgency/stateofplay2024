@@ -1,10 +1,11 @@
 .site-header {
     padding-inline: var(--gutter);
-    padding-top: 2rem;
-    padding-bottom: 3rem;
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
 
     display: flex;
     justify-content: space-between;
+    align-content: flex-start;
     gap: 3rem;
 }
 
@@ -15,7 +16,7 @@
 
 .site-branding a { color: inherit; }
 .site-branding svg {
-    height: 1.56rem;
+    height: 2.5rem;
     width: auto;
     display:block;
     overflow: visible;
@@ -28,7 +29,7 @@
 .site-header .nav-wrap {
     display: flex;
     gap: 1.5rem;
-    align-items: center;
+    align-items: flex-start;
 }
 /* Darkmode Toggle */
 .darkmode {

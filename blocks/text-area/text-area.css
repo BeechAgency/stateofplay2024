@@ -37,5 +37,13 @@
         gap: 0.25em;
         line-height: 1;
     }
+}
 
+@media screen and (max-width: 780px) {
+    .wp-block-heading {
+        &:has( sup ) { 
+            display: block;
+        }
+        sup { display: none;}
+    }
 }

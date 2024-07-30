@@ -43,6 +43,7 @@
         }
     }
 
+    .header__inner { row-gap: 0; }
 
     .header__inner-blocks {
         grid-column: span 8;
@@ -62,6 +63,11 @@
 
         &:last-child {
             grid-column: span 8;
+        }
+
+        &:first-child {
+            display: flex;
+            flex-wrap: nowrap;
         }
 
         span:first-child {
@@ -99,21 +105,26 @@
     margin-top: 6rem;
 }
 
-@media screen and (max-width: 780px) {
+.single-project .wp-block-beech-images:last-child {
+    padding-bottom: calc(var(--block-space) * 2);
+}
+
+@media screen and (max-width: 768px) {
     .project-meta {
+        padding-top: 6rem;
+        
         display: flex;
-        flex-direction: column;
-        gap: 0.5rem;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 0.5rem 1.5rem;
 
-        .project-meta-item {
-            display: grid;
-            grid-template-columns: repeat(6, 1fr);
-            gap: var(--grid-col-gap);
-
-            > span:last-child {
-                grid-column: span 5;
-            }
+        .project-meta-item:last-child { width: 100%;
         }
+    }
+
+    .wp-block-beech-header.project-type,
+    .wp-block-beech-header .project-type {
+        padding-top: 6rem;
     }
 }
 
@@ -152,12 +163,9 @@
     .is-style-contact .gform_wrapper.gravity-theme .gform_fields { display: block; }
     .is-style-contact .header-form_wrapper.gform_wrapper.gravity-theme .gform_fields .gfield:nth-child(2) { border-top: solid 0px transparent; }
 
-    .is-style-home h1.header__marquee-text {
-        font-size: 12.5vw;
-    }
 
-    .is-style-side-dude .header__inner-blocks {
-        grid-column: span 10;
+    .project-meta-item:last-child {
+        display: flex;
     }
 }
 

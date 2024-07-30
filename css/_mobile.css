@@ -1,4 +1,13 @@
 @media screen and (max-width: 780px) { 
+  
+}
+
+
+
+
+/* SM */
+@media screen and (max-width: 768px) {
+
   :root {
     --grid-cols : 6;
     --grid-col-gap : 1rem;
@@ -29,13 +38,9 @@
     flex-direction: column;
     justify-content: flex-start;
   }
-}
 
 
 
-
-/* SM */
-@media screen and (max-width: 768px) {
   :root {
     --xy-gutter : 1rem;
     --gutter : 1rem;
@@ -74,12 +79,22 @@
   }
   .menu-open .site-branding {  color: var(--wp--preset--color--white); }
 
+  /* Cards */
+  .bb-post-card:nth-child(4n+2),
+  .bb-post-card:nth-child(4n+3),
+  .bb-post-card:nth-child(4n+1), 
+  .bb-post-card:nth-child(4n+4) { 
+      img, video {
+          aspect-ratio: 9 / 10;
+      }
+  }
+
 }
 
 /* XS */
 @media screen and (max-width: 480px) {
   :root {
-    --block-space: 4rem;
+    --block-space: 3rem;
   }
   .wp-block-image figcaption {
     padding-left: var(--gutter);
