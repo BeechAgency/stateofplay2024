@@ -245,46 +245,39 @@ class BeechAgency_Theme_Updater {
         $extracted_folder = $result['destination'];
         $this->log("Extracted folder: " . $extracted_folder);
 
-        // Our desired theme directory
-        $install_directory = get_theme_root() . '/' . $this->theme;
+        // Expected install directory
+        $install_directory = $wp_filesystem->wp_content_dir() . 'themes/' . $this->theme_slug;
         $this->log("Install directory: " . $install_directory);
 
-        // If the extracted folder is not the same as the install directory, rename it
-        if (basename($extracted_folder) !== basename($install_directory)) {
-            $wp_filesystem->move($extracted_folder, $install_directory);
-            $this->log("Folder renamed from " . basename($extracted_folder) . " to " . basename($install_directory));
+        // Rename the extracted folder to the theme slug
+        if ( $wp_filesystem->move( $extracted_folder, $install_directory, true ) ) {
+            $this->log("Folder renamed from " . basename($extracted_folder) . " to " . $this->theme_slug);
         } else {
-            $this->log("Folder names match, no need to rename.");
+            $this->log("Error renaming folder from " . basename($extracted_folder) . " to " . $this->theme_slug);
         }
 
-        $result['destination'] = $install_directory; // Set the destination for the rest of the stack
-
-        // Clear theme cache
+        // Rescan themes
         wp_clean_themes_cache();
-
-        // Force WordPress to rescan themes
         $themes = wp_get_themes();
-        $this->log("Themes after rescan: " . json_encode(array_keys($themes)));
+        $theme_names = array_keys($themes);
+        $this->log("Themes after rescan: " . json_encode($theme_names));
 
-        // Update the current theme's stylesheet option
-        if (get_option('stylesheet') !== $this->theme) {
-            update_option('stylesheet', $this->theme);
-            $this->log("Updated 'stylesheet' option to: " . $this->theme);
-        }
-        if (get_option('template') !== $this->theme) {
-            update_option('template', $this->theme);
-            $this->log("Updated 'template' option to: " . $this->theme);
-        }
+        // Ensure the active theme option is updated if necessary
+        $stylesheet = get_option('stylesheet');
+        $template = get_option('template');
+        $this->log("Current stylesheet and template options: ". json_encode($stylesheet).', '. json_encode($template));
+        $this->log("Theme slug: " . $this->theme_slug);
 
-        // Activate the theme if it's active
-        if ($this->active) {
-            switch_theme($this->theme);
-            $this->log("Theme activated: " . $this->theme);
+        if ($stylesheet !== $this->theme_slug || $template !== $this->theme_slug) {
+            update_option('stylesheet', $this->theme_slug);
+            update_option('template', $this->theme_slug);
+            switch_theme($this->theme_slug); // Ensure the new theme is activated
+            $this->log("Theme options updated to: " . $this->theme_slug);
         }
 
         $this->log("AFTER INSTALL PROCESS COMPLETED");
 
-        return $result;
+        return $response;
     }
 }
 
