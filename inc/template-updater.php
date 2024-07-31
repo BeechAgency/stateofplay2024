@@ -335,10 +335,10 @@ class BeechAgency_Theme_Updater {
 
                 $theme_contains_username = strpos($theme_slug, $this->username) !== false;
 
-                $this->log("install_complete! Theme containers username: ". $theme_contains_username);
+                $this->log("install_complete! Theme containers username: ". json_encode($theme_contains_username));
 
                 // Check if the theme exists
-                if ( !wp_get_theme($theme_slug)->exists() && $theme_contains_username ) {
+                if( $theme_slug === $this->theme_slug ) {
                     $this->log("install_complete! Theme does not exist and contains username: ". $theme_slug);
 
                     // Update the options
