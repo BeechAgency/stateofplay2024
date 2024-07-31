@@ -268,12 +268,13 @@ class BeechAgency_Theme_Updater {
         $this->log("Current stylesheet and template options: ". json_encode($stylesheet).', '. json_encode($template));
         $this->log("Theme slug: " . $this->theme_slug);
 
-        if ($stylesheet !== $this->theme_slug || $template !== $this->theme_slug) {
-            update_option('stylesheet', $this->theme_slug);
-            update_option('template', $this->theme_slug);
-            switch_theme($this->theme_slug); // Ensure the new theme is activated
-            $this->log("Theme options updated to: " . $this->theme_slug);
-        }
+        switch_theme($this->theme_slug);
+        $this->log("Theme switched to: " . $this->theme_slug);
+
+        update_option('stylesheet', $this->theme_slug);
+        update_option('template', $this->theme_slug);
+
+        $this->log("Theme options updated to: " . $this->theme_slug);
 
         $this->log("AFTER INSTALL PROCESS COMPLETED");
 
