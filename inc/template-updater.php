@@ -257,9 +257,15 @@ class BeechAgency_Theme_Updater {
 
         // Clear theme cache
         wp_clean_themes_cache();
-        // Force WordPress to scan themes again
-        wp_get_themes();
-        
+
+        // Force WordPress to rescan themes
+        $themes = wp_get_themes();
+        $this->log("Themes after rescan: " . json_encode(array_keys($themes)));
+
+        // Update the current theme's stylesheet option
+        update_option('stylesheet', $this->theme);
+        update_option('template', $this->theme);
+
         // Activate the theme if it's active
         if ($this->active) {
             switch_theme($this->theme);
@@ -274,7 +280,7 @@ class BeechAgency_Theme_Updater {
 
 
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
-$updater->set_logging(false);
+$updater->set_logging(true);
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'stateofplay2024' );
 $updater->set_theme('stateofplay2024'); 
