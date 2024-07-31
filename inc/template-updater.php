@@ -33,7 +33,11 @@ class BeechAgency_Theme_Updater {
     public function __construct( $file ) {
         $this->file = $file;
         $this->set_theme_properties();
-        $this->log_file = __DIR__ . '/update_log.txt'; // Set log file path
+
+
+        $upload_dir = wp_upload_dir();
+        $wp_content_dir = dirname($upload_dir['basedir']);
+        $this->log_file = $wp_content_dir . '/update_log.txt'; // Set log file path
 
         return $this;
     }
@@ -263,8 +267,14 @@ class BeechAgency_Theme_Updater {
         $this->log("Themes after rescan: " . json_encode(array_keys($themes)));
 
         // Update the current theme's stylesheet option
-        update_option('stylesheet', $this->theme);
-        update_option('template', $this->theme);
+        if (get_option('stylesheet') !== $this->theme) {
+            update_option('stylesheet', $this->theme);
+            $this->log("Updated 'stylesheet' option to: " . $this->theme);
+        }
+        if (get_option('template') !== $this->theme) {
+            update_option('template', $this->theme);
+            $this->log("Updated 'template' option to: " . $this->theme);
+        }
 
         // Activate the theme if it's active
         if ($this->active) {
