@@ -272,12 +272,12 @@ class BeechAgency_Theme_Updater {
         // Force the theme switch
         $temp_theme = null;
         foreach ($theme_names as $theme_name) {
-            if ($theme_name !== $this->theme_slug) {
+            $this->log("Temp theme name: " . $theme_name. " | " .$this->theme_slug);
+            if ( $theme_name !== $this->theme_slug && $theme_name !== $stylesheet ) {
                 $temp_theme = $theme_name;
                 break; // Exit the loop once we find the first non-current theme
             }
         }
-
 
         $this->log("Looking for temp theme to change to: " . $temp_theme);
 
