@@ -199,7 +199,7 @@ class BeechAgency_Theme_Updater {
 
         $theme = array( // setup our theme info
             'url' => 'https://github.com/'.$this->username.'/'.$this->repository, //$this->themeObject["ThemeURI"],
-            'slug' => 'yolowhatever',
+            'slug' => $this->theme_slug,
             'package' => $new_files,
             'new_version' => $this->github_response->tag_name
         );
@@ -216,23 +216,21 @@ class BeechAgency_Theme_Updater {
 
     public function download_package( $args, $url ) {
         // This function is just for adding auth prior to downloading the package.
-        if (strpos($url, $this->username . '/' . $this->repository) === false) {
+
+        if(strpos($url, $this->username.'/'.$this->repository) === false) {
             return $args;
         }
 
         $this->log("Attempting to download package from URL: $url");
         $this->log("Download Package Args (before modification): " . json_encode($args));
 
-        if (null !== $args['filename']) {
-            if ($this->authorize_token) { 
-                $args = array_merge($args, array("headers" => array("Authorization" => "token {$this->authorize_token}")));
+        if ( null !== $args['filename'] ) {
+            if( $this->authorize_token ) { 
+                $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
             }
-
-            // Set a temporary filename for the download
-            $args['filename'] = sys_get_temp_dir() . '/theme-update-' . uniqid() . '.zip';
         }
 
-        remove_filter('http_request_args', [$this, 'download_package']);
+        remove_filter( 'http_request_args', [ $this, 'download_package' ] );
 
         return $args;
     }
@@ -243,19 +241,19 @@ class BeechAgency_Theme_Updater {
 
         $this->log("AFTER INSTALL PROCESS STARTED");
 
-        // Temporary directory
-        $temp_directory = $result['destination'];
-        $this->log("Extracted folder: " . $temp_directory);
+        // Extracted directory name (usually same as the repo name)
+        $extracted_folder = $result['destination'];
+        $this->log("Extracted folder: " . $extracted_folder);
 
-        // Target directory
+        // Expected install directory
         $install_directory = $wp_filesystem->wp_content_dir() . 'themes/' . $this->theme_slug;
         $this->log("Install directory: " . $install_directory);
 
-        // Rename the extracted folder to the theme slug before moving it to final destination
-        if ($wp_filesystem->move($temp_directory, $install_directory, true)) {
-            $this->log("Folder renamed from " . basename($temp_directory) . " to " . $this->theme_slug);
+        // Rename the extracted folder to the theme slug
+        if ( $wp_filesystem->move( $extracted_folder, $install_directory, true ) ) {
+            $this->log("Folder renamed from " . basename($extracted_folder) . " to " . $this->theme_slug);
         } else {
-            $this->log("Error renaming folder from " . basename($temp_directory) . " to " . $this->theme_slug);
+            $this->log("Error renaming folder from " . basename($extracted_folder) . " to " . $this->theme_slug);
             return $response; // Abort if renaming fails
         }
 
@@ -284,12 +282,14 @@ class BeechAgency_Theme_Updater {
         $template_updated = get_option('template');
         $this->log("Updated stylesheet and template options: " . json_encode($stylesheet_updated) . ", " . json_encode($template_updated));
 
-        $this->log("Skip cache clearing for now...");
+        
+        $this->log("Pause on the cache...");
         // Clear cache at the very end to avoid interruptions
         //clean_theme_cache();
         //wp_clean_themes_cache(true);
 
         $this->log("AFTER INSTALL PROCESS COMPLETED");
+
 
         return $response;
     }
