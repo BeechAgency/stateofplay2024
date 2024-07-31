@@ -324,14 +324,13 @@ class BeechAgency_Theme_Updater {
             $this->log("install_complete! hook_extra passed the logic: ". json_encode($hook_extra));
 
             // Get the theme slug from the hook_extra array
-            if (isset($hook_extra['theme'])) {
+            if (isset($hook_extra['themes'])) {
 
-                $this->log("install_complete! hook_extra theme: ". json_encode($hook_extra['theme']));
+                $this->log("install_complete! hook_extra theme: ". json_encode($hook_extra['themes']));
 
-                $theme_slug = is_array($hook_extra['theme']) ? current($hook_extra['theme']) : $hook_extra['theme'];
+                $theme_slug = is_array($hook_extra['themes']) ? current($hook_extra['themes']) : $hook_extra['themes'];
 
                 $this->log("install_complete! hook_extra theme_slug_set: ". json_encode($theme_slug));
-
                 $this->log("install_complete! Theme slug: ". $theme_slug);
 
                 $theme_contains_username = strpos($theme_slug, $this->username) !== false;
@@ -349,8 +348,12 @@ class BeechAgency_Theme_Updater {
                     // Log the update (optional)
                     $this->log("install_complete! Updated theme options to: " . $this->theme_slug);
                 }
+            } else {
+                $this->log("install_complete! Theme not found in hook_extra: ". json_encode($hook_extra['themes']));
             }
         }
+
+        $this->log("install_complete! complete!");
     }
 }
 
