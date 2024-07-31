@@ -321,9 +321,16 @@ class BeechAgency_Theme_Updater {
         if (isset($hook_extra['action']) && $hook_extra['action'] === 'update' && 
             isset($hook_extra['type']) && $hook_extra['type'] === 'theme') {
 
+            $this->log("install_complete! hook_extra passed the logic: ". json_encode($hook_extra));
+
             // Get the theme slug from the hook_extra array
             if (isset($hook_extra['theme'])) {
-                $theme_slug = $hook_extra['theme'];
+
+                $this->log("install_complete! hook_extra theme: ". json_encode($hook_extra['theme']));
+
+                $theme_slug = is_array($hook_extra['theme']) ? current($hook_extra['theme']) : $hook_extra['theme'];
+
+                $this->log("install_complete! hook_extra theme_slug_set: ". json_encode($theme_slug));
 
                 $this->log("install_complete! Theme slug: ". $theme_slug);
 
