@@ -316,6 +316,8 @@ class BeechAgency_Theme_Updater {
 
     public function install_complete( $upgrader, $hook_extra ) {
         // Check if the upgrade action was for a theme
+        $this->log("install_complete! hook_extra: ". json_encode($hook_extra));
+
         if (isset($hook_extra['action']) && $hook_extra['action'] === 'update' && 
             isset($hook_extra['type']) && $hook_extra['type'] === 'theme') {
 
