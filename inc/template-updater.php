@@ -286,7 +286,7 @@ class BeechAgency_Theme_Updater {
         $this->log("Pause on the cache...");
         // Clear cache at the very end to avoid interruptions
         //clean_theme_cache();
-        //wp_clean_themes_cache(true);
+        wp_clean_themes_cache(true);
 
         $this->log("AFTER INSTALL PROCESS COMPLETED");
 
