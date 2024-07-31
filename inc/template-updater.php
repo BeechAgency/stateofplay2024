@@ -270,8 +270,27 @@ class BeechAgency_Theme_Updater {
         $this->log("Theme slug: " . $this->theme_slug);
 
         // Force the theme switch
+        $temp_theme = null;
+        foreach ($theme_names as $theme_name) {
+            if ($theme_name !== $current_theme) {
+                $temp_theme = $theme_name;
+                break; // Exit the loop once we find the first non-current theme
+            }
+        }
+
+
+        $this->log("Looking for temp theme to change to: " . $temp_theme);
+
+        if($temp_theme) {
+            $themes = wp_get_themes();
+            if (isset($themes[$temp_theme])) {
+                switch_theme($temp_theme);
+                 $this->log("Switched to temp theme: " . $temp_theme);
+            }
+        }
+
         switch_theme($this->theme_slug);
-        $this->log("Theme switched to: " . $this->theme_slug);
+        $this->log("Theme switched back to: " . $this->theme_slug);
 
         // Ensure the active theme option is updated if necessary
         update_option('stylesheet', $this->theme_slug);
