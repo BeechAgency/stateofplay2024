@@ -254,6 +254,7 @@ class BeechAgency_Theme_Updater {
             $this->log("Folder renamed from " . basename($extracted_folder) . " to " . $this->theme_slug);
         } else {
             $this->log("Error renaming folder from " . basename($extracted_folder) . " to " . $this->theme_slug);
+            return $response; // Abort if renaming fails
         }
 
         // Rescan themes
@@ -262,19 +263,29 @@ class BeechAgency_Theme_Updater {
         $theme_names = array_keys($themes);
         $this->log("Themes after rescan: " . json_encode($theme_names));
 
-        // Ensure the active theme option is updated if necessary
+        // Clear cache and reset theme root
+        clean_theme_cache();
+        wp_clean_themes_cache(true);
+        $this->log("Cleared the theme cache");
+
+        // Log current options
         $stylesheet = get_option('stylesheet');
         $template = get_option('template');
-        $this->log("Current stylesheet and template options: ". json_encode($stylesheet).', '. json_encode($template));
+        $this->log("Current stylesheet and template options: " . json_encode($stylesheet) . ", " . json_encode($template));
         $this->log("Theme slug: " . $this->theme_slug);
 
+        // Force the theme switch
         switch_theme($this->theme_slug);
         $this->log("Theme switched to: " . $this->theme_slug);
 
+        // Ensure the active theme option is updated if necessary
         update_option('stylesheet', $this->theme_slug);
         update_option('template', $this->theme_slug);
 
-        $this->log("Theme options updated to: " . $this->theme_slug);
+        // Double-check if the theme options have been updated correctly
+        $stylesheet_updated = get_option('stylesheet');
+        $template_updated = get_option('template');
+        $this->log("Updated stylesheet and template options: " . json_encode($stylesheet_updated) . ", " . json_encode($template_updated));
 
         $this->log("AFTER INSTALL PROCESS COMPLETED");
 
