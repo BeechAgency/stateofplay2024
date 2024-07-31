@@ -272,7 +272,7 @@ class BeechAgency_Theme_Updater {
         // Force the theme switch
         $temp_theme = null;
         foreach ($theme_names as $theme_name) {
-            if ($theme_name !== $current_theme) {
+            if ($theme_name !== $this->theme_slug) {
                 $temp_theme = $theme_name;
                 break; // Exit the loop once we find the first non-current theme
             }
