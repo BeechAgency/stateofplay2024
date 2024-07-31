@@ -263,11 +263,6 @@ class BeechAgency_Theme_Updater {
         $theme_names = array_keys($themes);
         $this->log("Themes after rescan: " . json_encode($theme_names));
 
-        // Clear cache and reset theme root
-        clean_theme_cache();
-        wp_clean_themes_cache(true);
-        $this->log("Cleared the theme cache");
-
         // Log current options
         $stylesheet = get_option('stylesheet');
         $template = get_option('template');
@@ -287,7 +282,14 @@ class BeechAgency_Theme_Updater {
         $template_updated = get_option('template');
         $this->log("Updated stylesheet and template options: " . json_encode($stylesheet_updated) . ", " . json_encode($template_updated));
 
+        
+        $this->log("Everything is done, just clearing the cache now.");
+        // Clear cache at the very end to avoid interruptions
+        clean_theme_cache();
+        wp_clean_themes_cache(true);
+
         $this->log("AFTER INSTALL PROCESS COMPLETED");
+
 
         return $response;
     }
