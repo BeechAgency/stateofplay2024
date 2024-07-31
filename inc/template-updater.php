@@ -144,6 +144,8 @@ class BeechAgency_Theme_Updater {
                 return false; // upgrader_pre_download filter default return value.
             }
         );
+
+        add_filter('upgrader_process_complete',[ $this, 'install_complete' ], 10, 2);
     }
 
     public function modify_transient( $transient ) {
@@ -282,12 +284,10 @@ class BeechAgency_Theme_Updater {
         $this->log("Looking for temp theme to change to: " . $temp_theme);
 
         if($temp_theme) {
-            $themes = wp_get_themes();
-            if (isset($themes[$temp_theme])) {
-                switch_theme($temp_theme);
-                 $this->log("Switched to temp theme: " . $temp_theme);
-            }
+            switch_theme($temp_theme);
         }
+        $this->log("Switched to temp theme: " . $temp_theme);
+
 
         switch_theme($this->theme_slug);
         $this->log("Theme switched back to: " . $this->theme_slug);
@@ -295,6 +295,7 @@ class BeechAgency_Theme_Updater {
         // Ensure the active theme option is updated if necessary
         update_option('stylesheet', $this->theme_slug);
         update_option('template', $this->theme_slug);
+        //update_option('current_theme', $this->theme_slug);
 
         // Double-check if the theme options have been updated correctly
         $stylesheet_updated = get_option('stylesheet');
@@ -311,6 +312,36 @@ class BeechAgency_Theme_Updater {
 
 
         return $response;
+    }
+
+    public function install_complete( $upgrader, $hook_extra ) {
+        // Check if the upgrade action was for a theme
+        if (isset($hook_extra['action']) && $hook_extra['action'] === 'update' && 
+            isset($hook_extra['type']) && $hook_extra['type'] === 'theme') {
+
+            // Get the theme slug from the hook_extra array
+            if (isset($hook_extra['theme'])) {
+                $theme_slug = $hook_extra['theme'];
+
+                $this->log("install_complete! Theme slug: ". $theme_slug);
+
+                $theme_contains_username = strpos($theme_slug, $this->username) !== false;
+
+                $this->log("install_complete! Theme containers username: ". $theme_contains_username);
+
+                // Check if the theme exists
+                if ( !wp_get_theme($theme_slug)->exists() && $theme_contains_username ) {
+                    $this->log("install_complete! Theme does not exist and contains username: ". $theme_slug);
+
+                    // Update the options
+                    update_option('stylesheet', $this->theme_slug);
+                    update_option('template', $this->theme_slug);
+
+                    // Log the update (optional)
+                    $this->log("install_complete! Updated theme options to: " . $this->theme_slug);
+                }
+            }
+        }
     }
 }
 
