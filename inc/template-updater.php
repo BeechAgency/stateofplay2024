@@ -243,6 +243,19 @@ class BeechAgency_Theme_Updater {
 
         $this->log("AFTER INSTALL PROCESS STARTED");
 
+        // Theme installs look like this: {"type":"theme","action":"install"}, need to avoid.
+        if(!isset($hook_extra['theme'])) {
+            $this->log("AFTER INSTALL PROCESS EXITING - NOT THEME UPDATE: ". json_encode($hook_extra));
+            return $response;
+        }
+
+        if( $hook_extra['theme'] !== $this->theme_slug) {
+            $this->log("AFTER INSTALL PROCESS EXITING - WRONG THEME: slug: ".$this->theme_slug." | ". json_encode($hook_extra['theme']));
+            return $response;
+        }
+
+        $this->log("AFTER INSTALL PROCESS PROCEEDING: ". json_encode($hook_extra));
+
         // Extracted directory name (usually same as the repo name)
         $extracted_folder = $result['destination'];
         $this->log("Extracted folder: " . $extracted_folder);
