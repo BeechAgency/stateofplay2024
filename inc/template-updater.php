@@ -359,7 +359,7 @@ class BeechAgency_Theme_Updater {
 
 
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
-$updater->set_logging(true);
+$updater->set_logging(false);
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'stateofplay2024' );
 $updater->set_theme('stateofplay2024'); 

@@ -11,6 +11,8 @@
 
     .images_block-inner-blocks {
         grid-column: 2 / 12;
+
+        figure, img, video, .wp-block-beech-sick-video { aspect-ratio: 16 / 10;}
     }
 }
 .wp-block-beech-images.is-style-feature .wp-block-beech-images,
