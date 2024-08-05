@@ -146,6 +146,8 @@ class BeechAgency_Theme_Updater {
         );
 
         add_filter('upgrader_process_complete',[ $this, 'install_complete' ], 10, 2);
+
+        add_action('after_switch_theme', [$this, 'ensure_correct_theme_directory'], 10, 1);
     }
 
     public function modify_transient( $transient ) {
@@ -368,11 +370,50 @@ class BeechAgency_Theme_Updater {
 
         $this->log("install_complete! complete!");
     }
+
+    public function ensure_correct_theme_directory() { 
+
+        $this->log('Ensure the correct theme is correct.');
+
+        // Define the correct theme slug
+        $correct_slug = $this->theme_slug;
+        
+        // Get the current theme's directory
+        $theme_dir = get_template_directory();
+        $current_theme_slug = basename($theme_dir);
+        
+        // If the current theme directory does not match the correct slug
+        if ($current_theme_slug !== $correct_slug) {
+            // Get the parent directory
+            $parent_dir = dirname($theme_dir);
+            
+            // Define the new directory path
+            $new_dir = $parent_dir . '/' . $correct_slug;
+            
+            // Rename the directory
+            if (rename($theme_dir, $new_dir)) {
+                // Update the theme root URI option in the database
+                update_option('stylesheet', $correct_slug);
+                update_option('template', $correct_slug);
+                
+                // Refresh the theme cache
+                wp_clean_themes_cache();
+                
+                // Switch to the new theme directory
+                switch_theme($correct_slug);
+                $this->log('Switching to the correct dog. CURRENT: '. $current_theme_slug. ' || CORRECT: '. $correct_slug);
+            } else {
+                // Log an error or handle the failure as needed
+                $this->log('Failed to rename the theme directory.');
+            }
+        }
+
+    }
 }
 
 
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
-$updater->set_logging(false);
+$updater->set_logging(true);
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'stateofplay2024' );
 $updater->set_theme('stateofplay2024'); 
