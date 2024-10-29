@@ -14,7 +14,7 @@
 }
 
 .epic-carousel__showcase--wrapper {
-    --_header-height :  95svh;
+    --_header-height :  80svh;
     position: relative;
     min-height: var(--_header-height);
     /*padding-inline: var(--gutter);

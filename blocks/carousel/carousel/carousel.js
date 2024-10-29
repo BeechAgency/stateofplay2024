@@ -29,7 +29,9 @@ if(typeof AnalyticsHandler !== 'function') {
                 pageDots: false,
                 wrapAround: false,
                 cellAlign: 'left',
-                contain: true
+                contain: true,
+                autoPlay : 1800,
+                wrapAround : true,
             }
 
             if ( matchMedia('screen and (max-width: 768px)').matches ) {
