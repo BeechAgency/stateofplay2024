@@ -8,7 +8,7 @@
  */
 
 
-function dump_it($what, $color) {
+function dump_it($what, $color = 'lime') {
   echo "<pre style='background-color: $color;'>";
   var_dump($what);
   echo '</pre>';
@@ -33,11 +33,10 @@ class BeechAgency_Theme_Updater {
     public function __construct( $file ) {
         $this->file = $file;
         $this->set_theme_properties();
-
-
-        $upload_dir = wp_upload_dir();
-        $wp_content_dir = dirname($upload_dir['basedir']);
-        $this->log_file = $wp_content_dir . '/update_log.txt'; // Set log file path
+		
+		$upload_dir = wp_upload_dir();
+		$this->log_file = trailingslashit( $upload_dir['basedir'] ) . 'update_log.txt';
+        //$this->log_file = __DIR__ . '/update_log.txt'; // Set log file path
 
         return $this;
     }
@@ -83,38 +82,41 @@ class BeechAgency_Theme_Updater {
         if ( !is_null( $this->github_response ) ) {
             return; // We already have a response so bail.
         }
-
+    
         $args = array();
         $request_uri = sprintf( 'https://api.github.com/repos/%s/%s/releases/latest', $this->username, $this->repository ); // Build URI
-
+    
         $this->request_uri = $request_uri;
-
-        $args = array();
+        
         $this->log("Request URL: ". $request_uri);
-
-        if( $this->authorize_token ) { // Is there an access token?
-            $args['headers']['Authorization'] = "token {$this->authorize_token}"; // Set the headers
+    
+        $headers = array(
+            'User-Agent: ' . $this->username,
+        );
+    
+        if ($this->authorize_token) {
+            $this->log("handling request with authorization token");
+            $headers[] = 'Authorization: token ' . $this->authorize_token;
         }
+    
+        $ch = curl_init($request_uri);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch, CURLOPT_HTTPHEADER, $headers);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+        curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, false);
+    
+        $response = curl_exec($ch);
+        $http_code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        curl_close($ch);
+    
+        if ($http_code == 200) {
+            $this->github_response = json_decode($response);
+            $this->log("GitHub response: " . json_encode($this->github_response));
 
-        $response = json_decode(
-            file_get_contents(
-            'https://api.github.com/repos/'.$this->username.'/'.$this->repository.'/releases/latest', false,
-            stream_context_create([
-                'http' => ['header' => "User-Agent: ".$this->username."\r\n"],
-                'ssl' => ["verify_peer"=>false, "verify_peer_name"=>false]
-            ])
-        ));
-
-        $this->log("GitHub response: " . json_encode($response));
-
-        if( is_array( $response ) ) { // If it is an array
-            $response = current( $response ); // Get the first item
+        } else {
+            $this->log("GitHub error: " . $response);
         }
-
-        $this->log("Github response set for ". $this->theme);
-
-        $this->github_response = $response; // Set it to our property
-
+    
         return;
     }
 
@@ -144,10 +146,6 @@ class BeechAgency_Theme_Updater {
                 return false; // upgrader_pre_download filter default return value.
             }
         );
-
-        add_filter('upgrader_process_complete',[ $this, 'install_complete' ], 10, 2);
-
-        add_action('after_switch_theme', [$this, 'ensure_correct_theme_directory'], 10, 1);
     }
 
     public function modify_transient( $transient ) {
@@ -162,13 +160,15 @@ class BeechAgency_Theme_Updater {
 
         $checked = $transient->checked;
         
-        $this->get_repository_info(); // Get the repo info
         $this->log("Checking repository info: ". $this->theme);
+        $this->get_repository_info(); // Get the repo info
+        
 
         if( gettype($this->github_response) === "boolean" ) { 
             return $transient; 
         }
 
+        $this->log("Finding the version ". print_r($this->github_response->tag_name, true));
         $github_version = filter_var($this->github_response->tag_name, FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 
         $out_of_date = version_compare( 
@@ -186,13 +186,20 @@ class BeechAgency_Theme_Updater {
 
         $this->log("Theme out of date");
 
+        $git_response = $this->github_response;
+
         $new_files = $this->github_response->zipball_url; // Get the ZIP
 
-        /* Optional: Get the assets instead of the zip. Not required here.
-        if( isset($this->github_response->assets) && count($this->github_response->assets) > 0 ) {
-            $new_files = $this->github_response->assets[0]->browser_download_url;
+        // If there are theme assets attached, use those instead!
+        if( isset($git_response->assets) && is_countable($git_response->assets) && count($git_response->assets) > 0 ) {
+            $new_files = $git_response->assets[0]->browser_download_url;
         }
-        */
+
+        if (isset($git_response->assets[0]->id)) {
+            $asset_id = $this->github_response->assets[0]->id;
+            $this->log("Found asset ID: $asset_id");
+            $new_files = "https://api.github.com/repos/{$this->username}/{$this->repository}/releases/assets/{$asset_id}";
+        }
 
         $slug = current( explode('/', $this->theme ) ); // Create valid slug
         $this->package_url = $new_files;
@@ -203,9 +210,9 @@ class BeechAgency_Theme_Updater {
 
         $theme = array( // setup our theme info
             'url' => 'https://github.com/'.$this->username.'/'.$this->repository, //$this->themeObject["ThemeURI"],
-            'slug' => $this->theme_slug,
+            'slug' => 'beechagency2023',
             'package' => $new_files,
-            'new_version' => $this->github_response->tag_name
+            'new_version' => $github_version
         );
 
 
@@ -219,23 +226,24 @@ class BeechAgency_Theme_Updater {
     }
 
     public function download_package( $args, $url ) {
-        // This function is just for adding auth prior to downloading the package.
-
-        if(strpos($url, $this->username.'/'.$this->repository) === false) {
+        if (strpos($url, $this->username . '/' . $this->repository) === false) {
+            $this->log("Immediately returning args. ". print_r($args, true));
             return $args;
         }
-
-        $this->log("Attempting to download package from URL: $url");
-        $this->log("Download Package Args (before modification): " . json_encode($args));
-
-        if ( null !== $args['filename'] ) {
-            if( $this->authorize_token ) { 
-                $args = array_merge( $args, array( "headers" => array( "Authorization" => "token {$this->authorize_token}" ) ) );
+    
+        if ($this->authorize_token) {
+            $this->log("Secure download required for $url");
+            if (!isset($args['headers'])) {
+                $args['headers'] = [];
             }
+    
+            $args['headers']['Authorization'] = "token {$this->authorize_token}";
+            $args['headers']['Accept'] = "application/octet-stream"; // Important for GitHub asset downloads
         }
-
-        remove_filter( 'http_request_args', [ $this, 'download_package' ] );
-
+    
+        $this->log("Download Package Args (after modification): " . json_encode($args));
+        remove_filter('http_request_args', [$this, 'download_package']);
+    
         return $args;
     }
 
@@ -243,177 +251,28 @@ class BeechAgency_Theme_Updater {
     public function after_install( $response, $hook_extra, $result ) {
         global $wp_filesystem; // Get global FS object
 
-        $this->log("AFTER INSTALL PROCESS STARTED");
+        $this->log("AFTER INSTALL BABY!!!!!!!" );
 
-        // Theme installs look like this: {"type":"theme","action":"install"}, need to avoid.
-        if(!isset($hook_extra['theme'])) {
-            $this->log("AFTER INSTALL PROCESS EXITING - NOT THEME UPDATE: ". json_encode($hook_extra));
-            return $response;
-        }
+        $install_directory = get_theme_root(). '/' . $this->theme ; // Our theme directory
+        $wp_filesystem->move( $result['destination'], $install_directory ); // Move files to the theme dir
+        $result['destination'] = $install_directory; // Set the destination for the rest of the stack
 
-        if( $hook_extra['theme'] !== $this->theme_slug) {
-            $this->log("AFTER INSTALL PROCESS EXITING - WRONG THEME: slug: ".$this->theme_slug." | ". json_encode($hook_extra['theme']));
-            return $response;
-        }
+        $this->log("attempt after install: ". $this->theme);
 
-        $this->log("AFTER INSTALL PROCESS PROCEEDING: ". json_encode($hook_extra));
-
-        // Extracted directory name (usually same as the repo name)
-        $extracted_folder = $result['destination'];
-        $this->log("Extracted folder: " . $extracted_folder);
-
-        // Expected install directory
-        $install_directory = $wp_filesystem->wp_content_dir() . 'themes/' . $this->theme_slug;
-        $this->log("Install directory: " . $install_directory);
-
-        // Rename the extracted folder to the theme slug
-        if ( $wp_filesystem->move( $extracted_folder, $install_directory, true ) ) {
-            $this->log("Folder renamed from " . basename($extracted_folder) . " to " . $this->theme_slug);
-        } else {
-            $this->log("Error renaming folder from " . basename($extracted_folder) . " to " . $this->theme_slug);
-            return $response; // Abort if renaming fails
-        }
-
-        // Rescan themes
-        wp_clean_themes_cache();
-        $themes = wp_get_themes();
-        $theme_names = array_keys($themes);
-        $this->log("Themes after rescan: " . json_encode($theme_names));
-
-        // Log current options
-        $stylesheet = get_option('stylesheet');
-        $template = get_option('template');
-        $this->log("Current stylesheet and template options: " . json_encode($stylesheet) . ", " . json_encode($template));
-        $this->log("Theme slug: " . $this->theme_slug);
-
-        // Force the theme switch
-        $temp_theme = null;
-        foreach ($theme_names as $theme_name) {
-            $this->log("Temp theme name: " . $theme_name. " | " .$this->theme_slug);
-            if ( $theme_name !== $this->theme_slug && $theme_name !== $stylesheet ) {
-                $temp_theme = $theme_name;
-                break; // Exit the loop once we find the first non-current theme
-            }
-        }
-
-        $this->log("Looking for temp theme to change to: " . $temp_theme);
-
-        if($temp_theme) {
-            switch_theme($temp_theme);
-        }
-        $this->log("Switched to temp theme: " . $temp_theme);
-
-
-        switch_theme($this->theme_slug);
-        $this->log("Theme switched back to: " . $this->theme_slug);
-
-        // Ensure the active theme option is updated if necessary
-        update_option('stylesheet', $this->theme_slug);
-        update_option('template', $this->theme_slug);
-        //update_option('current_theme', $this->theme_slug);
-
-        // Double-check if the theme options have been updated correctly
-        $stylesheet_updated = get_option('stylesheet');
-        $template_updated = get_option('template');
-        $this->log("Updated stylesheet and template options: " . json_encode($stylesheet_updated) . ", " . json_encode($template_updated));
-
-        
-        $this->log("Pause on the cache...");
-        // Clear cache at the very end to avoid interruptions
-        //clean_theme_cache();
-        wp_clean_themes_cache(true);
-
-        $this->log("AFTER INSTALL PROCESS COMPLETED");
-
-
-        return $response;
-    }
-
-    public function install_complete( $upgrader, $hook_extra ) {
-        // Check if the upgrade action was for a theme
-        $this->log("install_complete! hook_extra: ". json_encode($hook_extra));
-
-        if (isset($hook_extra['action']) && $hook_extra['action'] === 'update' && 
-            isset($hook_extra['type']) && $hook_extra['type'] === 'theme') {
-
-            $this->log("install_complete! hook_extra passed the logic: ". json_encode($hook_extra));
-
-            // Get the theme slug from the hook_extra array
-            if (isset($hook_extra['themes'])) {
-
-                $this->log("install_complete! hook_extra theme: ". json_encode($hook_extra['themes']));
-
-                $theme_slug = is_array($hook_extra['themes']) ? current($hook_extra['themes']) : $hook_extra['themes'];
-
-                $this->log("install_complete! hook_extra theme_slug_set: ". json_encode($theme_slug));
-                $this->log("install_complete! Theme slug: ". $theme_slug);
-
-                $theme_contains_username = strpos($theme_slug, $this->username) !== false;
-
-                $this->log("install_complete! Theme containers username: ". json_encode($theme_contains_username));
-
-                // Check if the theme exists
-                if( $theme_slug === $this->theme_slug ) {
-                    $this->log("install_complete! Theme does not exist and contains username: ". $theme_slug);
-
-                    // Update the options
-                    update_option('stylesheet', $this->theme_slug);
-                    update_option('template', $this->theme_slug);
-
-                    // Log the update (optional)
-                    $this->log("install_complete! Updated theme options to: " . $this->theme_slug);
-                }
-            } else {
-                $this->log("install_complete! Theme not found in hook_extra: ". json_encode($hook_extra['themes']));
-            }
-        }
-
-        $this->log("install_complete! complete!");
-    }
-
-    public function ensure_correct_theme_directory() { 
-
-        $this->log('Ensure the correct theme is correct.');
-
-        // Define the correct theme slug
-        $correct_slug = $this->theme_slug;
-        
-        // Get the current theme's directory
-        $theme_dir = get_template_directory();
-        $current_theme_slug = basename($theme_dir);
-        
-        // If the current theme directory does not match the correct slug
-        if ($current_theme_slug !== $correct_slug) {
-            // Get the parent directory
-            $parent_dir = dirname($theme_dir);
-            
-            // Define the new directory path
-            $new_dir = $parent_dir . '/' . $correct_slug;
-            
-            // Rename the directory
-            if (rename($theme_dir, $new_dir)) {
-                // Update the theme root URI option in the database
-                update_option('stylesheet', $correct_slug);
-                update_option('template', $correct_slug);
-                
-                // Refresh the theme cache
-                wp_clean_themes_cache();
-                
-                // Switch to the new theme directory
-                switch_theme($correct_slug);
-                $this->log('Switching to the correct dog. CURRENT: '. $current_theme_slug. ' || CORRECT: '. $correct_slug);
-            } else {
-                // Log an error or handle the failure as needed
-                $this->log('Failed to rename the theme directory.');
-            }
-        }
-
+        return $result;
     }
 }
 
 
+$update_key = get_field('update_key', 'options');
+
 $updater = new BeechAgency_Theme_Updater( __FILE__ );
-$updater->set_logging(true);
+$updater->set_logging(false);
+
+if( $update_key ) {
+    $updater->authorize($update_key);    
+}
+
 $updater->set_username( 'BeechAgency' );
 $updater->set_repository( 'stateofplay2024' );
 $updater->set_theme('stateofplay2024'); 
